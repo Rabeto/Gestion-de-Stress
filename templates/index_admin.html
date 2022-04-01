@@ -1,5 +1,5 @@
-{% load static %}
 {% extends 'base.html' %}
+{% load static %}
     {% block stylesheet %}
     <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
     <!--Bootstrap CSS-->
@@ -40,7 +40,7 @@
                     <div class="sidebar-menu-container">
                         <ul class="sidebar-menu mt-4 mb-4">
                             <li class="parent">
-                                <a href="index_admin.html" class=""><i class="fa fa-dashboard mr-3"> </i>
+                                <a href="/index_admin" class=""><i class="fa fa-dashboard mr-3"> </i>
                                     <span class="none">Dashboard</span>
                                 </a>  
                             </li>
@@ -50,22 +50,22 @@
                                 </a>  
                             </li>
                             <li class="parent">
-                                <a href="user_admin.html" class=""><i class="fas fa-user-circle mr-3"></i>
+                                <a href="/user_admin" class=""><i class="fas fa-user-circle mr-3"></i>
                                     <span class="none">Utilisateur </span>
                                 </a>
                             </li>
                             <li class="parent">
-                                <a href="news_post.html" class=""><i class="fas fa-address-book mr-3"></i>
+                                <a href="/news_post" class=""><i class="fas fa-address-book mr-3"></i>
                                     <span class="none">News ou Post</span>
                                 </a>
                             </li>
                             <li class="parent">
-                                <a href="ressources_admin.html" class=""><i class="fas fa-database mr-3"></i>
+                                <a href="/ressources_admin" class=""><i class="fas fa-database mr-3"></i>
                                     <span class="none">Ressources</span>
                                 </a>
                             </li>
                             <li class="parent">
-                                <a href="manage_stress_admin.html" class=""><i class="fas fa-smile mr-3"></i>
+                                <a href="/manage_stress_admin" class=""><i class="fas fa-smile mr-3"></i>
                                     <span class="none">Manage Stress</span>
                                 </a>
                             </li>

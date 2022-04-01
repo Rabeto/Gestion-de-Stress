@@ -8,7 +8,7 @@ def user_admin(request):
     return render(request,'user_admin.html')
 
 def manage_stress_admin(request):
-    return render(request,'manage_stress.html')
+    return render(request,'manage_stress_admin.html')
 
 def news_post_admin(request):
     return render(request,'news_post.html')

@@ -1,5 +1,6 @@
-{% load static %}
 {% extends 'base.html' %}
+{% load static %}
+
     {% block stylesheet %}
     <!--Favicon Icon-->
         <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
@@ -17,10 +18,12 @@
         <link rel="stylesheet" href="{% static 'js/calendar/bootstrap_calendar.css' %}">
         <!--Datatable-->
         <link rel="stylesheet" href="{% static 'css/dataTables.bootstrap4.min.css' %}">
+
+        <link rel="stylesheet" href="{% static 'js/form-validator/theme-default.min.css' %}">
     {% endblock stylesheet %}
 
     {% block title %}Utilisateurs{% endblock title %}
-    
+
         {% block content %}
             <!--Main Content-->
 
@@ -40,7 +43,7 @@
                         <div class="sidebar-menu-container">
                             <ul class="sidebar-menu mt-4 mb-4">
                                 <li class="parent">
-                                    <a href="index_admin.html" class=""><i class="fa fa-dashboard mr-3"> </i>
+                                    <a href="/index_admin" class=""><i class="fa fa-dashboard mr-3"> </i>
                                         <span class="none">Dashboard</span>
                                     </a>  
                                 </li>
@@ -55,17 +58,17 @@
                                     </a>
                                 </li>
                                 <li class="parent">
-                                    <a href="news_post.html" class=""><i class="fas fa-address-book mr-3"></i>
+                                    <a href="/news_post" class=""><i class="fas fa-address-book mr-3"></i>
                                         <span class="none">News ou Post</span>
                                     </a>
                                 </li>
                                 <li class="parent">
-                                    <a href="ressources_admin.html" class=""><i class="fas fa-database mr-3"></i>
+                                    <a href="/ressources_admin" class=""><i class="fas fa-database mr-3"></i>
                                         <span class="none">Ressources</span>
                                     </a>
                                 </li>
                                 <li class="parent">
-                                    <a href="manage_stress_admin.html" class=""><i class="fas fa-smile mr-3"></i>
+                                    <a href="/manage_stress_admin" class=""><i class="fas fa-smile mr-3"></i>
                                         <span class="none">Manage Stress</span>
                                     </a>
                                 </li>
@@ -89,7 +92,7 @@
                         <div class="col-sm-12">
                             <!--Datatable-->
                             <div class="mt-1 mb-3 p-3 button-container bg-white border shadow-sm">
-                                <button class="btn btn-success">
+                                <button class="btn btn-success" data-toggle="modal" data-target=".bd-example-modal">
                                     <i class="fas fa-plus mr-3"></i>Ajouter
                                 </button>
                                 
@@ -115,37 +118,7 @@
                                                 <td>61</td>
                                                 <td>2011/04/25</td>
                                                 <td>
-                                                    <button class="btn btn-info btn-round">
-                                                        <i class="fa fa-edit"></i>
-                                                    </button>
-                                                    <button class="btn btn-danger btn-round">
-                                                        <i class="fa fa-trash"></i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Garrett Winters</td>
-                                                <td>Accountant</td>
-                                                <td>Tokyo</td>
-                                                <td>63</td>
-                                                <td>2011/07/25</td>
-                                                <td>
-                                                    <button class="btn btn-info btn-round">
-                                                        <i class="fa fa-edit"></i>
-                                                    </button>
-                                                    <button class="btn btn-danger btn-round">
-                                                        <i class="fa fa-trash"></i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Ashton Cox</td>
-                                                <td>Junior Technical Author</td>
-                                                <td>San Francisco</td>
-                                                <td>66</td>
-                                                <td>2009/01/12</td>
-                                                <td>
-                                                    <button class="btn btn-info btn-round">
+                                                    <button class="btn btn-info btn-round" data-toggle="modal" data-target="#update">
                                                         <i class="fa fa-edit"></i>
                                                     </button>
                                                     <button class="btn btn-danger btn-round">
@@ -162,6 +135,97 @@
                     <!--Dashboard widget-->
                 </div>
             </div>
+
+            <div class="modal fade bd-example-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header text-center">
+                            <h5 class="modal-title text-secondary"><strong>Ajout d'utilisateur</strong></h5>
+                            <button type="button" class="close pull-right" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body text-justify">
+                            <form action="">
+                                <div class="form-group">
+                                    <label for="Nom_Complet" class="mb-0">Nom Complet</label>
+                                    <input type="text" id="Nom_Complet" class="form-control" placeholder="Nom Complet"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="Email" class="mb-0">Email</label>
+                                    <input type="email" id="Email" class="form-control" placeholder="johndoe@example.com" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="Adresse" class="mb-0">Adresse</label>
+                                    <input type="text" id="Adresse" class="form-control" placeholder="Adresse" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="Profession" class="mb-0">Profession</label>
+                                    <select id="Profession" class="custom-select">
+                                        <option value="Etudiant">Etudiant</option>
+                                        <option value="Professeur">Professeur</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="Status" class="mb-0">Status</label>
+                                    <select id="Status" class="custom-select">
+                                        <option value="Utilisateur Simple">Utilisateur Simple</option>
+                                        <option value="Psychologue">Psychologue</option>
+                                    </select>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default">Ajouter</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="update" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header text-center">
+                            <h5 class="modal-title text-secondary"><strong>Modification info utilisateur</strong></h5>
+                            <button type="button" class="close pull-right" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body text-justify">
+                            <form action="">
+                                <div class="form-group">
+                                    <label for="Nom_Complet" class="mb-0">Nom Complet</label>
+                                    <input type="text" id="Nom_Complet" class="form-control" placeholder="Nom Complet" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="Email" class="mb-0">Email</label>
+                                    <input type="email" id="Email" class="form-control" placeholder="johndoe@example.com" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="Adresse" class="mb-0">Adresse</label>
+                                    <input type="text" id="Adresse" class="form-control" placeholder="Adresse" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="Profession" class="mb-0">Profession</label>
+                                    <select id="Profession" class="custom-select">
+                                        <option value="Etudiant">Etudiant</option>
+                                        <option value="Professeur">Professeur</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="Status" class="mb-0">Status</label>
+                                    <select id="Status" class="custom-select">
+                                        <option value="Utilisateur Simple">Utilisateur Simple</option>
+                                        <option value="Psychologue">Psychologue</option>
+                                    </select>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default">Enregistrer</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
 
             <!--Main Content-->
         {% endblock content %}
@@ -194,7 +258,7 @@
        <!--Custom Js Script-->
        <script src="{% static 'js/custom.js' %}"></script>
        <!--Custom Js Script-->
-    
+        <script src="{% static 'js/form-validator/jquery.form-validator.min.js' %}"></script>
         <script>
             $('#example').DataTable();
         </script>
