@@ -1,0 +1,201 @@
+{% load static %}
+{% extends 'base.html' %}
+    {% block stylesheet %}
+    <!--Favicon Icon-->
+        <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+        <!--Bootstrap CSS-->
+        <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+        <!--Custom style.css-->
+        <link rel="stylesheet" href="{% static 'css/quicksand.css' %}">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <!--Font Awesome-->
+        <link rel="stylesheet" href="{% static 'css/fontawesome-all.min.css' %}">
+        <link rel="stylesheet" href="{% static 'css/fontawesome.css' %}">
+        <!--Chartist CSS-->
+        <link rel="stylesheet" href="{% static 'css/chartist.min.css' %}">
+        <!--Bootstrap Calendar-->
+        <link rel="stylesheet" href="{% static 'js/calendar/bootstrap_calendar.css' %}">
+        <!--Datatable-->
+        <link rel="stylesheet" href="{% static 'css/dataTables.bootstrap4.min.css' %}">
+    {% endblock stylesheet %}
+
+    {% block title %}Utilisateurs{% endblock title %}
+    
+        {% block content %}
+            <!--Main Content-->
+
+            <div class="row main-content">
+                <!--Sidebar left-->
+                <div class="col-sm-3 col-xs-6 sidebar pl-0">
+                    <div class="inner-sidebar mr-3">
+                        <!--Image Avatar-->
+                        <div class="avatar text-center">
+                            <img src="{% static 'img/client-img4.png' %}" alt="" class="rounded-circle" />
+                            <p><strong>Lorem ipsum</strong></p>
+                            <span class="text-primary small"><strong>Admin App</strong></span>
+                        </div>
+                        <!--Image Avatar-->
+
+                        <!--Sidebar Navigation Menu-->
+                        <div class="sidebar-menu-container">
+                            <ul class="sidebar-menu mt-4 mb-4">
+                                <li class="parent">
+                                    <a href="index_admin.html" class=""><i class="fa fa-dashboard mr-3"> </i>
+                                        <span class="none">Dashboard</span>
+                                    </a>  
+                                </li>
+                                <li class="parent">
+                                    <a href="#" class=""><i class="fas fa-user mr-3"> </i>
+                                        <span class="none">Mon profil</span>
+                                    </a>  
+                                </li>
+                                <li class="parent">
+                                    <a href="#" class=""><i class="fas fa-user-circle mr-3"></i>
+                                        <span class="none">Utilisateur </span>
+                                    </a>
+                                </li>
+                                <li class="parent">
+                                    <a href="news_post.html" class=""><i class="fas fa-address-book mr-3"></i>
+                                        <span class="none">News ou Post</span>
+                                    </a>
+                                </li>
+                                <li class="parent">
+                                    <a href="ressources_admin.html" class=""><i class="fas fa-database mr-3"></i>
+                                        <span class="none">Ressources</span>
+                                    </a>
+                                </li>
+                                <li class="parent">
+                                    <a href="manage_stress_admin.html" class=""><i class="fas fa-smile mr-3"></i>
+                                        <span class="none">Manage Stress</span>
+                                    </a>
+                                </li>
+                                <li class="parent">
+                                    <a href="#" class=""><i class="fas fa-power-off mr-3"></i>
+                                        <span class="none">Déconnexion</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!--Sidebar Naigation Menu-->
+                    </div>
+                </div>
+                <!--Sidebar left-->
+
+                <!--Content right-->
+                <div class="col-sm-9 col-xs-12 content pt-3 pl-0">
+                    <h5 class="mb-0" ><strong>Utilisateur</strong></h5>
+                    <span class="text-secondary">Infos sur les utilisateurs</span>
+                    <div class="row mt-3">
+                        <div class="col-sm-12">
+                            <!--Datatable-->
+                            <div class="mt-1 mb-3 p-3 button-container bg-white border shadow-sm">
+                                <button class="btn btn-success">
+                                    <i class="fas fa-plus mr-3"></i>Ajouter
+                                </button>
+                                
+
+                                <div class="table-responsive">
+                                    <table id="example" class="table table-striped table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Nom Complet</th>
+                                                <th>Email</th>
+                                                <th>Adresse</th>
+                                                <th>Profession</th>
+                                                <th>Status</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            <tr>
+                                                <td>Tiger Nixon</td>
+                                                <td>System Architect</td>
+                                                <td>Edinburgh</td>
+                                                <td>61</td>
+                                                <td>2011/04/25</td>
+                                                <td>
+                                                    <button class="btn btn-info btn-round">
+                                                        <i class="fa fa-edit"></i>
+                                                    </button>
+                                                    <button class="btn btn-danger btn-round">
+                                                        <i class="fa fa-trash"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Garrett Winters</td>
+                                                <td>Accountant</td>
+                                                <td>Tokyo</td>
+                                                <td>63</td>
+                                                <td>2011/07/25</td>
+                                                <td>
+                                                    <button class="btn btn-info btn-round">
+                                                        <i class="fa fa-edit"></i>
+                                                    </button>
+                                                    <button class="btn btn-danger btn-round">
+                                                        <i class="fa fa-trash"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Ashton Cox</td>
+                                                <td>Junior Technical Author</td>
+                                                <td>San Francisco</td>
+                                                <td>66</td>
+                                                <td>2009/01/12</td>
+                                                <td>
+                                                    <button class="btn btn-info btn-round">
+                                                        <i class="fa fa-edit"></i>
+                                                    </button>
+                                                    <button class="btn btn-danger btn-round">
+                                                        <i class="fa fa-trash"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Dashboard widget-->
+                </div>
+            </div>
+
+            <!--Main Content-->
+        {% endblock content %}
+
+    {% block script %}
+        <!--Page Wrapper-->
+    
+       <!-- Page JavaScript Files-->
+       <script src="{% static 'js/jquery.min.js' %}"></script>
+       <script src="{% static 'js/jquery-1.12.4.min.js' %}"></script>
+       <!--Popper JS-->
+       <script src="{% static 'js/popper.min.js' %}"></script>
+       <!--Bootstrap-->
+       <script src="{% static 'js/bootstrap.min.js' %}"></script>
+       <!--Sweet alert JS-->
+       <script src="{% static 'js/sweetalert.js' %}"></script>
+       <!--Progressbar JS-->
+       <script src="{% static 'js/progressbar.min.js' %}"></script>
+       <!--Charts-->
+       <!--Canvas JS-->
+       <script src="{% static 'js/charts/canvas.min.js' %}"></script>
+       <!--Bootstrap Calendar JS-->
+       <script src="{% static 'js/calendar/bootstrap_calendar.js' %}"></script>
+       <script src="{% static 'js/calendar/demo.js' %}"></script>
+       <!--Bootstrap Calendar-->
+       <!--Datatable-->
+       <script src="{% static 'js/jquery.dataTables.min.js' %}"></script>
+       <script src="{% static 'js/dataTables.bootstrap4.min.js' %}"></script>
+    
+       <!--Custom Js Script-->
+       <script src="{% static 'js/custom.js' %}"></script>
+       <!--Custom Js Script-->
+    
+        <script>
+            $('#example').DataTable();
+        </script>
+    {% endblock script %}
