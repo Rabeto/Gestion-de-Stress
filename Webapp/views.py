@@ -8,7 +8,6 @@ def index_admin(request):
 
 def user_admin(request):
     Users = User.objects.all
-    
     context = {
         'Users' : Users,
     }
@@ -35,4 +34,26 @@ def create_user_admin(request):
     status = request.GET['Status']
     create_user = User(Nom_Complet = nom_Complet,Email = email, Adresse = adresse, Profession = profession, Status = status)
     create_user.save()
+    return redirect('/user_admin')
+
+def edit_user_admin(request, id):
+    Users_e = User.objects.get(pk=id)
+    context = {
+        'Users_e' : Users_e,
+    }
+    return render(request,'user_admin.html',context)
+
+def update_user_admin(request, id):
+    create_user_edit = User.objects.get(pk=id)
+    create_user_edit.nom_Complet = request.GET['Nom_Complet']
+    create_user_edit.email = request.GET['Email']
+    create_user_edit.adresse = request.GET['Adresse']
+    create_user_edit.profession = request.GET['Profession']
+    create_user_edit.status = request.GET['Status']
+    create_user_edit.save()
+    return redirect('/user_admin')
+
+def delete_user_admin(request,id):
+    Users = User.objects.get(pk=id)
+    Users.delete()
     return redirect('/user_admin')

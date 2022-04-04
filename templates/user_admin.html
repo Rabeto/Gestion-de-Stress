@@ -116,12 +116,12 @@
                                                 <td>{{ us.Profession }}</td>
                                                 <td>{{ us.Status }}</td>
                                                 <td>
-                                                    <button class="btn btn-info btn-round" data-toggle="modal" data-target="#update">
+                                                    <a class="btn btn-info btn-round" data-toggle="modal" data-target="#update" href="/edit_user_admin/{{ us.id }}">
                                                         <i class="fa fa-edit"></i>
-                                                    </button>
-                                                    <button class="btn btn-danger btn-round">
+                                                    </a>
+                                                    <a class="btn btn-danger btn-round" href="/delete_user_admin/{{ us.id }}">
                                                         <i class="fa fa-trash"></i>
-                                                    </button>
+                                                    </a>
                                                 </td>
                                             </tr>
                                             {% endfor %}
@@ -143,7 +143,7 @@
                             <button type="button" class="close pull-right" data-dismiss="modal">&times;</button>
                         </div>
                         <div class="modal-body text-justify">
-                            <form method="POST" action="{% url 'create_user_admin' %}">
+                            <form action="/create_user_admin">
                                 {%  csrf_token %}
                                 <div class="form-group">
                                     <label for="Nom_Complet" class="mb-0">Nom Complet</label>
@@ -171,11 +171,9 @@
                                         <option value="Psychologue">Psychologue</option>
                                     </select>
                                 </div>
+                                <input class="btn btn-default" type="submit"  value="Enregistrer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
                             </form>
-                        </div>
-                        <div class="modal-footer">
-                            <input class="btn btn-default" type="submit"  value="Enregistrer">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
                         </div>
                     </div>
                 </div>
@@ -189,32 +187,38 @@
                             <button type="button" class="close pull-right" data-dismiss="modal">&times;</button>
                         </div>
                         <div class="modal-body text-justify">
-                            <form action="">
+                            <form action="/update_user_admin/{{ Users_e.id }}">
                                 {%  csrf_token %}
                                 <div class="form-group">
                                     <label for="Nom_Complet" class="mb-0">Nom Complet</label>
-                                    <input type="text" id="Nom_Complet" class="form-control" placeholder="Nom Complet" />
+                                    <input type="text" id="Nom_Complet" class="form-control" value="{{ Users_e.Nom_Complet }}" />
                                 </div>
                                 <div class="form-group">
                                     <label for="Email" class="mb-0">Email</label>
-                                    <input type="email" id="Email" class="form-control" placeholder="johndoe@example.com" />
+                                    <input type="email" id="Email" class="form-control" value="{{ Users_e.Email }}" />
                                 </div>
                                 <div class="form-group">
                                     <label for="Adresse" class="mb-0">Adresse</label>
-                                    <input type="text" id="Adresse" class="form-control" placeholder="Adresse" />
+                                    <input type="text" id="Adresse" class="form-control" value="{{ Users_e.Adresse }}" />
                                 </div>
                                 <div class="form-group">
                                     <label for="Profession" class="mb-0">Profession</label>
                                     <select id="Profession" class="custom-select">
-                                        <option value="Etudiant">Etudiant</option>
-                                        <option value="Professeur">Professeur</option>
+                                        {% if Users_e.Profession == "Etudiant" %}
+                                            print("<option value="Etudiant">Etudiant</option><option value="Professeur">Professeur</option>")
+                                        {% else %}
+                                            print("<option value="Professeur">Professeur</option><option value="Etudiant">Etudiant</option>")
+                                        {% endif %}
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="Status" class="mb-0">Status</label>
                                     <select id="Status" class="custom-select">
-                                        <option value="Utilisateur Simple">Utilisateur Simple</option>
-                                        <option value="Psychologue">Psychologue</option>
+                                        {% if Users_e.Status == "Utilisateur Simple" %}
+                                            print("<option value="Utilisateur Simple">Utilisateur Simple</option><option value="Psychologue">Psychologue</option>")
+                                        {% else %}
+                                            print("<option value="Psychologue">Psychologue</option><option value="Utilisateur Simple">Utilisateur Simple</option>")
+                                        {% endif %}
                                     </select>
                                 </div>
                             </form>

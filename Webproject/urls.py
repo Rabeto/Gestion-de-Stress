@@ -26,4 +26,7 @@ urlpatterns = [
     path('ressources_admin/', views.ressources_admin, name='ressources_admin'),
     path('manage_stress_admin/', views.manage_stress_admin, name='manage_stress_admin'),
     path('create_user_admin/', views.create_user_admin, name='create_user_admin'),
+    path('edit_user_admin/<id>/', views.edit_user_admin, name='edit_user_admin'),
+    path('update_user_admin/<id>/', views.update_user_admin, name='update_user_admin'),
+    path('delete_user_admin/<id>/', views.delete_user_admin, name='delete_user_admin'),
 ]
