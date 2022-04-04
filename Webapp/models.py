@@ -26,7 +26,6 @@ class Manage_Stress(models.Model):
     Titre_MS = models.CharField(max_length=50)
     Description = models.CharField(max_length=255)
     Date_pub_MS = models.DateField()
-    Image_MS = models.ImageField()
     Fichier_MS = models.FileField()
     
 class News_Post(models.Model):

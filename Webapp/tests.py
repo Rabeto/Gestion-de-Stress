@@ -1,3 +1,16 @@
 from django.test import TestCase
+from faker import Faker
+from .models import User
+import random
 
 # Create your tests here.
+faker = Faker()
+
+for i in range(5):
+    nom_Complet = faker.first_name()
+    email = faker.email()
+    adresse = faker.country()
+    profession = faker.job()
+    status = random.choice(["US","PSY"])
+    create_user = User(Nom_Complet = nom_Complet,Email = email, Adresse = adresse, Profession = profession, Status = status)
+    create_user.save()
