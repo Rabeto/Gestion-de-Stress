@@ -89,9 +89,9 @@
                     <div class="col-sm-12">
                         <!--Datatable-->
                         <div class="mt-1 mb-3 p-3 button-container bg-white border shadow-sm">
-                            <button class="btn btn-success" data-toggle="modal" data-target=".bd-example-modal">
+                            <a class="btn btn-success" href="/add_news_post_admin">
                                 <i class="fas fa-plus mr-3"></i>Ajouter
-                            </button>
+                            </a>
                             
 
                             <div class="table-responsive">
@@ -108,21 +108,23 @@
                                     </thead>
 
                                     <tbody>
+                                        {% for pub in News_Posts %}
                                         <tr>
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect</td>
-                                            <td>Edinburgh</td>
-                                            <td>61</td>
-                                            <td>2011/04/25</td>
+                                            <td>{{ pub.Titre }}</td>
+                                            <td>{{ pub.Contenu }}</td>
+                                            <td>{{ pub.Fichier }}</td>
+                                            <td>{{ pub.Date_pub | date:"d/m/Y" }}</td>
+                                            <td>{{ pub.Type }}</td>
                                             <td>
-                                                <button class="btn btn-info btn-round" data-toggle="modal" data-target="#update">
+                                                <a class="btn btn-info btn-round" href="/edit_news_post_admin/{{ pub.id }}">
                                                     <i class="fa fa-edit"></i>
-                                                </button>
-                                                <button class="btn btn-danger btn-round">
+                                                </a>
+                                                <a class="btn btn-danger btn-round" href="/delete_news_post_admin/{{ pub.id }}">
                                                     <i class="fa fa-trash"></i>
-                                                </button>
+                                                </a>
                                             </td>
                                         </tr>
+                                        {% endfor %}
                                     </tbody>
                                 </table>
                             </div>
