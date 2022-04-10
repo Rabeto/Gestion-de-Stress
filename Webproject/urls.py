@@ -17,6 +17,9 @@ from django.contrib import admin
 from django.urls import path
 from Webapp import views
 
+from django.conf.urls.static import static
+from django.conf import settings
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('index_admin/', views.index_admin, name='index_admin'),
@@ -31,6 +34,12 @@ urlpatterns = [
     
     
     path('ressources_admin/', views.ressources_admin, name='ressources_admin'),
+    path('add_ressource_admin/', views.add_ressource_admin, name='add_ressource_admin'),
+    path('create_ressource_admin/', views.create_ressource_admin, name='create_ressource_admin'),
+    path('edit_ressource_admin/<id>/', views.edit_ressource_admin, name='edit_ressource_admin'),
+    path('update_ressource_admin/<id>/', views.update_ressource_admin, name='update_ressource_admin'),
+    path('delete_ressource_admin/<id>/', views.delete_ressource_admin, name='delete_ressource_admin'),
+    
     path('manage_stress_admin/', views.manage_stress_admin, name='manage_stress_admin'),
     
     path('user_admin/', views.user_admin, name='user_admin'),
@@ -40,4 +49,4 @@ urlpatterns = [
     path('update_user_admin/<id>/', views.update_user_admin, name='update_user_admin'),
     path('delete_user_admin/<id>/', views.delete_user_admin, name='delete_user_admin'),
 
-]
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

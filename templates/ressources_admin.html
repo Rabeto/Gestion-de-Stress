@@ -87,9 +87,9 @@
                     <div class="col-sm-12">
                         <!--Datatable-->
                         <div class="mt-1 mb-3 p-3 button-container bg-white border shadow-sm">
-                            <button class="btn btn-success" data-toggle="modal" data-target=".bd-example-modal">
+                            <a class="btn btn-success" href="/add_ressource_admin">
                                 <i class="fas fa-plus mr-3"></i>Ajouter
-                            </button>
+                            </a>
                             
 
                             <div class="table-responsive">
@@ -105,20 +105,22 @@
                                     </thead>
 
                                     <tbody>
+                                        {% for src in Src %}
                                         <tr>
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect</td>
-                                            <td>Edinburgh</td>
-                                            <td>61</td>
+                                            <td>{{ src.Titre_Ressource }}</td>
+                                            <td>{{ src.Description_Ressource }}</td>
+                                            <td>{{ src.Fichier_Ressource }}</td>
+                                            <td>{{ src.Date_pub_Ressource }}</td>
                                             <td>
-                                                <button class="btn btn-info btn-round" data-toggle="modal" data-target="#update">
+                                                <a class="btn btn-info btn-round" href="/edit_ressource_admin/{{ src.id }}">
                                                     <i class="fa fa-edit"></i>
-                                                </button>
-                                                <button class="btn btn-danger btn-round">
+                                                </a>
+                                                <a class="btn btn-danger btn-round" href="/delete_ressource_admin/{{ src.id }}">
                                                     <i class="fa fa-trash"></i>
-                                                </button>
+                                                </a>
                                             </td>
                                         </tr>
+                                        {% endfor %}
                                     </tbody>
                                 </table>
                             </div>
@@ -128,79 +130,6 @@
                 <!--Dashboard widget-->
             </div>
         </div>
-
-        <div class="modal fade bd-example-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header text-center">
-                        <h5 class="modal-title text-secondary"><strong>Ajout Ressource</strong></h5>
-                        <button type="button" class="close pull-right" data-dismiss="modal">&times;</button>
-                    </div>
-                    <div class="modal-body text-justify">
-                        <form action="">
-                            {%  csrf_token %}
-                            <div class="form-group">
-                                <label for="Titre_Ressource" class="mb-0">Titre</label>
-                                <input type="text" id="Titre_Ressource" class="form-control" placeholder="Titre du Ressource"/>
-                            </div>
-                            <div class="form-group">
-                                <label for="Description_Ressource" class="mb-0">Description</label>
-                                <textarea id="Description_Ressource" class="form-control" placeholder="Description Ressource"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="Fichier_Ressource" class="mb-0">Fichier</label>
-                                <input type="file" id="Fichier_Ressource" class="form-control"/>
-                            </div>
-                            <div class="form-group">
-                                <label for="Date_pub_Ressource" class="mb-0">Date de Publication</label>
-                                <input type="date" id="Date_pub_Ressource" class="form-control"/>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default">Enregistrer</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="modal fade" id="update" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header text-center">
-                        <h5 class="modal-title text-secondary"><strong>Modification Ressource</strong></h5>
-                        <button type="button" class="close pull-right" data-dismiss="modal">&times;</button>
-                    </div>
-                    <div class="modal-body text-justify">
-                        <form action="">
-                            {%  csrf_token %}
-                            <div class="form-group">
-                                <label for="Titre_Ressource" class="mb-0">Titre</label>
-                                <input type="text" id="Titre_Ressource" class="form-control" placeholder="Titre du Ressource"/>
-                            </div>
-                            <div class="form-group">
-                                <label for="Description_Ressource" class="mb-0">Description</label>
-                                <textarea id="Description_Ressource" class="form-control" placeholder="Description Ressource"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="Fichier_Ressource" class="mb-0">Fichier</label>
-                                <input type="file" id="Fichier_Ressource" class="form-control"/>
-                            </div>
-                            <div class="form-group">
-                                <label for="Date_pub_Ressource" class="mb-0">Date de Publication</label>
-                                <input type="date" id="Date_pub_Ressource" class="form-control"/>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default">Modifier</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <!--Main Content-->
     {% endblock content %}
 

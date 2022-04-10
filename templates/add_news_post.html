@@ -55,7 +55,7 @@
                                 </a>
                             </li>
                             <li class="parent">
-                                <a href="/news_post" class=""><i class="fas fa-address-book mr-3"></i>
+                                <a href="/news_post_admin" class=""><i class="fas fa-address-book mr-3"></i>
                                     <span class="none">News ou Post</span>
                                 </a>
                             </li>
@@ -83,48 +83,46 @@
 
             <div class="col-sm-9 col-xs-12 content pt-3 pl-0">
                 <h5 class="mb-0" ><strong>News_Posts</strong></h5>
-                <span class="text-secondary">News_Posts<i class="fa fa-angle-right"></i> Ajouter</span>
+                <span class="text-secondary">News_Posts <i class="fa fa-angle-right"></i> Ajouter</span>
                 <div class="row mt-3">
                     <div class="col-sm-12">
                         <!--Default elements-->
                         <div class="mt-1 mb-3 p-3 button-container bg-white border shadow-sm">
-                            <form class="form-horizontal mt-4 mb-5" action="/create_news_post_admin">
+                            <form class="form-horizontal mt-4 mb-5" action="/create_news_post_admin" enctype="multipart/form-data">
                                 {%  csrf_token %}
-                                <div class="form-group">
+                                <div class="form-group row">
                                     <label for="Titre" class="control-label col-sm-2">Titre</label>
-                                    <div class="col-sm-8">
+                                    <div class="col-sm-10">
                                         <input type="text" name="Titre" class="form-control" placeholder="Titre"/>
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group row">
                                     <label for="Contenu" class="control-label col-sm-2">Contenu</label>
-                                    <div class="col-sm-8">
+                                    <div class="col-sm-10">
                                         <textarea name="Contenu" class="form-control" placeholder="Contenu"></textarea>
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group row">
                                     <label for="Fichier" class="control-label col-sm-2">Fichier</label>
-                                    <div class="col-sm-8">
+                                    <div class="col-sm-10">
                                         <input type="file" name="Fichier" class="form-control"/>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="Date_pub" class="control-label col-sm-2">Date de Publication</label>
-                                    <div class="col-sm-8">
-                                        <input type="date" name="Date_pub" class="form-control"/>
-                                    </div>
-                                </div>
-                                <div class="form-group">
+                                <div class="form-group row">
                                     <label for="Type" class="control-label col-sm-2">Type</label>
-                                    <div class="col-sm-8">
+                                    <div class="col-sm-10">
                                         <select name="Type" class="custom-select">
                                             <option value="News">News</option>
                                             <option value="Posts">Posts</option>
                                         </select>
                                     </div>
                                 </div>
-                                <input type="submit" class="btn btn-default" value="Ajouter">
-                                <a class="btn btn-danger" href="/news_post_admin">Annuler</a>
+                                <div class="form-group row">
+                                    <div class="offset-sm-2 col-sm-9">
+                                        <input type="submit" class="btn btn-success" value="Ajouter">
+                                        <a class="btn btn-danger" href="/news_post_admin">Annuler</a>
+                                    </div>
+                                </div>
                             </form>
                         </div>
                     </div>

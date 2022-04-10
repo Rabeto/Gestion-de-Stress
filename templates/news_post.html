@@ -55,7 +55,7 @@
                                 </a>
                             </li>
                             <li class="parent">
-                                <a href="/news_post" class=""><i class="fas fa-address-book mr-3"></i>
+                                <a href="/news_post_admin" class=""><i class="fas fa-address-book mr-3"></i>
                                     <span class="none">News ou Post</span>
                                 </a>
                             </li>
@@ -113,7 +113,7 @@
                                             <td>{{ pub.Titre }}</td>
                                             <td>{{ pub.Contenu }}</td>
                                             <td>{{ pub.Fichier }}</td>
-                                            <td>{{ pub.Date_pub | date:"d/m/Y" }}</td>
+                                            <td>{{ pub.Date_pub }}</td>
                                             <td>{{ pub.Type }}</td>
                                             <td>
                                                 <a class="btn btn-info btn-round" href="/edit_news_post_admin/{{ pub.id }}">

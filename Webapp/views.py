@@ -3,7 +3,11 @@ from django.forms import EmailField
 from django.shortcuts import render,redirect
 from .models import *
 
+
 # Create your views here.
+def login(request):
+    return render(request,'login.html')
+
 def index_admin(request):
     return render(request,'index_admin.html')
 
@@ -11,11 +15,43 @@ def manage_stress_admin(request):
     return render(request,'manage_stress_admin.html')
 
 def ressources_admin(request):
-    return render(request,'ressources_admin.html')
+    Src = Ressources.objects.all()
+    context = {
+        'Src' : Src, 
+    }
+    return render(request,'ressources_admin.html',context)
 
-def login(request):
-    return render(request,'login.html')
+def add_ressource_admin(request):
+    return render(request,'add_ressource_admin.html')
 
+def edit_ressource_admin(request,id):
+    Src = Ressources.objects.get(pk=id)
+    context = {
+        'Src' : Src
+    }
+    return render(request,'edit_ressource_admin.html',context)
+
+def delete_ressource_admin(request,id):
+    Src = Ressources.objects.get(pk=id)
+    Src.delete()
+    return redirect('/ressources_admin')
+
+def create_ressource_admin(request):
+    print(request.POST)
+    Titre_R = request.GET['Titre_Ressource']
+    Description_R = request.GET['Description_Ressource']
+    Fichier_R = request.GET['Fichier_Ressource']
+    create_R = Ressources(Titre_Ressource = Titre_R, Description_Ressource = Description_R, Fichier_Ressource = Fichier_R)
+    create_R.save()
+    return redirect('/ressources_admin')
+
+def update_ressource_admin(request,id):
+    update_R = Ressources.objects.get(pk=id)
+    update_R.Titre_Ressource = request.GET['Titre_Ressource']
+    update_R.Description_R = request.GET['Description_Ressource']
+    update_R.Fichier_R = request.GET['Fichier_Ressource']
+    update_R.save()
+    return redirect('/ressources_admin')
 
 def user_admin(request):
     Users = User.objects.all
@@ -72,20 +108,27 @@ def add_news_post_admin(request):
     return render(request,'add_news_post.html')
 
 def create_news_post_admin(request):
-    print(request.POST)
     titre = request.GET['Titre']
     contenu = request.GET['Contenu']
-    date_pub = request.GET['Date_pub']
     type = request.GET['Type']
     fichier = request.GET['Fichier']
-    create_np = News_Post(Titre = titre, Contenu = contenu, Date_pub = date_pub, Type = type, Fichier = fichier)
+    create_np = News_Post(Titre = titre, Contenu = contenu, Type = type, Fichier = fichier)
     create_np.save()
     return redirect('/news_post_admin')
 
+def news_edit(f):
+    if f == "":
+        d = "aucun fichier"
+    else:
+        d = f
+    return d
+
 def edit_news_post_admin(request, id):
     NP = News_Post.objects.get(pk=id)
+    data = news_edit(NP.Fichier)
     context = {
         'NP' : NP,
+        'data' : data,
     }
     return render(request,'edit_news_post.html',context)
 
@@ -93,7 +136,6 @@ def update_news_post_admin(request, id):
     update_NP = News_Post.objects.get(pk=id)
     update_NP.Titre = request.GET['Titre']
     update_NP.Contenu = request.GET['Contenu']
-    update_NP.Date_pub = request.GET['Date_pub']
     update_NP.Type = request.GET['Type']
     update_NP.Fichier = request.GET['Fichier']
     update_NP.save()
