@@ -1,18 +1,68 @@
 from aiohttp import request
+from django import urls
 from django.forms import EmailField
 from django.shortcuts import render,redirect
 from .models import *
-
 
 # Create your views here.
 def login(request):
     return render(request,'login.html')
 
 def index_admin(request):
-    return render(request,'index_admin.html')
+    user_S = User.objects.filter(Status = "Utilisateur Simple").count()
+    user_P = User.objects.filter(Status = "Psychologue").count()
+    nbr_MS = Manage_Stress.objects.count()
+    nbr_RS = Ressources.objects.count()
+    nbr_NP = News_Post.objects.count()
+    context = {
+        'user_S' : user_S,
+        'user_P' : user_P,
+        'nbr_MS' : nbr_MS,
+        'nbr_RS' : nbr_RS,
+        'nbr_NP': nbr_NP,
+    }
+    return render(request,'index_admin.html',context)
+
 
 def manage_stress_admin(request):
-    return render(request,'manage_stress_admin.html')
+    MS = Manage_Stress.objects.all()
+    context = {
+        'MS' : MS,
+    }
+    return render(request,'manage_stress_admin.html',context)
+
+def add_manage_stress_admin(request):
+    return render(request,'add_manage_stress_admin.html')
+
+def edit_manage_stress_admin(request,id):
+    MS = Manage_Stress.objects.get(pk=id)
+    context = {
+        'MS' : MS,
+    }
+    return render(request,'edit_manage_stress_admin.html',context)
+
+def delete_manage_stress_admin(request,id):
+    MS = Manage_Stress.objects.get(pk=id)
+    MS.delete()
+    return redirect('/manage_stress_admin')
+
+def create_manage_stress_admin(request):
+    print(request.POST)
+    titre_MS = request.POST['Titre_MS']
+    description_MS = request.POST['Description_MS']
+    fichier_MS = request.FILES.get('Fichier_MS')
+    create_MS = Manage_Stress(Titre_MS = titre_MS, Description_MS = description_MS, Fichier_MS = fichier_MS)
+    create_MS.save()
+    return redirect('/manage_stress_admin')
+
+def update_manage_stress_admin(request,id):
+    update_MS = Manage_Stress.objects.get(pk=id)
+    update_MS.Titre_MS = request.GET['Titre_MS']
+    update_MS.Description_MS = request.GET['Description_MS']
+    update_MS.Fichier_MS = request.FILES.get('Fichier_MS')
+    update_MS.save()
+    return redirect('/manage_stress_admin')
+    
 
 def ressources_admin(request):
     Src = Ressources.objects.all()
@@ -37,10 +87,10 @@ def delete_ressource_admin(request,id):
     return redirect('/ressources_admin')
 
 def create_ressource_admin(request):
-    print(request.POST)
-    Titre_R = request.GET['Titre_Ressource']
-    Description_R = request.GET['Description_Ressource']
-    Fichier_R = request.GET['Fichier_Ressource']
+    #print(request.POST)
+    Titre_R = request.POST['Titre_Ressource']
+    Description_R = request.POST['Description_Ressource']
+    Fichier_R = request.FILES.get('Fichier_Ressource')
     create_R = Ressources(Titre_Ressource = Titre_R, Description_Ressource = Description_R, Fichier_Ressource = Fichier_R)
     create_R.save()
     return redirect('/ressources_admin')
@@ -49,7 +99,7 @@ def update_ressource_admin(request,id):
     update_R = Ressources.objects.get(pk=id)
     update_R.Titre_Ressource = request.GET['Titre_Ressource']
     update_R.Description_R = request.GET['Description_Ressource']
-    update_R.Fichier_R = request.GET['Fichier_Ressource']
+    update_R.Fichier_R = request.FILES.get('Fichier_Ressource')
     update_R.save()
     return redirect('/ressources_admin')
 
@@ -108,12 +158,14 @@ def add_news_post_admin(request):
     return render(request,'add_news_post.html')
 
 def create_news_post_admin(request):
-    titre = request.GET['Titre']
-    contenu = request.GET['Contenu']
-    type = request.GET['Type']
-    fichier = request.GET['Fichier']
+    #print(request.POST, request.FILES)
+    titre = request.POST['Titre']
+    contenu = request.POST['Contenu']
+    type = request.POST['Type']
+    fichier = request.FILES.get('Fichier')
     create_np = News_Post(Titre = titre, Contenu = contenu, Type = type, Fichier = fichier)
     create_np.save()
+        
     return redirect('/news_post_admin')
 
 def news_edit(f):
@@ -137,7 +189,7 @@ def update_news_post_admin(request, id):
     update_NP.Titre = request.GET['Titre']
     update_NP.Contenu = request.GET['Contenu']
     update_NP.Type = request.GET['Type']
-    update_NP.Fichier = request.GET['Fichier']
+    update_NP.Fichier = request.FILES.get('Fichier')
     update_NP.save()
     return redirect('/news_post_admin')
 

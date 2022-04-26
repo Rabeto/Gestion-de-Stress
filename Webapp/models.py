@@ -23,8 +23,8 @@ class Message(models.Model):
     
 class Manage_Stress(models.Model):
     Titre_MS = models.CharField(max_length=50)
-    Description = models.CharField(max_length=255)
-    Date_pub_MS = models.DateField()
+    Description_MS = models.CharField(max_length=255)
+    Date_pub_MS = models.DateTimeField(auto_now=True)
     Fichier_MS = models.FileField()
     
 class News_Post(models.Model):
@@ -32,4 +32,4 @@ class News_Post(models.Model):
     Contenu = models.CharField(max_length=255)
     Date_pub = models.DateTimeField(auto_now=True)
     Type = models.CharField(max_length=5)
-    Fichier = models.FileField(upload_to='fichier/')
+    Fichier = models.ImageField()

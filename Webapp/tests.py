@@ -6,11 +6,11 @@ import random
 # Create your tests here.
 faker = Faker()
 
-for i in range(5):
+for i in range(10):
     nom_Complet = faker.first_name()
     email = faker.email()
     adresse = faker.country()
     profession = faker.job()
-    status = random.choice(["US","PSY"])
+    status = random.choice(["Utilisateur Simple","Psychologue"])
     create_user = User(Nom_Complet = nom_Complet,Email = email, Adresse = adresse, Profession = profession, Status = status)
     create_user.save()

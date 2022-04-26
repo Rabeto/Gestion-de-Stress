@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% load static %}
-
     {% block stylesheet %}
     <!--Bootstrap CSS-->
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
@@ -18,12 +17,9 @@
     <link rel="stylesheet" href="{% static 'css/dataTables.bootstrap4.min.css' %}">
     {% endblock stylesheet %}
 
-    {% block title %}Postes et News{% endblock title %}
+    {% block title %}Manage Stress{% endblock title %}
 
-        {% block content %}
-
-        <!--Main Content-->
-
+    {% block content %}
         <div class="row main-content">
             <!--Sidebar left-->
             <div class="col-sm-3 col-xs-6 sidebar pl-0">
@@ -81,49 +77,38 @@
             </div>
             <!--Sidebar left-->
 
+            <!--Content right-->
             <div class="col-sm-9 col-xs-12 content pt-3 pl-0">
-                <h5 class="mb-0" ><strong>News_Posts</strong></h5>
-                <span class="text-secondary">News_Posts<i class="fa fa-angle-right"></i> Modifier</span>
+                <h5 class="mb-0" ><strong>Manage Stress</strong></h5>
+                <span class="text-secondary">Manage Stress <i class="fa fa-angle-right"></i> Modifier</span>
                 <div class="row mt-3">
                     <div class="col-sm-12">
                         <!--Default elements-->
                         <div class="mt-1 mb-3 p-3 button-container bg-white border shadow-sm">
-                            <form class="form-horizontal mt-4 mb-5" action="/update_news_post_admin/{{ NP.id }}" enctype="multipart/form-data">
+                            <form action="/update_manage_stress_admin/{{ MS.id }}" class="form-horizontal mt-4 mb-5" enctype="multipart/form-data">
                                 {%  csrf_token %}
                                 <div class="form-group row">
-                                    <label for="Titre" class="control-label col-sm-2">Titre</label>
+                                    <label for="Titre_MS" class="control-label col-sm-2">Titre</label>
                                     <div class="col-sm-10">
-                                        <input type="text" name="Titre" class="form-control" value="{{ NP.Titre }}"/>
+                                        <input type="text" name="Titre_MS" class="form-control" value="{{ MS.Titre_MS }}"/>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="Contenu" class="control-label col-sm-2">Contenu</label>
+                                    <label for="Description_MS" class="control-label col-sm-2">Description</label>
                                     <div class="col-sm-10">
-                                        <textarea name="Contenu" class="form-control">{{ NP.Contenu }}</textarea>
+                                        <textarea name="Description_MS" class="form-control">{{ MS.Description_MS }}</textarea>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="Fichier" class="control-label col-sm-2">Fichier</label>
+                                    <label for="Fichier_MS" class="control-label col-sm-2">Fichier</label>
                                     <div class="col-sm-10">
-                                        <input type="file" name="Fichier" class="form-control" src="{{ data.url }}" value="{{ data }}" />
+                                        <input type="file" name="Fichier_MS" class="form-control" value="{{ MS.Fichier_MS }}"/>
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <label for="Type" class="control-label col-sm-2">Type</label>
-                                    <div class="col-sm-10">
-                                        <select name="Type" class="custom-select">
-                                            {% if NP.Type == "News" %}
-                                                print("<option value="News">News</option><option value="Posts">Posts</option>")
-                                            {% else %}
-                                                print("<option value="Posts">Posts</option><option value="News">News</option>")
-                                            {% endif %}
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
+                                <div class="col-sm-10">
                                     <div class="offset-sm-2 col-sm-9">
                                         <input type="submit" class="btn btn-success" value="Modifier">
-                                        <a class="btn btn-danger" href="/news_post_admin">Annuler</a>
+                                        <a class="btn btn-danger" href="/manage_stress_admin">Annuler</a>
                                     </div>
                                 </div>
                             </form>
@@ -132,9 +117,8 @@
                 </div>
             </div>
         </div>
-       <!--Main Content-->
-       {% endblock content %}
-       
+    {% endblock content %}
+
     {% block script %}
     <!--Page Wrapper-->
 
@@ -163,4 +147,8 @@
     <!--Custom Js Script-->
     <script src="{% static 'js/custom.js' %}"></script>
     <!--Custom Js Script-->
-    {% endblock script %}
+
+    <script>
+        $('#example').DataTable();
+    </script>
+    {% endblock script %}   

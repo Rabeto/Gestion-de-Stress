@@ -17,8 +17,8 @@ from django.contrib import admin
 from django.urls import path
 from Webapp import views
 
-from django.conf.urls.static import static
 from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,8 +26,8 @@ urlpatterns = [
     path('login/', views.login, name='login'),
     
     path('news_post_admin/', views.news_post_admin, name='news_post'),
-    path('add_news_post_admin', views.add_news_post_admin, name='add_news_post_admin'),
-    path('create_news_post_admin/', views.create_news_post_admin, name='creae_news_post_admin'),
+    path('add_news_post_admin/', views.add_news_post_admin, name='add_news_post_admin'),
+    path('create_news_post_admin/', views.create_news_post_admin, name='create_news_post_admin'),
     path('edit_news_post_admin/<id>/', views.edit_news_post_admin, name='edit_news_post_admin'),
     path('update_news_post_admin/<id>/', views.update_news_post_admin, name='update_news_post_admin'),
     path('delete_news_post_admin/<id>', views.delete_news_post_admin, name='delete_news_post_admin'),
@@ -41,12 +41,17 @@ urlpatterns = [
     path('delete_ressource_admin/<id>/', views.delete_ressource_admin, name='delete_ressource_admin'),
     
     path('manage_stress_admin/', views.manage_stress_admin, name='manage_stress_admin'),
+    path('add_manage_stress_admin/', views.add_manage_stress_admin, name='add_manage_stress_admin'),
+    path('create_manage_stress_admin/', views.create_manage_stress_admin, name='create_manage_stress_admin'),
+    path('edit_manage_stress_admin/<id>/', views.edit_manage_stress_admin, name='edit_manage_stress_admin'),
+    path('update_manage_stress_admin/<id>/', views.update_manage_stress_admin, name='update_manage_stress_admin'),
+    path('delete_manage_stress_admin/<id>/', views.delete_manage_stress_admin, name='delete_manage_stress_admin'),
     
     path('user_admin/', views.user_admin, name='user_admin'),
-    path('add_user_admin', views.add_user_admin, name='add_user_admin'),
+    path('add_user_admin/', views.add_user_admin, name='add_user_admin'),
     path('create_user_admin/', views.create_user_admin, name='create_user_admin'),
     path('edit_user_admin/<id>/', views.edit_user_admin, name='edit_user_admin'),
     path('update_user_admin/<id>/', views.update_user_admin, name='update_user_admin'),
     path('delete_user_admin/<id>/', views.delete_user_admin, name='delete_user_admin'),
 
-]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)
