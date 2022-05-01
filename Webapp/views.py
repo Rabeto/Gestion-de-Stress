@@ -8,6 +8,9 @@ from .models import *
 def login(request):
     return render(request,'login.html')
 
+def index_app(request):
+    return render(request,'index_app.html')
+
 def index_admin(request):
     user_S = User.objects.filter(Status = "Utilisateur Simple").count()
     user_P = User.objects.filter(Status = "Psychologue").count()
@@ -168,19 +171,10 @@ def create_news_post_admin(request):
         
     return redirect('/news_post_admin')
 
-def news_edit(f):
-    if f == "":
-        d = "aucun fichier"
-    else:
-        d = f
-    return d
-
 def edit_news_post_admin(request, id):
     NP = News_Post.objects.get(pk=id)
-    data = news_edit(NP.Fichier)
     context = {
         'NP' : NP,
-        'data' : data,
     }
     return render(request,'edit_news_post.html',context)
 

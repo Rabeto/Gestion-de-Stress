@@ -23,6 +23,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('index_admin/', views.index_admin, name='index_admin'),
+    path('index_app/', views.index_app, name='index_app'),
     path('login/', views.login, name='login'),
     
     path('news_post_admin/', views.news_post_admin, name='news_post'),
