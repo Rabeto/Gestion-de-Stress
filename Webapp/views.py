@@ -9,7 +9,34 @@ def login(request):
     return render(request,'login.html')
 
 def index_app(request):
-    return render(request,'index_app.html')
+    NP = News_Post.objects.order_by('Date_pub').reverse()[:3]
+    MS = Manage_Stress.objects.order_by('Date_pub_MS').reverse()[:3]
+    RS = Ressources.objects.order_by('Date_pub_Ressource').reverse()[:3]
+    context = {
+        'NP': NP,
+        'MS': MS,
+        'RS': RS,
+    }
+    return render(request,'index_app.html',context)
+
+def ressource_app(request):
+    Ressource = Ressources.objects.order_by('Date_pub_Ressource').reverse()
+    usr = User.objects.filter(Status = 'Psychologue')
+    context = {
+        'Ressource': Ressource,
+        'usr': usr, 
+    }
+    return render(request,'ressource_app.html',context)
+
+def manage_stress_app(request):
+    MS = Manage_Stress.objects.order_by('Date_pub_MS').reverse()
+    context = {
+        'MS': MS,
+    }
+    return render(request,'manage_stress_app.html',context)
+
+def journal_app(request):
+    return render(request,'journal_app.html')
 
 def index_admin(request):
     user_S = User.objects.filter(Status = "Utilisateur Simple").count()

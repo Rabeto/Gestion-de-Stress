@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="{% static 'css/nice-select.css' %}">
     {% endblock stylesheet %}
 
-    {% block title %}Acceuil{% endblock title %}
+    {% block title %}Gestion de stress{% endblock title %}
 
     {% block content %}
 
@@ -41,7 +41,7 @@
                 <div class="sidebar-menu-container">
                     <ul class="sidebar-menu mt-4 mb-4">
                         <li class="parent">
-                            <a href="" class=""><i class="fa fa-rocket mr-3"> </i>
+                            <a href="/index_app" class=""><i class="fa fa-rocket mr-3"> </i>
                                 <span class="none">Acceuil</span>
                             </a>  
                         </li>
@@ -79,73 +79,22 @@
         <div class="col-sm-9 col-xs-12 content pt-3 pl-0">
             <div class="row mt-3">
                 <div class="col-sm-12">
-                    <div class="mt-1 mb-3 p-3 button-container border bg-white shadow-sm custom-tabs">
-                        <nav>
-                            <div class="nav nav-tabs nav-fill" id="nav-customContent" role="tablist">
-                                <a class="nav-item nav-link active" id="nav-journal" data-toggle="tab" href="#custom-journal" role="tab" aria-controls="nav-journal" aria-selected="true">Journal</a>
-                                <a class="nav-item nav-link" id="nav-ms" data-toggle="tab" href="#custom-ms" role="tab" aria-controls="nav-ms" aria-selected="false">Gérer votre stress</a>
-                                <a class="nav-item nav-link" id="nav-src" data-toggle="tab" href="#custom-src" role="tab" aria-controls="nav-src" aria-selected="false">Ressource</a>
-                            </div>
-                        </nav>
-                        <div class="tab-content py-3 px-3 px-sm-0" id="nav-customContent">
-                            <div class="tab-pane fade show active" id="custom-journal" role="tabpanel" aria-labelledby="nav-journal">
-                                <div class="mt-1 mb-5 button-container">
-                                    <div class="card-group">
-                                        {% for np in NP %}
-                                        <div class="card">
-                                            <div class="card_header">
-                                                <img class="card-img-top" src="{{ np.Fichier.url }}" alt="Card image cap">
-                                            </div>
-                                            <div class="card-body">
-                                                <h5 class="card-title text-left">{{ np.Titre }}</h5>
-                                                <p class="card-text"><small class="text-muted">{{ np.Date_pub }}</small></p>
-                                            </div>
-                                        </div>
-                                        {% endfor %}
-                                    </div>
+                    <!--Card groups-->
+                    <div class="mt-1 mb-5 button-container">
+                        {% for ms in MS %}
+                        <div class="card-group">
+                            <div class="card">
+                                <img class="card-img-top" src="{{ ms.Fichier_MS.url }}" alt="Card image cap">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ ms.Titre_MS }}</h5>
+                                    <p class="card-text">{{ ms.Description_MS }}</p>
+                                    <p class="card-text"><small class="text-muted">{{ ms.Date_pub_MS }}</small></p>
                                 </div>
-                                <a class="btn btn-info btn-round" href="#">
-                                    <i class="fas fa-info">   Plus de détails </i>
-                                </a>
-                            </div>
-                            <div class="tab-pane fade" id="custom-ms" role="tabpanel" aria-labelledby="nav-ms">
-                                <div class="mt-1 mb-5 button-container">
-                                    <div class="card-group">
-                                        {% for ms in MS %}
-                                        <div class="card">
-                                            <img class="card-img-top" src="{{ ms.Fichier_MS.url }}" alt="Card image cap">
-                                            <div class="card-body">
-                                                <h5 class="card-title">{{ ms.Titre_MS }}</h5>
-                                                <p class="card-text"><small class="text-muted">{{ ms.Date_pub_MS }}</small></p>
-                                            </div>
-                                        </div>
-                                        {% endfor %}
-                                    </div>
-                                </div>
-                                <a class="btn btn-info btn-round" href="/manage_stress_app">
-                                    <i class="fas fa-info">   Plus de détails </i>
-                                </a>
-                            </div>
-                            <div class="tab-pane fade" id="custom-src" role="tabpanel" aria-labelledby="nav-src">
-                                <div class="mt-1 mb-5 button-container">
-                                    <div class="card-group">
-                                        {% for src in RS %}
-                                        <div class="card">
-                                            <img class="card-img-top" src="{{ src.Fichier_Ressource.url }}" alt="Card image cap">
-                                            <div class="card-body">
-                                                <h5 class="card-title">{{ src.Titre_Ressource }}</h5>
-                                                <p class="card-text"><small class="text-muted">{{ src.Date_pub_Ressource }}</small></p>
-                                            </div>
-                                        </div>
-                                        {% endfor %}
-                                    </div>
-                                </div>
-                                <a class="btn btn-info btn-round" href="/ressource_app">
-                                    <i class="fas fa-info">   Plus de détails </i>
-                                </a>
                             </div>
                         </div>
+                        {% endfor %}
                     </div>
+                    <!--/Card groups-->
                 </div>
             </div>
         </div>
