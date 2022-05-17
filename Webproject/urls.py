@@ -28,6 +28,7 @@ urlpatterns = [
     path('ressource_app/', views.ressource_app, name='ressource_app'),
     path('manage_stress_app/', views.manage_stress_app, name='manage_stress_app'),
     path('journal_app/', views.journal_app, name='journal_app'),
+    path('create_comment/', views.create_comment, name='create_comment'),
     
     path('news_post_admin/', views.news_post_admin, name='news_post'),
     path('add_news_post_admin/', views.add_news_post_admin, name='add_news_post_admin'),

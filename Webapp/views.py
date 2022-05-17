@@ -36,7 +36,21 @@ def manage_stress_app(request):
     return render(request,'manage_stress_app.html',context)
 
 def journal_app(request):
-    return render(request,'journal_app.html')
+    pst = News_Post.objects.filter(Type = 'Posts').order_by('Date_pub').reverse()
+    nws = News_Post.objects.filter(Type = 'News').order_by('Date_pub').reverse()
+    cmt = Comments.objects.order_by('Date_pub_com')
+    context = {
+        'pst': pst,
+        'nws': nws,
+        'cmt': cmt,
+    }
+    return render(request,'journal_app.html',context)
+
+def create_comment(request):
+    cmt = request.POST['comment']
+    create_cmt = Comments(Commentaire = cmt)
+    create_cmt.save()
+    return redirect('/journal_app')
 
 def index_admin(request):
     user_S = User.objects.filter(Status = "Utilisateur Simple").count()

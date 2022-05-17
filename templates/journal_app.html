@@ -76,6 +76,102 @@
             </div>
         </div>
 
+        <div class="col-sm-9 col-xs-12 content pt-3 pl-0">
+            <button class="btn btn-success">
+                <i class="fas fa-plus mr-3"></i> Poster publication
+            </button>
+            <div class="row mt-3">
+                <div class="col-sm-12">
+                    <div class="mt-1 mb-3 p-3 button-container border bg-white shadow-sm custom-tabs">
+                        <nav>
+                            <div class="nav nav-tabs nav-fill" id="nav-customContent" role="tablist">
+                                <a class="nav-item nav-link active" id="nav-pub" data-toggle="tab" href="#custom-pub" role="tab" aria-controls="nav-pub" aria-selected="true">Publication</a>
+                                <a class="nav-item nav-link" id="nav-new" data-toggle="tab" href="#custom-new" role="tab" aria-controls="nav-new" aria-selected="false">News</a>
+                            </div>
+                        </nav>
+                        <div class="tab-content py-3 px-3 px-sm-0" id="nav-customContent">
+                            <div class="tab-pane fade show active" id="custom-pub" role="tabpanel" aria-labelledby="nav-pub">
+                                {% for post in pst %}
+                                <div class="card">
+                                    <img class="card-img-top" src="{{ post.Fichier.url }}">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ post.Titre }}</h5>
+                                        <p class="card-text">{{ post.Contenu }}</p>
+                                        <p class="card-text"><small class="text-muted">{{ post.Date_pub }}</small></p>
+                                        <div class="row text-center">
+                                            <div class="col-sm-4">
+                                                <i class="fas fa-heart"></i>
+                                                <span class="None"> Réagir</span>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <i class="fas fa-comment"></i>
+                                                <span class="None"> Commentaires</span>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <a href="#">
+                                                    <i class="fas fa-comments"></i>
+                                                    <span class="None"> Message privé</span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="dropdown-divider"></div>
+                                        <!-- Comment form-->
+                                        <form  class="form-horizontal" method="post" action="{% url 'create_comment' %}">
+                                            {%  csrf_token %}
+                                            <div class="form-group row">
+                                                <div class="col-sm-12">
+                                                    <textarea name="comment" class="form-control" placeholder="Votre Commentaire"></textarea>
+                                                </div>
+                                            </div>
+                                            <input type="submit" class="btn btn-success" value="Enregister">
+                                        </form>
+                                        <!-- Comment with nested comments-->
+                                        <div class="dropdown-divider"></div>
+                                        {% for cmnt in cmt%}
+                                        <div class="feed-single mt-3 mb-3">
+                                            <div class="media">
+                                                <img class="mr-3 rounded-circle" height="40px" width="40px" src="{% static 'img/client-img4.png' %}" alt="Generic placeholder image">
+                                                <div class="media-body">
+                                                    <h6 class="mt-1 mb-2">Mario Mendez 
+                                                        <small class="text-muted  pl-2"><i class="fa fa-clock"></i>{{ cmnt.Date_pub_com }}</small>
+                                                    </h6>
+                                                    <div class="card shadow-sm">
+                                                        <div class="card-body">
+                                                            <p class="card-text">{{ cmnt.Commentaire }}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                <br>
+                                {% endfor %}
+                            </div>
+                            <div class="tab-pane fade" id="custom-new" role="tabpanel" aria-labelledby="nav-new">
+                                {% for new in nws %}
+                                <div class="card">
+                                    <img class="card-img-top" src="{{ new.Fichier.url }}">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ new.Titre }}</h5>
+                                        <p class="card-text">{{ new.Contenu }}</p>
+                                        <p class="card-text"><small class="text-muted">{{ new.Date_pub }}</small></p>
+                                        <div class="row text-center">
+                                            <div class="col-sm-12 btn btn-danger">
+                                                <i class="fas fa-heart"></i>
+                                                <span class="None"> Réagir</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><br>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         
     </div>
 
