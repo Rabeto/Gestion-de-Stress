@@ -9,26 +9,16 @@ class User(models.Model):
     Profession = models.CharField(max_length=60)
     Status = models.CharField(max_length=20)
     
-    def __str__(self):
-        self.Nom_Complet
-    
-    
 class Comments(models.Model):
     Commentaire = models.CharField(max_length=255)
     Date_pub_com = models.DateTimeField(auto_now=True)
-    
-    def __str__(self):
-        self.Commentaire
-    
     
 class Ressources(models.Model):
     Titre_Ressource = models.CharField(max_length=50)
     Description_Ressource = models.CharField(max_length=255)
     Fichier_Ressource = models.FileField()
     Date_pub_Ressource = models.DateTimeField(auto_now=True)
-    
-    def __str__(self):
-        self.Titre_Ressource
+
     
 class Message(models.Model):
     User_send = models.CharField(max_length=50)
@@ -42,16 +32,11 @@ class Manage_Stress(models.Model):
     Date_pub_MS = models.DateTimeField(auto_now=True)
     Fichier_MS = models.FileField()
     
-    def __str__(self):
-        self.Titre_MS
-    
 class News_Post(models.Model):
     Titre = models.CharField(max_length=50)
     Contenu = models.CharField(max_length=255)
     Date_pub = models.DateTimeField(auto_now=True)
     Type = models.CharField(max_length=5)
     Fichier = models.ImageField()
-    
-    def __str__(self):
-        self.Titre
+
     

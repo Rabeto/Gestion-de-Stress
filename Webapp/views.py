@@ -46,6 +46,22 @@ def journal_app(request):
     }
     return render(request,'journal_app.html',context)
 
+def pub_post_user(request):
+    titre = request.POST['Titre']
+    contenu = request.POST['Contenu']
+    type = 'Posts'
+    fichier = request.FILES.get('Fichier')
+    create_np = News_Post(Titre = titre, Contenu = contenu, Type = type, Fichier = fichier)
+    create_np.save()
+    return redirect('/journal_app')
+
+def details_pub(request,id):
+    post = News_Post.objects.get(pk=id)
+    context = {
+        'post': post,
+    }
+    return render(request,'pub.html',context)
+
 def create_comment(request):
     cmt = request.POST['comment']
     create_cmt = Comments(Commentaire = cmt)

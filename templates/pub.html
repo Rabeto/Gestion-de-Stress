@@ -77,21 +77,19 @@
         </div>
 
         <div class="col-sm-9 col-xs-12 content pt-3 pl-0">
-            <button class="btn btn-success" data-toggle="modal" data-target="#myModal">
-                <i class="fas fa-plus mr-3"></i> Poster publication
-            </button>
+            <a class="btn btn-success" href="/journal_app">
+                <i class="fas fa-arrow-left mr-3"></i> Retour
+            </a>
             <div class="row mt-3">
                 <div class="col-sm-12">
                     <div class="mt-1 mb-3 p-3 button-container border bg-white shadow-sm custom-tabs">
                         <nav>
                             <div class="nav nav-tabs nav-fill" id="nav-customContent" role="tablist">
                                 <a class="nav-item nav-link active" id="nav-pub" data-toggle="tab" href="#custom-pub" role="tab" aria-controls="nav-pub" aria-selected="true">Publication</a>
-                                <a class="nav-item nav-link" id="nav-new" data-toggle="tab" href="#custom-new" role="tab" aria-controls="nav-new" aria-selected="false">News</a>
                             </div>
                         </nav>
                         <div class="tab-content py-3 px-3 px-sm-0" id="nav-customContent">
                             <div class="tab-pane fade show active" id="custom-pub" role="tabpanel" aria-labelledby="nav-pub">
-                                {% for post in pst %}
                                 <div class="card">
                                     <img class="card-img-top" src="{{ post.Fichier.url }}">
                                     <div class="card-body">
@@ -104,10 +102,8 @@
                                                 <span class="None"> Réagir</span>
                                             </div>
                                             <div class="col-sm-4">
-                                                <a href="/details_pub/{{ post.id }}">
-                                                    <i class="fas fa-comment"></i>
-                                                    <span class="None"> Voir Commentaires</span>
-                                                </a>
+                                                <i class="fas fa-comment"></i>
+                                                <span class="None"> Commentaires</span>
                                             </div>
                                             <div class="col-sm-4">
                                                 <a href="#">
@@ -116,79 +112,45 @@
                                                 </a>
                                             </div>
                                         </div>
+                                        <div class="dropdown-divider"></div>
+                                        <!-- Comment form-->
+                                        <form  class="form-horizontal" method="post" action="{% url 'create_comment' %}">
+                                            {%  csrf_token %}
+                                            <div class="form-group row">
+                                                <div class="col-sm-12">
+                                                    <textarea name="comment" class="form-control" placeholder="Votre Commentaire"></textarea>
+                                                </div>
+                                            </div>
+                                            <input type="submit" class="btn btn-success" value="Enregister">
+                                        </form>
+                                        <!-- Comment with nested comments-->
+                                        <div class="dropdown-divider"></div>
+                                        {% for cmnt in cmt%}
+                                        <div class="feed-single mt-3 mb-3">
+                                            <div class="media">
+                                                <img class="mr-3 rounded-circle" height="40px" width="40px" src="{% static 'img/client-img4.png' %}" alt="Generic placeholder image">
+                                                <div class="media-body">
+                                                    <h6 class="mt-1 mb-2">Mario Mendez 
+                                                        <small class="text-muted  pl-2"><i class="fa fa-clock"></i>{{ cmnt.Date_pub_com }}</small>
+                                                    </h6>
+                                                    <div class="card shadow-sm">
+                                                        <div class="card-body">
+                                                            <p class="card-text">{{ cmnt.Commentaire }}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
                                     </div>
                                 </div>
                                 <br>
-                                {% endfor %}
-                            </div>
-                            <div class="tab-pane fade" id="custom-new" role="tabpanel" aria-labelledby="nav-new">
-                                {% for new in nws %}
-                                <div class="card">
-                                    <img class="card-img-top" src="{{ new.Fichier.url }}">
-                                    <div class="card-body">
-                                        <h5 class="card-title">{{ new.Titre }}</h5>
-                                        <p class="card-text">{{ new.Contenu }}</p>
-                                        <p class="card-text"><small class="text-muted">{{ new.Date_pub }}</small></p>
-                                        <div class="row text-center">
-                                            <div class="col-sm-12 btn btn-danger">
-                                                <i class="fas fa-heart"></i>
-                                                <span class="None"> Réagir</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div><br>
-                                {% endfor %}
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
-        <div class="modal fade" id="myModal">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-          
-                    <!-- Modal Header -->
-                    <div class="modal-header">
-                        <h3>Publication</h3>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
-          
-                    <!-- Modal body -->
-                    <div class="modal-body">
-                        <form class="form-horizontal mt-4 mb-5" method="post" action="{% url 'pub_post_user' %}" enctype="multipart/form-data">
-                            {%  csrf_token %}
-                            <div class="form-group row">
-                                <label for="Titre" class="control-label col-sm-2">Titre</label>
-                                <div class="col-sm-10">
-                                    <input type="text" name="Titre" class="form-control" placeholder="Titre"/>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="Contenu" class="control-label col-sm-2">Contenu</label>
-                                <div class="col-sm-10">
-                                    <textarea name="Contenu" class="form-control" placeholder="Contenu"></textarea>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="Fichier" class="control-label col-sm-2">Fichier</label>
-                                <div class="col-sm-10">
-                                    <input type="file" name="Fichier" class="form-control"/>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="offset-sm-2 col-sm-9">
-                                    <input type="submit" class="btn btn-success" value="Publier">
-                                    <a class="btn btn-danger" href="/journal_app">Annuler</a>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
     </div>
 
     {% endblock content %}
