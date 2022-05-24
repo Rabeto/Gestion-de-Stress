@@ -93,9 +93,23 @@
                                 <form class="form-horizontal mt-4 mb-5" action="/update_user_admin/{{ Users_e.id }}">
                                     {%  csrf_token %}
                                     <div class="form-group row">
-                                        <label for="Nom_Complet" class="control-label col-sm-2">Nom Complet</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" name="Nom_Complet" class="form-control" value="{{ Users_e.Nom_Complet }}" />
+                                        <label for="Nom" class="control-label col-sm-2">Nom</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" name="Nom" class="form-control" value="{{ Users_e.Nom }}" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="Prenom" class="control-label col-sm-2">Prénom</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" name="Prenom" class="form-control" value="{{ Users_e.Prenom }}" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="Age" class="control-label col-sm-2">Age</label>
+                                        <div class="col-sm-10">
+                                            <input type="number" name="Age" class="form-control" value="{{ Users_e.Age }}" min="15" max="85" />
                                         </div>
                                     </div>
 
@@ -105,24 +119,35 @@
                                             <input type="email" name="Email" class="form-control" value="{{ Users_e.Email }}" />
                                         </div>
                                     </div>
+
                                     <div class="form-group row">
-                                        <label for="Adresse" class="control-label col-sm-2">Adresse</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" name="Adresse" class="form-control" value="{{ Users_e.Adresse }}" />
+                                        <label for="Departement" class="control-label col-sm-2">Département</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" name="Departement" class="form-control" value="{{ Users_e.Departement }}" />
                                         </div>
                                     </div>
+
                                     <div class="form-group row">
                                         <label for="Profession" class="control-label col-sm-2">Profession</label>
                                         <div class="col-sm-10">
-                                            <select name="Profession" class="custom-select">
-                                                {% if Users_e.Profession == "Etudiant" %}
-                                                    print("<option value="Etudiant">Etudiant</option><option value="Professeur">Professeur</option>")
-                                                {% else %}
-                                                    print("<option value="Professeur">Professeur</option><option value="Etudiant">Etudiant</option>")
-                                                {% endif %}
-                                            </select>
+                                            <input type="text" name="Profession" class="form-control" value="{{ Users_e.Profession }}" />
                                         </div>
                                     </div>
+
+                                    <div class="form-group row">
+                                        <label for="Username" class="control-label col-sm-2">Nom d'utilisateur</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" name="Username" class="form-control" value="{{ Users_e.Username }}" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="Password" class="control-label col-sm-2">Mot de passe</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" name="Password" class="form-control" value="{{ Users_e.Password }}"/>
+                                        </div>
+                                    </div>
+
                                     <div class="form-group row">
                                         <label for="Status" class="control-label col-sm-2">Status</label>
                                         <div class="col-sm-10">
@@ -135,6 +160,7 @@
                                             </select>
                                         </div>
                                     </div>
+                                    
                                     <div class="form-group row">
                                         <div class="offset-sm-2 col-sm-9">
                                             <input type="submit" class="btn btn-success" value="Modifier">

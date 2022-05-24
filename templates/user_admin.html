@@ -98,10 +98,14 @@
                                     <table id="example" class="table table-striped table-bordered">
                                         <thead>
                                             <tr>
-                                                <th>Nom Complet</th>
+                                                <th>Nom</th>
+                                                <th>Prénom</th>
+                                                <th>Age</th>
                                                 <th>Email</th>
-                                                <th>Adresse</th>
+                                                <th>Departement</th>
                                                 <th>Profession</th>
+                                                <th>Username</th>
+                                                <th>Password</th>
                                                 <th>Status</th>
                                                 <th>Actions</th>
                                             </tr>
@@ -110,10 +114,14 @@
                                         <tbody>
                                             {% for us in Users %}
                                             <tr>
-                                                <td>{{ us.Nom_Complet }}</td>
+                                                <td>{{ us.Nom }}</td>
+                                                <td>{{ us.Prenom }}</td>
+                                                <td>{{ us.Age }}</td>
                                                 <td>{{ us.Email }}</td>
-                                                <td>{{ us.Adresse }}</td>
+                                                <td>{{ us.Departement }}</td>
                                                 <td>{{ us.Profession }}</td>
+                                                <td>{{ us.Username }}</td>
+                                                <td>{{ us.Password }}</td>
                                                 <td>{{ us.Status }}</td>
                                                 <td>
                                                     <a class="btn btn-info icon-round" href="/edit_user_admin/{{ us.id }}">

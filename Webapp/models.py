@@ -1,17 +1,16 @@
 from django.db import models
-from sqlalchemy import false
 
 # Create your models here.
-class User(models.Model):
-    Nom_Complet = models.CharField(max_length=150)
-    Email = models.EmailField(null=false)
-    Adresse = models.CharField(max_length=150)
-    Profession = models.CharField(max_length=60)
+class Utilisateur(models.Model):
+    Nom = models.CharField(max_length=50)
+    Prenom = models.CharField(max_length=50)
+    Age = models.IntegerField(null=True)
+    Email = models.EmailField()
+    Departement = models.CharField(max_length=50)
+    Profession = models.CharField(max_length=50)
+    Username = models.CharField(max_length=50)
+    Password = models.CharField(max_length=50)
     Status = models.CharField(max_length=20)
-    
-class Comments(models.Model):
-    Commentaire = models.CharField(max_length=255)
-    Date_pub_com = models.DateTimeField(auto_now=True)
     
 class Ressources(models.Model):
     Titre_Ressource = models.CharField(max_length=50)
@@ -19,7 +18,6 @@ class Ressources(models.Model):
     Fichier_Ressource = models.FileField()
     Date_pub_Ressource = models.DateTimeField(auto_now=True)
 
-    
 class Message(models.Model):
     User_send = models.CharField(max_length=50)
     User_received = models.CharField(max_length=50)

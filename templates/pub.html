@@ -125,23 +125,23 @@
                                         </form>
                                         <!-- Comment with nested comments-->
                                         <div class="dropdown-divider"></div>
-                                        {% for cmnt in cmt%}
+
                                         <div class="feed-single mt-3 mb-3">
                                             <div class="media">
                                                 <img class="mr-3 rounded-circle" height="40px" width="40px" src="{% static 'img/client-img4.png' %}" alt="Generic placeholder image">
                                                 <div class="media-body">
                                                     <h6 class="mt-1 mb-2">Mario Mendez 
-                                                        <small class="text-muted  pl-2"><i class="fa fa-clock"></i>{{ cmnt.Date_pub_com }}</small>
+                                                        <small class="text-muted  pl-2"><i class="fa fa-clock"></i>date de publication</small>
                                                     </h6>
                                                     <div class="card shadow-sm">
                                                         <div class="card-body">
-                                                            <p class="card-text">{{ cmnt.Commentaire }}</p>
+                                                            <p class="card-text">commentaire</p>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        {% endfor %}
+
                                     </div>
                                 </div>
                                 <br>

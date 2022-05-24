@@ -28,7 +28,6 @@ urlpatterns = [
     path('ressource_app/', views.ressource_app, name='ressource_app'),
     path('manage_stress_app/', views.manage_stress_app, name='manage_stress_app'),
     path('journal_app/', views.journal_app, name='journal_app'),
-    path('create_comment/', views.create_comment, name='create_comment'),
     path('pub_post_user/', views.pub_post_user, name='pub_post_user'),
     path('details_pub/<id>/', views.details_pub, name='details_pub'),
     

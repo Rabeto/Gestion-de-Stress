@@ -21,7 +21,7 @@ def index_app(request):
 
 def ressource_app(request):
     Ressource = Ressources.objects.order_by('Date_pub_Ressource').reverse()
-    usr = User.objects.filter(Status = 'Psychologue')
+    usr = Utilisateur.objects.filter(Status = 'Psychologue')
     context = {
         'Ressource': Ressource,
         'usr': usr, 
@@ -38,11 +38,9 @@ def manage_stress_app(request):
 def journal_app(request):
     pst = News_Post.objects.filter(Type = 'Posts').order_by('Date_pub').reverse()
     nws = News_Post.objects.filter(Type = 'News').order_by('Date_pub').reverse()
-    cmt = Comments.objects.order_by('Date_pub_com')
     context = {
         'pst': pst,
         'nws': nws,
-        'cmt': cmt,
     }
     return render(request,'journal_app.html',context)
 
@@ -62,15 +60,9 @@ def details_pub(request,id):
     }
     return render(request,'pub.html',context)
 
-def create_comment(request):
-    cmt = request.POST['comment']
-    create_cmt = Comments(Commentaire = cmt)
-    create_cmt.save()
-    return redirect('/journal_app')
-
 def index_admin(request):
-    user_S = User.objects.filter(Status = "Utilisateur Simple").count()
-    user_P = User.objects.filter(Status = "Psychologue").count()
+    user_S = Utilisateur.objects.filter(Status = "Utilisateur Simple").count()
+    user_P = Utilisateur.objects.filter(Status = "Psychologue").count()
     nbr_MS = Manage_Stress.objects.count()
     nbr_RS = Ressources.objects.count()
     nbr_NP = News_Post.objects.count()
@@ -164,7 +156,7 @@ def update_ressource_admin(request,id):
     return redirect('/ressources_admin')
 
 def user_admin(request):
-    Users = User.objects.all
+    Users = Utilisateur.objects.all
     context = {
         'Users' : Users,
     }
@@ -175,24 +167,28 @@ def add_user_admin(request):
 
 def create_user_admin(request):
     print(request.POST)
-    nom_Complet = request.GET['Nom_Complet']
+    nom = request.GET['Nom']
+    prenom = request.GET['Prenom']
+    age= request.GET['Age']
     email = request.GET['Email']
-    adresse = request.GET['Adresse']
+    departement = request.GET['Departement']
     profession = request.GET['Profession']
+    username = request.GET['Username']
+    password = request.GET['Password']
     status = request.GET['Status']
-    create_user = User(Nom_Complet = nom_Complet,Email = email, Adresse = adresse, Profession = profession, Status = status)
+    create_user = Utilisateur(Nom = nom, Prenom = prenom, Age = age, Email = email, Departement = departement, Profession = profession, Utilisateurname = username, Password = password, Status = status)
     create_user.save()
     return redirect('/user_admin')
 
 def edit_user_admin(request, id):
-    Users_e = User.objects.get(pk=id)
+    Users_e = Utilisateur.objects.get(pk=id)
     context = {
         'Users_e' : Users_e,
     }
     return render(request,'edit_user_admin.html',context)
 
 def update_user_admin(request, id):
-    create_user_edit = User.objects.get(pk=id)
+    create_user_edit = Utilisateur.objects.get(pk=id)
     create_user_edit.Nom_Complet = request.GET['Nom_Complet']
     create_user_edit.Email = request.GET['Email']
     create_user_edit.Adresse = request.GET['Adresse']
@@ -202,7 +198,7 @@ def update_user_admin(request, id):
     return redirect('/user_admin')
 
 def delete_user_admin(request,id):
-    Users = User.objects.get(pk=id)
+    Users = Utilisateur.objects.get(pk=id)
     Users.delete()
     return redirect('/user_admin')
 
