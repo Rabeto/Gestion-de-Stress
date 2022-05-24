@@ -176,7 +176,7 @@ def create_user_admin(request):
     username = request.GET['Username']
     password = request.GET['Password']
     status = request.GET['Status']
-    create_user = Utilisateur(Nom = nom, Prenom = prenom, Age = age, Email = email, Departement = departement, Profession = profession, Utilisateurname = username, Password = password, Status = status)
+    create_user = Utilisateur(Nom = nom, Prenom = prenom, Age = age, Email = email, Departement = departement, Profession = profession, Username = username, Password = password, Status = status)
     create_user.save()
     return redirect('/user_admin')
 
