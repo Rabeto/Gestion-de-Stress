@@ -4,6 +4,7 @@ from django.db import models
 class Utilisateur(models.Model):
     Nom = models.CharField(max_length=50)
     Prenom = models.CharField(max_length=50)
+    Image_profil = models.ImageField()
     Age = models.IntegerField(null=True)
     Email = models.EmailField()
     Departement = models.CharField(max_length=50)

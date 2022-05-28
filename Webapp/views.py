@@ -166,17 +166,18 @@ def add_user_admin(request):
     return render(request,'add_user_admin.html')
 
 def create_user_admin(request):
-    print(request.POST)
-    nom = request.GET['Nom']
-    prenom = request.GET['Prenom']
-    age= request.GET['Age']
-    email = request.GET['Email']
-    departement = request.GET['Departement']
-    profession = request.GET['Profession']
-    username = request.GET['Username']
-    password = request.GET['Password']
-    status = request.GET['Status']
-    create_user = Utilisateur(Nom = nom, Prenom = prenom, Age = age, Email = email, Departement = departement, Profession = profession, Username = username, Password = password, Status = status)
+
+    nom = request.POST['Nom']
+    prenom = request.POST['Prenom']
+    age= request.POST['Age']
+    email = request.POST['Email']
+    departement = request.POST['Departement']
+    profession = request.POST['Profession']
+    username = request.POST['Username']
+    password = request.POST['Password']
+    status = request.POST['Status']
+    image_profile = request.FILES.get('Image_Profil')
+    create_user = Utilisateur(Image_profil = image_profile, Nom = nom, Prenom = prenom, Age = age, Email = email, Departement = departement, Profession = profession, Username = username, Password = password, Status = status)
     create_user.save()
     return redirect('/user_admin')
 

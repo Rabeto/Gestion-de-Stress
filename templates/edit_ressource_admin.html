@@ -91,13 +91,13 @@
                                 <div class="form-group row">
                                     <label for="Titre_Ressource" class="control-label col-sm-2">Titre</label>
                                     <div class="col-sm-10">
-                                        <input type="text" name="Titre_Ressource" class="form-control" value="{{ Src.Titre_Ressource }}"/>
+                                        <input type="text" name="Titre_Ressource" class="form-control" value="{{ Src.Titre_Ressource }}" required />
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="Description_Ressource" class="control-label col-sm-2">Description</label>
                                     <div class="col-sm-10">
-                                        <textarea name="Description_Ressource" class="form-control" placeholder="Description Ressource">{{ Src.Description_Ressource }}</textarea>
+                                        <textarea name="Description_Ressource" class="form-control" placeholder="Description Ressource" required >{{ Src.Description_Ressource }}</textarea>
                                     </div>
                                 </div>
                                 <div class="form-group row">

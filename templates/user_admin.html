@@ -98,6 +98,7 @@
                                     <table id="example" class="table table-striped table-bordered">
                                         <thead>
                                             <tr>
+                                                <th>Photo</th>
                                                 <th>Nom</th>
                                                 <th>Prénom</th>
                                                 <th>Age</th>
@@ -114,6 +115,7 @@
                                         <tbody>
                                             {% for us in Users %}
                                             <tr>
+                                                <td><img src="{{ us.Image_profil.url }}" class="rounded-circle" width="50" height="50" /></td>
                                                 <td>{{ us.Nom }}</td>
                                                 <td>{{ us.Prenom }}</td>
                                                 <td>{{ us.Age }}</td>
