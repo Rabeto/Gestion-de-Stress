@@ -41,6 +41,10 @@
                     <h4 class="mb-4">Le but de l'élaboration de cette application est de mieux aider l'utilisateur à mieux gérer son stress</h4>
                 </div>
                 <div class="col-md-6 col-sm-6 col-12 login-box-form p-4">
+                    <div class="alert alert-danger" role="alert">
+                        <p class="text-justify">Le nom d'utilisateur ou le mot de passe est incorrect</p>
+                    </div>
+                    
                     <h3 class="mb-2">Connexion</h3>
                     <small class="text-muted bc-description">Connectez-vous avec votre compte</small>
                     <form action="{% url 'login' %}" method="post" class="mt-2">

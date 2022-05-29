@@ -1,12 +1,37 @@
 from aiohttp import request
 from django import urls
 from django.forms import EmailField
+from django.http import HttpResponse
 from django.shortcuts import render,redirect
 from .models import *
 
 # Create your views here.
-def login(request):
+def index(request):
     return render(request,'login.html')
+
+def login(request):
+    uname = request.POST.get('Username')
+    pwd = request.POST.get('Password')
+    check_user = Utilisateur.objects.filter(Username = uname, Password = pwd)
+    if check_user:
+        request.session['user'] = uname
+        usr = Utilisateur.objects.get(Username = uname, Password = pwd)
+        if usr.Status == 'Administrateur':
+            return redirect('/index_admin')
+        if usr.Status == 'Psychologue':
+            return redirect('/index_app')
+        else:
+            return redirect('index_app')
+        
+    else:
+        return render(request,'login_notif.html')
+
+def logout(request):
+    try:
+        del request.session['user']
+    except:
+        return redirect('/')
+    return redirect('/')
 
 def index_app(request):
     NP = News_Post.objects.order_by('Date_pub').reverse()[:3]

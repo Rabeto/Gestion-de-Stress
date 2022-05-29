@@ -165,8 +165,9 @@
                                                     print("<option value="Utilisateur Simple">Utilisateur Simple</option><option value="Psychologue">Psychologue</option><option value="Administrateur">Administrateur</option>")
                                                 {% elif Users_e.Status == "Psychologue" %}
                                                     print("<option value="Psychologue">Psychologue</option><option value="Utilisateur Simple">Utilisateur Simple</option><option value="Administrateur">Administrateur</option>")
-                                                {% endif %}
+                                                {% else %}
                                                     print("<option value="Administrateur">Administrateur</option><option value="Utilisateur Simple">Utilisateur Simple</option><option value="Psychologue">Psychologue</option>")
+                                                {% endif %}
                                             </select>
                                         </div>
                                     </div>
