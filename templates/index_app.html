@@ -31,9 +31,9 @@
             <div class="inner-sidebar mr-3">
                 <!--Image Avatar-->
                 <div class="avatar text-center">
-                    <img src="{% static 'img/client-img4.png' %}" alt="" class="rounded-circle" />
-                    <p><strong>Lorem ipsum</strong></p>
-                    <span class="text-primary small"><strong>User App</strong></span>
+                    <img src="{{ ustr.Image_profil.url }}" alt="" class="rounded-circle" />
+                    <p><strong>{{ ustr.Nom }} {{ ustr.Prenom }}</strong></p>
+                    <span class="text-primary small"><strong>{{ ustr.Status }}</strong></span>
                 </div>
                 <!--Image Avatar-->
 
@@ -48,6 +48,11 @@
                         <li class="parent">
                             <a href="/journal_app" class=""><i class="fas fa-book mr-3"> </i>
                                 <span class="none">Journal</span>
+                            </a>  
+                        </li>
+                        <li class="parent">
+                            <a href="/profil" class=""><i class="fas fa-user mr-3"> </i>
+                                <span class="none">Mon profil</span>
                             </a>  
                         </li>
                         <li class="parent">
