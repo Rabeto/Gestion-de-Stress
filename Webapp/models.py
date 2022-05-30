@@ -1,3 +1,4 @@
+import uuid
 from django.db import models
 
 # Create your models here.
@@ -9,7 +10,7 @@ class Utilisateur(models.Model):
     Email = models.EmailField()
     Departement = models.CharField(max_length=50)
     Profession = models.CharField(max_length=50)
-    Username = models.CharField(max_length=50)
+    Username = models.CharField(max_length=50, unique=True)
     Password = models.CharField(max_length=50)
     Status = models.CharField(max_length=20)
     
@@ -33,9 +34,10 @@ class Manage_Stress(models.Model):
     
 class News_Post(models.Model):
     Titre = models.CharField(max_length=50)
-    Contenu = models.CharField(max_length=255)
+    Contenu = models.TextField(max_length=255)
     Date_pub = models.DateTimeField(auto_now=True)
     Type = models.CharField(max_length=5)
     Fichier = models.ImageField()
+    Auteur_pub = models.CharField(max_length=50, default='Utilisateur')
 
     
