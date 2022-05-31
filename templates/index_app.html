@@ -32,7 +32,7 @@
                 <!--Image Avatar-->
                 <div class="avatar text-center">
                     <img src="{{ ustr.Image_profil.url }}" alt="" class="rounded-circle" />
-                    <p><strong>{{ ustr.Nom }} {{ ustr.Prenom }}</strong></p>
+                    <p><strong>{{ usr.Nom_Complet }}</strong></p>
                     <span class="text-primary small"><strong>{{ ustr.Status }}</strong></span>
                 </div>
                 <!--Image Avatar-->
@@ -98,9 +98,10 @@
                                     <div class="card-group">
                                         {% for np in NP %}
                                         <div class="card">
-                                            <div class="card_header">
-                                                <img class="card-img-top" src="{{ np.Fichier.url }}" alt="Card image cap">
-                                            </div>
+                                            {% if np.Fichier %}
+                                                <div class="card_header"><img class="card-img-top" src="{{ np.Fichier.url }}" alt="Card image cap"></div>
+                                            {% else %}
+                                            {% endif %}
                                             <div class="card-body">
                                                 <h5 class="card-title text-left">{{ np.Titre }}</h5>
                                                 <p class="card-text"><small class="text-muted">{{ np.Date_pub }}</small></p>
@@ -118,7 +119,10 @@
                                     <div class="card-group">
                                         {% for ms in MS %}
                                         <div class="card">
+                                            {% if ms.Fichier_MS %}
                                             <img class="card-img-top" src="{{ ms.Fichier_MS.url }}" alt="Card image cap">
+                                            {% else %}
+                                            {% endif %}
                                             <div class="card-body">
                                                 <h5 class="card-title">{{ ms.Titre_MS }}</h5>
                                                 <p class="card-text"><small class="text-muted">{{ ms.Date_pub_MS }}</small></p>
@@ -136,7 +140,10 @@
                                     <div class="card-group">
                                         {% for src in RS %}
                                         <div class="card">
+                                            {% if src.Fichier_Ressource %}
                                             <img class="card-img-top" src="{{ src.Fichier_Ressource.url }}" alt="Card image cap">
+                                            {% else %}
+                                            {% endif %}
                                             <div class="card-body">
                                                 <h5 class="card-title">{{ src.Titre_Ressource }}</h5>
                                                 <p class="card-text"><small class="text-muted">{{ src.Date_pub_Ressource }}</small></p>

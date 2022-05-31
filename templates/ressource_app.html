@@ -32,7 +32,7 @@
                 <!--Image Avatar-->
                 <div class="avatar text-center">
                     <img src="{{ ustr.Image_profil.url }}" alt="" class="rounded-circle" />
-                    <p><strong>{{ ustr.Nom }} {{ ustr.Prenom }}</strong></p>
+                    <p><strong>{{ usr.Nom_Complet }}</strong></p>
                     <span class="text-primary small"><strong>{{ ustr.Status }}</strong></span>
                 </div>
                 <!--Image Avatar-->
@@ -122,7 +122,10 @@
                                         {% for src in Ressource %}
                                         <div class="col-lg-4 col-md-4 col-sm-6 col-12 mb-3">
                                             <div class="card">
+                                                {% if src.Fichier_Ressource %}
                                                 <img class="card-img-top" src="{{ src.Fichier_Ressource.url }}">
+                                                {% else %}
+                                                {% endif %}
                                                 <div class="card-body">
                                                     <h5 class="card-title">{{ src.Titre_Ressource }}</h5>
                                                     <p class="card-text">{{ src.Description_Ressource }}</p>

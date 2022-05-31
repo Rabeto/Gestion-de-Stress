@@ -31,7 +31,7 @@
                     <!--Image Avatar-->
                     <div class="avatar text-center">
                         <img src="{{ usr.Image_profil.url }}" alt="" class="rounded-circle" />
-                        <p><strong>{{ usr.Nom }} {{ usr.Prenom }}</strong></p>
+                        <p><strong>{{ usr.Nom_Complet }}</strong></p>
                         <span class="text-primary small"><strong>{{ usr.Status }}</strong></span>
                     </div>
                     <!--Image Avatar-->
@@ -98,7 +98,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="Fichier" class="control-label col-sm-2">Fichier</label>
+                                    <label for="Fichier" class="control-label col-sm-2">Photo</label>
                                     <div class="col-sm-10">
                                         <input type="file" name="Fichier" class="form-control" src="{{ NP.Fichier.path }}" value="{{ NP.Fichier }}" />
                                     </div>

@@ -28,6 +28,7 @@ urlpatterns = [
     path('login/', views.login, name='login'),
     path('logout/', views.logout, name='logout'),
     path('profil/', views.profil, name='profil'),
+    #path('create_comment/<id>', views.create_comment, name='create_comment'),
     path('ressource_app/', views.ressource_app, name='ressource_app'),
     path('manage_stress_app/', views.manage_stress_app, name='manage_stress_app'),
     path('journal_app/', views.journal_app, name='journal_app'),
@@ -39,7 +40,7 @@ urlpatterns = [
     path('create_news_post_admin/', views.create_news_post_admin, name='create_news_post_admin'),
     path('edit_news_post_admin/<id>/', views.edit_news_post_admin, name='edit_news_post_admin'),
     path('update_news_post_admin/<id>/', views.update_news_post_admin, name='update_news_post_admin'),
-    path('delete_news_post_admin/<id>', views.delete_news_post_admin, name='delete_news_post_admin'),
+    path('delete_news_post_admin/<id>/', views.delete_news_post_admin, name='delete_news_post_admin'),
     
     
     path('ressources_admin/', views.ressources_admin, name='ressources_admin'),

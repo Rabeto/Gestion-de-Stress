@@ -31,7 +31,7 @@
                     <!--Image Avatar-->
                     <div class="avatar text-center">
                         <img src="{{ usr.Image_profil.url }}" alt="" class="rounded-circle" />
-                        <p><strong>{{ usr.Nom }} {{ usr.Prenom }}</strong></p>
+                        <p><strong>{{ usr.Nom_Complet }}</strong></p>
                         <span class="text-primary small"><strong>{{ usr.Status }}</strong></span>
                     </div>
                     <!--Image Avatar-->
@@ -93,9 +93,10 @@
                                 <table id="example" class="table table-striped table-bordered">
                                     <thead>
                                         <tr>
+                                            <th>Auteur</th>
                                             <th>Titre</th>
                                             <th>Contenu</th>
-                                            <th>Fichiers</th>
+                                            <th>Photos</th>
                                             <th>Poster le </th>
                                             <th>Type</th>
                                             <th>Actions</th>
@@ -105,6 +106,7 @@
                                     <tbody>
                                         {% for pub in News_Posts %}
                                         <tr>
+                                            <td>{{ pub.Auteur_pub }}</td>
                                             <td>{{ pub.Titre }}</td>
                                             <td>{{ pub.Contenu }}</td>
                                             <td>{{ pub.Fichier }}</td>

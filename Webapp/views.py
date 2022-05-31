@@ -13,10 +13,32 @@ def index(request):
 def profil(request):
     ust = request.session['user']
     usr = Utilisateur.objects.get(Username = ust)
+    utl = usr.Nom_Complet
+    pub = News_Post.objects.filter(Auteur_pub = usr.id)
     context = {
         'usr': usr,
+        'utl': utl,
+        'pub': pub,
     }
     return render(request,'profil.html',context)
+
+#def create_comment(request,id):
+#    post = News_Post.objects.get(pk=id)
+#    ust = request.session['user']
+#    usr = Utilisateur.objects.get(Username = ust)
+#    titre_pub = post.Titre
+#    comment_pub = request.POST['comment']
+#    auteur_comment_pub = usr.Nom_Complet
+#    create_comment = Commentaires(Titre_pub = titre_pub, Auteur_Comment_pub = auteur_comment_pub, Comment_pub = comment_pub)
+#    create_comment.save()
+#    cmt = Commentaires.objects.all()
+#    context = {
+#        'post': post,
+#        'titre_pub': titre_pub,
+#        'usr': usr,
+#        'cmt': cmt,
+#    }
+#    return render(request,'pub.html',context)
 
 def login(request):
     uname = request.POST.get('Username')
@@ -97,9 +119,16 @@ def pub_post_user(request):
     titre = request.POST['Titre']
     contenu = request.POST['Contenu']
     type = 'Posts'
+    ust = request.session['user']
+    usr = Utilisateur.objects.get(Username = ust)
+    auteur_pub = usr.Nom_Complet
     fichier = request.FILES.get('Fichier')
-    create_np = News_Post(Titre = titre, Contenu = contenu, Type = type, Fichier = fichier)
-    create_np.save()
+    if fichier != None:
+        create_np = News_Post(Titre = titre, Contenu = contenu, Type = type, Fichier = fichier)
+        create_np.save()
+    else:
+        create_np = News_Post(Titre = titre, Contenu = contenu, Type = type)
+        create_np.save()
     return redirect('/journal_app')
 
 def details_pub(request,id):
@@ -314,7 +343,9 @@ def create_news_post_admin(request):
     contenu = request.POST['Contenu']
     type = request.POST['Type']
     fichier = request.FILES.get('Fichier')
-    auteur_pub = request.session['user']
+    ust = request.session['user']
+    usr = Utilisateur.objects.get(Username = ust)
+    auteur_pub = usr.Nom_Complet
     create_np = News_Post(Titre = titre, Contenu = contenu, Type = type, Fichier = fichier, Auteur_pub = auteur_pub)
     create_np.save()
         

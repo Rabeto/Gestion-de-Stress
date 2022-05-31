@@ -30,7 +30,7 @@
                     <!--Image Avatar-->
                     <div class="avatar text-center">
                         <img src="{{ usr.Image_profil.url }}" alt="" class="rounded-circle" />
-                        <p><strong>{{ usr.Nom }} {{ usr.Prenom }}</strong></p>
+                        <p><strong>{{ usr.Nom_Complet }}</strong></p>
                         <span class="text-primary small"><strong>{{ usr.Status }}</strong></span>
                     </div>
                     <!--Image Avatar-->
@@ -90,7 +90,7 @@
                             <div class="profile-bio-main container-fluid">
                                 <div class="row">
                                     <div class="col-md-5 offset-md-3 col-sm-12 offset-sm-0 col-12 bio-header">
-                                        <h3 class="mt-4">{{ usr.Nom }}{{ usr.Prenom }}</h3>
+                                        <h3 class="mt-4">{{ usr.Nom_Complet }}</h3>
                                         <span class="text-muted mt-0 bio-request">{{ usr.Profession }}</span>
                                     </div>
                                     <div class="col-md-4 col-sm-12 col-12 px-5 text-right pt-4 bio-comment">
@@ -164,7 +164,7 @@
                                     <div class="media">
                                         <img class="mr-3 rounded-circle" height="40px" width="40px" src="{{ usr.Image_profil.url }}" alt="Generic placeholder image">
                                         <div class="media-body">
-                                            <h6 class="mt-1">{{ usr.Nom }}{{ usr.Prenom }}
+                                            <h6 class="mt-1">{{ usr.Nom_Complet }}
                                                 <small class="text-muted pl-2"><i class="fa fa-clock"></i> 10 hours</small>
                                                 <small class="text-muted small pull-right"><i>{{ usr.Profession }}</i> <i class="fa fa-bookmark-o pl-2"></i></small>
 
@@ -190,7 +190,7 @@
                                 <!--Single feed-->
                                 <div class="feed-single mt-3 mb-3">
                                     <div class="media">
-                                        <img class="mr-3 rounded-circle" height="40px" width="40px" src="assets/img/John-doe.png">
+                                        <img class="mr-3 rounded-circle" height="40px" width="40px" src="{{ usr.Image_profil.url }}">
                                         <div class="media-body">
                                             <h6 class="mt-1 mb-2">Mario Mendez 
                                                 <small class="text-muted  pl-2"><i class="fa fa-clock"></i> 3 days</small>
@@ -266,12 +266,8 @@
                                     <table class="table table-borderless table-striped m-0">
                                         <tbody>
                                             <tr>
-                                                <th scope="row">Nom</th>
-                                                <td>{{ usr.Nom }}</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">Prénom</th>
-                                                <td>{{ usr.Prenom }}</td>
+                                                <th scope="row">Nom Complet</th>
+                                                <td>{{ usr.Nom_Complet }}</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">Age</th>

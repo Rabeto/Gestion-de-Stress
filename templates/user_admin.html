@@ -31,7 +31,7 @@
                         <!--Image Avatar-->
                         <div class="avatar text-center">
                             <img src="{{ usr.Image_profil.url }}" alt="" class="rounded-circle" />
-                            <p><strong>{{ usr.Nom }} {{ usr.Prenom }}</strong></p>
+                            <p><strong>{{ usr.Nom_Complet }}</strong></p>
                             <span class="text-primary small"><strong>{{ usr.Status }}</strong></span>
                         </div>
                         <!--Image Avatar-->
@@ -94,7 +94,7 @@
                                         <thead>
                                             <tr>
                                                 <th>Photo</th>
-                                                <th>Nom</th>
+                                                <th>Nom Complet</th>
                                                 <th>Prénom</th>
                                                 <th>Age</th>
                                                 <th>Email</th>
@@ -111,8 +111,7 @@
                                             {% for us in Users %}
                                             <tr>
                                                 <td><img src="{{ us.Image_profil.url }}" class="rounded-circle" width="50" height="50" /></td>
-                                                <td>{{ us.Nom }}</td>
-                                                <td>{{ us.Prenom }}</td>
+                                                <td>{{ user.Nom_Complet }}</td>
                                                 <td>{{ us.Age }}</td>
                                                 <td>{{ us.Email }}</td>
                                                 <td>{{ us.Departement }}</td>
