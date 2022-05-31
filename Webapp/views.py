@@ -314,7 +314,8 @@ def create_news_post_admin(request):
     contenu = request.POST['Contenu']
     type = request.POST['Type']
     fichier = request.FILES.get('Fichier')
-    create_np = News_Post(Titre = titre, Contenu = contenu, Type = type, Fichier = fichier)
+    auteur_pub = request.session['user']
+    create_np = News_Post(Titre = titre, Contenu = contenu, Type = type, Fichier = fichier, Auteur_pub = auteur_pub)
     create_np.save()
         
     return redirect('/news_post_admin')
