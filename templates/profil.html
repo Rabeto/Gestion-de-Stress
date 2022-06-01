@@ -110,33 +110,37 @@
                     <div class="col-sm-12 col-md-4">
                         <div class="mt-1 mb-3 p-3 button-container bg-white border shadow-sm">
                             
-                            <div class="mb-3">
-                                <div class="row user-about">
-                                    <div class="col-sm-4 col-4 border-right text-center">
-                                        <h4>20</h4>
-                                        <p>Reviews</p>
-                                    </div>
-                                    <div class="col-sm-4 col-4 text-center">
-                                        <h4>31</h4>
-                                        <p>Clients</p>
-                                    </div>
-                                    <div class="col-sm-4 col-4 border-left text-center">
-                                        <h4>120</h4>
-                                        <p>Followers</p>
-                                    </div>
-                                </div>
+                            <div class="mb-3 text-center">
+                                <h3><i class="fa fa-file-text-o"></i> Infos</h3>
                             </div>
                             
                             <div class="dropdown-divider"></div>
                             
-                            <div class="mb-3">
-                                <h6>Slogan</h6>
-                                <p class="p-typo">For awesome buildings and drawing plans, i am the best you can call on</p>
-                                <div class="text-right">
-                                    <button type="button" class="btn btn-theme">
-                                        <i class="fa fa-user-plus"></i> Follow
-                                    </button>
-                                </div>
+                            <div class="table-responsive mb-3">
+                                <table class="table table-borderless table-striped m-0">
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">Nom Complet</th>
+                                            <td>{{ usr.Nom_Complet }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Age</th>
+                                            <td>{{ usr.Age }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Email</th>
+                                            <td>{{ usr.Email }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Département</th>
+                                            <td>{{ usr.Departement }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Profession</th>
+                                            <td>{{ usr.Profession }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -149,9 +153,6 @@
                             <div class="nav nav-tabs nav-fill" id="nav-customContent" role="tablist">
                                 <a class="nav-item nav-link active" id="nav-home" data-toggle="tab" href="#custom-home" role="tab" aria-controls="nav-home" aria-selected="true">
                                         <i class="fa fa-list-ul"></i> Publication
-                                </a>
-                                <a class="nav-item nav-link" id="nav-profile" data-toggle="tab" href="#custom-profile" role="tab" aria-controls="nav-profile" aria-selected="false">
-                                    <i class="fa fa-file-text-o"></i> Infos
                                 </a>
                             </div>
                         </nav>
@@ -259,37 +260,6 @@
 
                             </div>
                             <!--/Feed tab-->
-
-                            <!--Personal info tab-->
-                            <div class="tab-pane fade p-4" id="custom-profile" role="tabpanel" aria-labelledby="nav-profile">
-                                <div class="table-responsive mb-4">
-                                    <table class="table table-borderless table-striped m-0">
-                                        <tbody>
-                                            <tr>
-                                                <th scope="row">Nom Complet</th>
-                                                <td>{{ usr.Nom_Complet }}</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">Age</th>
-                                                <td>{{ usr.Age }}</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">Email</th>
-                                                <td>{{ usr.Email }}</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">Département</th>
-                                                <td>{{ usr.Departement }}</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">Profession</th>
-                                                <td>{{ usr.Profession }}</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <!--/Personal info tab-->
                         </div>
                     </div>
                 </div>
