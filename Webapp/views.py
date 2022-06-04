@@ -14,7 +14,7 @@ def profil(request):
     ust = request.session['user']
     usr = Utilisateur.objects.get(Username = ust)
     utl = usr.Nom_Complet
-    pub = News_Post.objects.filter(Auteur_pub = usr.id)
+    pub = News_Post.objects.filter(Auteur_pub = utl)
     context = {
         'usr': usr,
         'utl': utl,
@@ -22,23 +22,24 @@ def profil(request):
     }
     return render(request,'profil.html',context)
 
-#def create_comment(request,id):
-#    post = News_Post.objects.get(pk=id)
-#    ust = request.session['user']
-#    usr = Utilisateur.objects.get(Username = ust)
-#    titre_pub = post.Titre
-#    comment_pub = request.POST['comment']
-#    auteur_comment_pub = usr.Nom_Complet
-#    create_comment = Commentaires(Titre_pub = titre_pub, Auteur_Comment_pub = auteur_comment_pub, Comment_pub = comment_pub)
-#    create_comment.save()
-#    cmt = Commentaires.objects.all()
-#    context = {
-#        'post': post,
-#        'titre_pub': titre_pub,
-#        'usr': usr,
-#        'cmt': cmt,
-#    }
-#    return render(request,'pub.html',context)
+def create_comment(request,id):
+    post = News_Post.objects.get(pk=id)
+    ust = request.session['user']
+    usr = Utilisateur.objects.get(Username = ust)
+    titre_pub = post.Titre
+    comment_pub = request.GET['comment']
+    auteur_comment_pub = usr.Nom_Complet
+    create_comment = Commentaires(Titre_pub = titre_pub, Auteur_Comment_pub = usr, Comment_pub = comment_pub)
+    create_comment.save()
+    cmt = Commentaires.objects.filter(Titre_pub = titre_pub)
+    # usr_comment = Utilisateur.objects.get(Nom_Complet = auteur_comment_pub)
+    context = {
+        'post': post,
+        'titre_pub': titre_pub,
+        'usr': usr,
+        'cmt': cmt,
+    }
+    return render(request,'pub.html',context)
 
 def login(request):
     uname = request.POST.get('Username')
@@ -135,9 +136,11 @@ def details_pub(request,id):
     post = News_Post.objects.get(pk=id)
     ust = request.session['user']
     usr = Utilisateur.objects.get(Username = ust)
+    cmt = Commentaires.objects.filter(Titre_pub = post.Titre)
     context = {
         'post': post,
         'usr': usr,
+        'cmt':cmt,
     }
     return render(request,'pub.html',context)
 

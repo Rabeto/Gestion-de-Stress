@@ -16,7 +16,7 @@ class Utilisateur(models.Model):
     
 class Commentaires(models.Model):
     Titre_pub = models.CharField(max_length=150)
-    Auteur_Comment_pub = models.CharField(max_length=150)
+    Auteur_Comment_pub = models.ForeignKey(Utilisateur, on_delete=models.CASCADE)
     Comment_pub = models.TextField(max_length=255)
     Date_Comment_pub = models.DateTimeField(auto_now=True)
     
