@@ -159,24 +159,34 @@
 
                         <div class="tab-content py-3 px-3 px-sm-0" id="nav-customContent">
                             <div class="tab-pane fade show active p-4" id="custom-home" role="tabpanel" aria-labelledby="nav-home">
-                                
+                                {% for post in pst %}
                                 <!--Single feed-->
                                 <div class="feed-single mb-3">
                                     <div class="media">
-                                        <img class="mr-3 rounded-circle" height="40px" width="40px" src="{{ usr.Image_profil.url }}" alt="Generic placeholder image">
+                                        <img class="mr-3 rounded-circle" height="40px" width="40px" src="{{ post.Auteur_pub.Image_profil.url }}">
                                         <div class="media-body">
-                                            <h6 class="mt-1">{{ usr.Nom_Complet }}
-                                                <small class="text-muted pl-2"><i class="fa fa-clock"></i> 10 hours</small>
-                                                <small class="text-muted small pull-right"><i>{{ usr.Profession }}</i> <i class="fa fa-bookmark-o pl-2"></i></small>
-
-                                                <p class="clearfix"></p>
+                                            <h6 class="mt-1">{{ post.Auteur_pub.Nom_Complet }}
+                                                <small class="text-muted pl-2"><i class="fa fa-clock"></i>{{ post.Date_pub }}</small>
+                                                <small class="text-muted small pull-right"><i>{{ post.Auteur_pub.Profession }}</i> <i class="fa fa-bookmark-o pl-2"></i></small>
+                                                <br>
                                             </h6>
-                                            <p>New update on my existing projects #portfolio #architecture <a href="#" class="text-theme">www.github.io/architect-mendez</a></p>
+                                            <div>                                    
+                                                {% if post.Fichier %}
+                                                <img class="card-img-top" src="{{ post.Fichier.url }}">
+                                                {% else %}
+                                                {% endif %}
+                                            </div>
+                                            <h5 class="mt-1">{{ post.Titre }}</h5>
+                                            <p>{{ post.Contenu }}</p>
 
                                             <div class="feed-footer">
-                                                <span class="pr-3"><i class="fa fa-star"></i> 3</span>
-                                                <span class="pr-3"><i class="fa fa-comment"></i> 2</span>
-                                                <span class="pr-3"><i class="fa fa-share"></i></span>
+                                                <span class="pr-3">
+                                                    <a href="#"><i class="fa fa-star"></i> Réagir</a></span>
+                                                <span class="pr-3">
+                                                    <a href="/details_pub/{{ post.id }}"><i class="fa fa-comment"></i> Voir Commentaires</a>
+                                                </span>
+                                                <span class="pr-3">
+                                                    <a href="#"><i class="fas fa-comments"></i> Messge Privé</a></span>
                                                 <span class="pl-3 pull-right"><i class="fa fa-ellipsis-h"></i></span>
 
                                                 <p class="clearfix"></p>
@@ -187,77 +197,7 @@
                                 <!--/Single feed-->
 
                                 <div class="dropdown-divider"></div>
-
-                                <!--Single feed-->
-                                <div class="feed-single mt-3 mb-3">
-                                    <div class="media">
-                                        <img class="mr-3 rounded-circle" height="40px" width="40px" src="{{ usr.Image_profil.url }}">
-                                        <div class="media-body">
-                                            <h6 class="mt-1 mb-2">Mario Mendez 
-                                                <small class="text-muted  pl-2"><i class="fa fa-clock"></i> 3 days</small>
-                                                <small class="text-muted small pull-right"><i>sponsored</i> <i class="fa fa-bookmark-o  pl-2"></i></small>
-
-                                                <p class="clearfix"></p>
-                                            </h6>
-                                            
-                                            <div class="card shadow-sm">
-                                                <div><img class="card-img-top" src="assets/img/headphones.jpeg" alt="Card image cap"></div>
-                                                <div class="card-body">
-                                                    <h5 class="card-title mb-1">Architecture services</h5>
-                                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.</p>
-                                                    <button type="button" class="btn btn-theme px-5 pull-right">HIRE</button>
-
-                                                    <p class="clearfix"></p>
-                                                </div>
-                                            </div>
-
-                                            <div class="feed-footer">
-                                                <span class="pr-3"><i class="fa fa-star"></i> 3</span>
-                                                <span class="pr-3"><i class="fa fa-comment"></i> 2</span>
-                                                <span class="pr-3"><i class="fa fa-share"></i></span>
-                                                <span class="pl-3 pull-right"><i class="fa fa-ellipsis-h"></i></span>
-
-                                                <p class="clearfix"></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--/Single feed-->
-
-                                <div class="dropdown-divider"></div>
-
-                                <!--Single feed-->
-                                <div class="feed-single mt-3 mb-3">
-                                    <div class="media">
-                                        <img class="mr-3 rounded-circle" height="40px" width="40px" src="assets/img/client-img2.png" alt="Generic placeholder image">
-                                        <div class="media-body">
-                                            <h6 class="mt-1 mb-2">Maria Burke 
-                                                <small class="text-muted  pl-2"><i class="fa fa-clock"></i> 4 days</small>
-                                                <small class="text-muted small pull-right"><i>sponsored</i> <i class="fa fa-bookmark-o  pl-2"></i></small>
-                                            </h6>
-                                            
-                                            <div class="card shadow-sm no-border">
-                                                <div><img class="card-img-top" src="assets/img/tarred.jpeg" alt="Card image cap"></div>
-                                                <div class="card-body">
-                                                    <blockquote class="blockquote">
-                                                        <p class="mb-0">"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante".</p>
-                                                    </blockquote>
-                                                </div>
-                                            </div>
-
-                                            <div class="feed-footer">
-                                                <span class="pr-3"><i class="fa fa-star"></i> 3</span>
-                                                <span class="pr-3"><i class="fa fa-comment"></i> 2</span>
-                                                <span class="pr-3"><i class="fa fa-share"></i></span>
-                                                <span class="pl-3 pull-right"><i class="fa fa-ellipsis-h"></i></span>
-
-                                                <p class="clearfix"></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--/Single feed-->
-
+                                {% endfor %}
                             </div>
                             <!--/Feed tab-->
                         </div>

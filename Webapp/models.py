@@ -45,6 +45,6 @@ class News_Post(models.Model):
     Date_pub = models.DateTimeField(auto_now=True)
     Type = models.CharField(max_length=5)
     Fichier = models.ImageField()
-    Auteur_pub = models.CharField(max_length=150)
+    Auteur_pub = models.ForeignKey(Utilisateur, on_delete=models.CASCADE)
 
     

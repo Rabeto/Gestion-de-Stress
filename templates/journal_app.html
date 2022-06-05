@@ -97,6 +97,47 @@
                         <div class="tab-content py-3 px-3 px-sm-0" id="nav-customContent">
                             <div class="tab-pane fade show active" id="custom-pub" role="tabpanel" aria-labelledby="nav-pub">
                                 {% for post in pst %}
+                                <!--Single feed-->
+                                <div class="feed-single mb-3">
+                                    <div class="media">
+                                        <img class="mr-3 rounded-circle" height="40px" width="40px" src="{{ post.Auteur_pub.Image_profil.url }}">
+                                        <div class="media-body">
+                                            <h6 class="mt-1">{{ post.Auteur_pub.Nom_Complet }}
+                                                <small class="text-muted pl-2"><i class="fa fa-clock"></i>{{ post.Date_pub }}</small>
+                                                <small class="text-muted small pull-right"><i>{{ post.Auteur_pub.Profession }}</i> <i class="fa fa-bookmark-o pl-2"></i></small>
+                                                <br>
+                                            </h6>
+                                            <div>                                    
+                                                {% if post.Fichier %}
+                                                <img class="card-img-top" src="{{ post.Fichier.url }}">
+                                                {% else %}
+                                                {% endif %}
+                                            </div>
+                                            <h5 class="mt-1">{{ post.Titre }}</h5>
+                                            <p>{{ post.Contenu }}</p>
+
+                                            <div class="feed-footer">
+                                                <span class="pr-3">
+                                                    <a href="#"><i class="fa fa-star"></i> Réagir</a></span>
+                                                <span class="pr-3">
+                                                    <a href="/details_pub/{{ post.id }}"><i class="fa fa-comment"></i> Voir Commentaires</a>
+                                                </span>
+                                                <span class="pr-3">
+                                                    <a href="#"><i class="fas fa-comments"></i> Messge Privé</a></span>
+                                                <span class="pl-3 pull-right"><i class="fa fa-ellipsis-h"></i></span>
+
+                                                <p class="clearfix"></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/Single feed-->
+
+                                <div class="dropdown-divider"></div>
+                                {% endfor %}
+                            </div>
+
+                                {% comment %} {% for post in pst %}
                                 <div class="card">
                                     {% if post.Fichier %}
                                     <img class="card-img-top" src="{{ post.Fichier.url }}">
@@ -110,6 +151,7 @@
                                             <div class="col-sm-4">
                                                 <i class="fas fa-heart"></i>
                                                 <span class="None"> Réagir</span>
+
                                             </div>
                                             <div class="col-sm-4">
                                                 <a href="/details_pub/{{ post.id }}">
@@ -128,7 +170,7 @@
                                 </div>
                                 <br>
                                 {% endfor %}
-                            </div>
+                            </div> {% endcomment %}
                             <div class="tab-pane fade" id="custom-new" role="tabpanel" aria-labelledby="nav-new">
                                 {% for new in nws %}
                                 <div class="card">

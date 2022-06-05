@@ -13,11 +13,9 @@ def index(request):
 def profil(request):
     ust = request.session['user']
     usr = Utilisateur.objects.get(Username = ust)
-    utl = usr.Nom_Complet
-    pub = News_Post.objects.filter(Auteur_pub = utl)
+    pub = News_Post.objects.filter(Auteur_pub = usr)
     context = {
         'usr': usr,
-        'utl': utl,
         'pub': pub,
     }
     return render(request,'profil.html',context)
@@ -32,12 +30,14 @@ def create_comment(request,id):
     create_comment = Commentaires(Titre_pub = titre_pub, Auteur_Comment_pub = usr, Comment_pub = comment_pub)
     create_comment.save()
     cmt = Commentaires.objects.filter(Titre_pub = titre_pub)
+    cpt = Commentaires.objects.count()
     # usr_comment = Utilisateur.objects.get(Nom_Complet = auteur_comment_pub)
     context = {
         'post': post,
         'titre_pub': titre_pub,
         'usr': usr,
         'cmt': cmt,
+        'cpt': cpt,
     }
     return render(request,'pub.html',context)
 
@@ -109,12 +109,33 @@ def journal_app(request):
     nws = News_Post.objects.filter(Type = 'News').order_by('Date_pub').reverse()
     ust = request.session['user']
     usr = Utilisateur.objects.get(Username = ust)
+    
     context = {
         'pst': pst,
         'nws': nws,
         'usr': usr,
     }
     return render(request,'journal_app.html',context)
+
+# def like_post(request, id):
+#     instance = News_Post.objects.get(pk=id)
+#     ust = request.session['user']
+#     usr = Utilisateur.objects.get(Username = ust)
+#     if not instance.Likes.filter(id= usr.id).exists():
+#         instance.Likes.add(usr.Nom_Complet)
+#         instance.save()
+#         context = {
+#             'poster': instance,
+#         }
+#         return render(request,'journal_app.html',context)
+#     else:
+#         instance.Likes.remove(usr.Nom_Complet)
+#         instance.save()
+#         context = {
+#             'poster': instance,
+#         }
+#         return render(request,'journal_app.html',context)
+        
 
 def pub_post_user(request):
     titre = request.POST['Titre']
@@ -137,10 +158,12 @@ def details_pub(request,id):
     ust = request.session['user']
     usr = Utilisateur.objects.get(Username = ust)
     cmt = Commentaires.objects.filter(Titre_pub = post.Titre)
+    cpt = Commentaires.objects.filter(Titre_pub = post.Titre).count()
     context = {
         'post': post,
         'usr': usr,
         'cmt':cmt,
+        'cpt': cpt,
     }
     return render(request,'pub.html',context)
 
@@ -348,8 +371,7 @@ def create_news_post_admin(request):
     fichier = request.FILES.get('Fichier')
     ust = request.session['user']
     usr = Utilisateur.objects.get(Username = ust)
-    auteur_pub = usr.Nom_Complet
-    create_np = News_Post(Titre = titre, Contenu = contenu, Type = type, Fichier = fichier, Auteur_pub = auteur_pub)
+    create_np = News_Post(Titre = titre, Contenu = contenu, Type = type, Fichier = fichier, Auteur_pub = usr)
     create_np.save()
         
     return redirect('/news_post_admin')

@@ -97,12 +97,21 @@
                                         <textarea name="Contenu" class="form-control" required >{{ NP.Contenu }}</textarea>
                                     </div>
                                 </div>
+                                {% if NP.Fichier %}
                                 <div class="form-group row">
                                     <label for="Fichier" class="control-label col-sm-2">Photo</label>
                                     <div class="col-sm-10">
-                                        <input type="file" name="Fichier" class="form-control" src="{{ NP.Fichier.path }}" value="{{ NP.Fichier }}" />
+                                        <input type="file" name="Fichier" class="form-control" src="{{ NP.Fichier.url }}" value="{{ NP.Fichier }}" />
                                     </div>
                                 </div>
+                                {% else %}
+                                <div class="form-group row">
+                                    <label for="Fichier" class="control-label col-sm-2">Photo</label>
+                                    <div class="col-sm-10">
+                                        <input type="file" name="Fichier" class="form-control"/>
+                                    </div>
+                                </div>
+                                {% endif %}
                                 <div class="form-group row">
                                     <label for="Type" class="control-label col-sm-2">Type</label>
                                     <div class="col-sm-10">
