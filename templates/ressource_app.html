@@ -96,19 +96,30 @@
                                 <div class="mt-1 mb-3 button-container">
                                     <div class="row pl-0">
                                         {% for user in usr %}
-                                        <div class="col-lg-4 col-md-4 col-sm-6 col-12 mb-3">
-                                            <div class="bg-white border shadow">
-                                                <div class="media p-4">
-                                                    <div class="align-self-center mr-3 rounded-circle notify-icon bg-danger">
-                                                        <i class="fas fa-user"></i>
-                                                    </div>
-                                                    <div class="media-body pl-2">
-                                                        <h3 class="mt-0 mb-0"><strong>{{ user.Nom_Complet }}</strong></h3>
-                                                        <a class="btn btn-primary btn-round" href="#">
-                                                            <i class="fas fa-comments"> Contacter </i>
-                                                        </a>
-                                                    </div>
-                                                </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-12 mb-3 shadow-sm">
+                                            <div class="avatar text-center">
+                                                <img src="{{ user.Image_profil.url }}" class="rounded-circle" />
+                                                <h4><strong>{{ user.Username }}</strong></h4>
+                                            </div>
+                                            <div class="dropdown-divider"></div>
+                            
+                                            <div class="table-responsive mb-3">
+                                                <table class="table table-borderless table-striped m-0">
+                                                    <tbody>
+                                                        <tr>
+                                                            <th scope="row">Nom Complet</th>
+                                                            <td>{{ user.Nom_Complet }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="row">Email</th>
+                                                            <td>{{ user.Email }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="row">Département</th>
+                                                            <td>{{ user.Departement }}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
                                             </div>
                                         </div>
                                         {% endfor %}

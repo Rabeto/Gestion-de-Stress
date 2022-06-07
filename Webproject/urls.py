@@ -35,6 +35,7 @@ urlpatterns = [
     path('pub_post_user/', views.pub_post_user, name='pub_post_user'),
     path('details_pub/<id>/', views.details_pub, name='details_pub'),
     # path('like_post/<id>/', views.like_post, name='like_post'),
+    path('chat/', views.chat, name='chat'),
     
     path('news_post_admin/', views.news_post_admin, name='news_post'),
     path('add_news_post_admin/', views.add_news_post_admin, name='add_news_post_admin'),

@@ -10,6 +10,9 @@ from .models import *
 def index(request):
     return render(request,'login.html')
 
+def chat(request):
+    return render(request,'chat.html')
+
 def profil(request):
     ust = request.session['user']
     usr = Utilisateur.objects.get(Username = ust)
