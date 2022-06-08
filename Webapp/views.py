@@ -13,6 +13,16 @@ def index(request):
 def chat(request):
     return render(request,'chat.html')
 
+def send_msg(request):
+    ust = request.session['user']
+    usr = Utilisateur.objects.get(Username = ust)
+    user_send_msg = usr
+    object_msg = request.POST['Object_msg']
+    content_msg = request.POST['Content_msg']
+    create_send_msg = Message(User_send_msg = user_send_msg, Object_msg = object_msg, Content_msg = content_msg)
+    create_send_msg.save()
+    return redirect('/manage_stress_app')
+    
 def profil(request):
     ust = request.session['user']
     usr = Utilisateur.objects.get(Username = ust)

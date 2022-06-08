@@ -1,5 +1,3 @@
-from pyexpat import model
-import uuid
 from django.db import models
 
 # Create your models here.
@@ -28,10 +26,10 @@ class Ressources(models.Model):
     Date_pub_Ressource = models.DateTimeField(auto_now=True)
 
 class Message(models.Model):
-    User_send = models.CharField(max_length=50)
-    User_received = models.CharField(max_length=50)
+    User_send_msg = models.ForeignKey(Utilisateur, on_delete=models.CASCADE)
+    Object_msg = models.CharField(max_length=150, default='Prise de Contact')
+    Content_msg = models.TextField(max_length=255)
     Date_send_msg = models.DateTimeField(auto_now=True)
-    Content_msg = models.CharField(max_length=255)
     
 class Manage_Stress(models.Model):
     Titre_MS = models.CharField(max_length=50)
