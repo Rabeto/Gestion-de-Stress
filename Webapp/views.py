@@ -187,6 +187,7 @@ def index_admin(request):
     nbr_MS = Manage_Stress.objects.count()
     nbr_RS = Ressources.objects.count()
     nbr_NP = News_Post.objects.count()
+    nbr_msg = Message.objects.count()
     ust = request.session['user']
     usr = Utilisateur.objects.get(Username = ust)
     context = {
@@ -195,7 +196,8 @@ def index_admin(request):
         'nbr_MS' : nbr_MS,
         'nbr_RS' : nbr_RS,
         'nbr_NP': nbr_NP,
-        'usr': usr
+        'usr': usr,
+        'nbr_msg': nbr_msg,
     }
     return render(request,'index_admin.html',context)
 
@@ -335,20 +337,40 @@ def create_user_admin(request):
     create_user.save()
     return redirect('/user_admin')
 
+def update_user_app(request, id):
+    create_user_app_edit = Utilisateur.objects.get(pk=id)
+    create_user_app_edit.Nom_Complet = request.GET['Nom_Complet']
+    create_user_app_edit.Departement = request.GET['Departement']
+    create_user_app_edit.Email = request.GET['Email']
+    create_user_app_edit.Age = request.GET['Age']
+    create_user_app_edit.Profession = request.GET['Profession']
+    create_user_app_edit.Image_profil = request.FILES.get('Image_profil')
+    create_user_app_edit.Username = request.GET['Username']
+    create_user_app_edit.Password = request.GET['Password']
+    create_user_app_edit.save()
+    return redirect('/profil')
+    
 def edit_user_admin(request, id):
     Users_e = Utilisateur.objects.get(pk=id)
+    ust = request.session['user']
+    usr = Utilisateur.objects.get(Username = ust)
     context = {
         'Users_e' : Users_e,
+        'usr': usr,
     }
     return render(request,'edit_user_admin.html',context)
 
 def update_user_admin(request, id):
     create_user_edit = Utilisateur.objects.get(pk=id)
     create_user_edit.Nom_Complet = request.GET['Nom_Complet']
+    create_user_edit.Departement = request.GET['Departement']
     create_user_edit.Email = request.GET['Email']
-    create_user_edit.Adresse = request.GET['Adresse']
+    create_user_edit.Age = request.GET['Age']
     create_user_edit.Profession = request.GET['Profession']
     create_user_edit.Status = request.GET['Status']
+    create_user_edit.Image_profil = request.FILES.get('Image_profil')
+    create_user_edit.Username = request.GET['Username']
+    create_user_edit.Password = request.GET['Password']
     create_user_edit.save()
     return redirect('/user_admin')
 

@@ -95,7 +95,6 @@
                                             <tr>
                                                 <th>Photo</th>
                                                 <th>Nom Complet</th>
-                                                <th>Prénom</th>
                                                 <th>Age</th>
                                                 <th>Email</th>
                                                 <th>Departement</th>
@@ -111,7 +110,7 @@
                                             {% for us in Users %}
                                             <tr>
                                                 <td><img src="{{ us.Image_profil.url }}" class="rounded-circle" width="50" height="50" /></td>
-                                                <td>{{ user.Nom_Complet }}</td>
+                                                <td>{{ us.Nom_Complet }}</td>
                                                 <td>{{ us.Age }}</td>
                                                 <td>{{ us.Email }}</td>
                                                 <td>{{ us.Departement }}</td>

@@ -37,6 +37,7 @@ urlpatterns = [
     # path('like_post/<id>/', views.like_post, name='like_post'),
     path('chat/', views.chat, name='chat'),
     path('send_msg/', views.send_msg, name='send_msg'),
+    path('update_user_app/<id>/', views.update_user_app, name='update_user_app'),
     
     path('news_post_admin/', views.news_post_admin, name='news_post'),
     path('add_news_post_admin/', views.add_news_post_admin, name='add_news_post_admin'),

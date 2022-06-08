@@ -31,7 +31,7 @@
                         <!--Image Avatar-->
                         <div class="avatar text-center">
                             <img src="{{ usr.Image_profil.url }}" alt="" class="rounded-circle" />
-                            <p><strong>{{ usr.Nom }} {{ usr.Prenom }}</strong></p>
+                            <p><strong>{{ usr.Nom_Complet }}</strong></p>
                             <span class="text-primary small"><strong>{{ usr.Status }}</strong></span>
                         </div>
                         <!--Image Avatar-->
@@ -178,7 +178,15 @@
 
     {% block script %}
     <!--Page Wrapper-->
-
+    <script>
+        var loadFile = function(event) {
+            var output = document.getElementById('output');
+            output.src = URL.createObjectURL(event.target.files[0]);
+            output.onload = function() {
+              URL.revokeObjectURL(output.src) // free memory
+            }
+          };
+    </script>
     <!-- Page JavaScript Files-->
     <script src="{% static 'js/jquery.min.js' %}"></script>
     <script src="{% static 'js/jquery-1.12.4.min.js' %}"></script>
