@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="{% static 'css/nice-select.css' %}">
     {% endblock stylesheet %}
 
-    {% block title %}Gestion de stress{% endblock title %}
+    {% block title %}Acceuil{% endblock title %}
 
     {% block content %}
 
@@ -65,14 +65,6 @@
                                 <span class="none">Ressource</span>
                             </a>
                         </li>
-                        {% if usr.Status == 'Psychologue' %}
-                        <li class="parent">
-                            <a href="/assistance" class=""><i class="fas fa-envelope mr-3"></i>
-                                <span class="none">Messagerie</span>
-                            </a>
-                        </li>
-                        {% else %}
-                        {% endif %}
                         <li class="parent">
                             <a href="#" class=""><i class="fas fa-comments mr-3"></i>
                                 <span class="none">Chat</span>
@@ -89,72 +81,119 @@
             </div>
         </div>
 
-        <div class="col-sm-9 col-xs-12 content pt-3 pl-0">
-            <button class="btn btn-success" data-toggle="modal" data-target="#myModal">
-                <i class="fas fa-plus mr-3"></i> Envoyer Message
-            </button>
-            <div class="row mt-3">
-                <div class="col-sm-12">
-                    <!--Card groups-->
-                    <div class="mt-1 mb-5 button-container">
-                        {% for ms in MS %}
-                        <div class="card-group">
-                            <div class="card">
-                                {% if ms.Fichier_MS %}
-                                <img class="card-img-top" src="{{ ms.Fichier_MS.url }}" alt="Card image cap">
+        
+        {% for m in msg %}
+        <div class="col-lg-6 col-xl-4">
+            <div class="card card-default p-4">
+              <a href="javascript:0" class="media text-secondary" data-toggle="modal" data-target="#modal-{{ m.id }}">
+                <img src="{{ m.User_send_msg.Image_profil.url }}" class="mr-3 img-fluid rounded" width="100px" height="100px">
+        
+                <div class="media-body">
+                    <h5 class="mt-0 mb-2 text-dark">{{ m.User_send_msg.Nom_Complet }}</h5>
+                    
+        
+                    <ul class="list-unstyled">
+                        <li class="d-flex mb-1">
+                            <span>&nbsp; {{ m.Object_msg }}</span>
+                        </li>
+            
+                        <li class="d-flex mb-1">
+                            <span>&nbsp; {{ m.Content_msg }}</span>
+                        </li>
+            
+                        <li class="d-flex mb-1">
+                            <span><i class="fa fa-clock"></i>&nbsp; {{ m.Date_send_msg }}</span>
+                        </li>
+                        {% if m.Status_msg == "Pris en charge" %}
+                        <li class="d-flex mb-1">
+                            {% for cs in ptc %}
+                                {% if m.Object_msg == cs.Cas.Object_msg and m.Content_msg == cs.Cas.Content_msg and m.User_send_msg == cs.Cas.User_send_msg %}
+                                    <img src="{{ cs.Suivi.Image_profil.url }}" class="rounded-circle" width="50" height="50"/>
                                 {% else %}
+                                continue
                                 {% endif %}
-                                <div class="card-body">
-                                    <h5 class="card-title">{{ ms.Titre_MS }}</h5>
-                                    <p class="card-text">{{ ms.Description_MS }}</p>
-                                    <p class="card-text"><small class="text-muted">{{ ms.Date_pub_MS }}</small></p>
-                                </div>
-                            </div>
-                        </div><br>
-                        {% endfor %}
-                    </div>
-                    <!--/Card groups-->
+                            {% endfor %}
+                            <p class="bc-description mt-2">&nbsp; {{ usr.Nom_Complet }}</p>
+                        </li>
+                        <li class="d-flex mb-1">
+                            <span class="badge badge-pill badge-success ">{{ m.Status_msg }}</span>
+                        </li>
+                        {% else %}
+                        <li class="d-flex mb-1">
+                            <span class="badge badge-pill badge-danger">Non pris en charge</span>
+                        </li>
+                        {% endif %}
+                    </ul>
                 </div>
+              </a>
             </div>
         </div>
-
-        <div class="modal fade" id="myModal">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-          
-                    <!-- Modal Header -->
-                    <div class="modal-header">
-                        <h3>Ecrire un Message</h3>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <!-- Contact Modal -->
+    <div class="modal fade" id="modal-{{ m.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">  
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header justify-content-end border-bottom-0">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                &times;
+            </button>
+            </div>
+    
+            <div class="modal-body pt-0">
+            <div class="row no-gutters">
+                <div class="col-md-6">
+                <div class="profile-content-left px-4">
+                    <div class="card text-center widget-profile px-0 border-0">
+                    <div class="card-img mx-auto rounded-circle">
+                        <img src="{{ m.User_send_msg.Image_profil.url }}" width="100px" height="100px">
                     </div>
-          
-                    <!-- Modal body -->
-                    <div class="modal-body">
-                        <form class="form-horizontal mt-4 mb-5" method="post" action="{% url 'send_msg' %}">
-                            {%  csrf_token %}
-                            <div class="form-group row">
-                                <label for="Object_msg" class="control-label col-sm-2">Object</label>
-                                <div class="col-sm-10">
-                                    <input type="text" name="Object_msg" class="form-control" placeholder="Object" required/>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="Content_msg" class="control-label col-sm-2">Contenu</label>
-                                <div class="col-sm-10">
-                                    <textarea name="Content_msg" class="form-control" placeholder="Contenu" required></textarea>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="offset-sm-2 col-sm-9">
-                                    <input type="submit" class="btn btn-success" value="Envoyer">
-                                    <a class="btn btn-danger" href="/manage_stress_app">Annuler</a>
-                                </div>
-                            </div>
-                        </form>
+    
+                    <div class="card-body">
+                        <h4 class="py-2 text-dark">{{ m.User_send_msg.Username }}</h4>
+                        <a class="btn btn-info btn-pill btn-lg my-4" href="/profil_user/{{ m.User_send_msg.Nom_Complet }}">Voir Profil</a>
+                        {% if m.Status_msg == "Non pris en charge" %}
+                        <a class="btn btn-success btn-pill btn-lg my-4" href="/cas/{{ m.id }}">Assister</a>
+                        {% else %}
+                        {% endif %}
+                    </div>
+                    </div>
+                </div>
+                </div>
+    
+                <div class="col-md-6">
+                    <div class="table-responsive mb-3">
+                        <table class="table table-borderless table-striped m-0">
+                            <tbody>
+                                <tr>
+                                    <th scope="row">Nom Complet</th>
+                                    <td>{{ m.User_send_msg.Nom_Complet }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Age</th>
+                                    <td>{{ m.User_send_msg.Age }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Email</th>
+                                    <td>{{ m.User_send_msg.Email }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Département</th>
+                                    <td>{{ m.User_send_msg.Departement }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Profession</th>
+                                    <td>{{ m.User_send_msg.Profession }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
+            </div>
         </div>
+        </div>
+    </div>
+        {% endfor %}
+       
 
     </div>
 

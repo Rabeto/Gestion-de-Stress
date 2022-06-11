@@ -31,9 +31,9 @@
             <div class="inner-sidebar mr-3">
                 <!--Image Avatar-->
                 <div class="avatar text-center">
-                    <img src="{{ ustr.Image_profil.url }}" alt="" class="rounded-circle" />
+                    <img src="{{ usr.Image_profil.url }}" alt="" class="rounded-circle" />
                     <p><strong>{{ usr.Nom_Complet }}</strong></p>
-                    <span class="text-primary small"><strong>{{ ustr.Status }}</strong></span>
+                    <span class="text-primary small"><strong>{{ usr.Status }}</strong></span>
                 </div>
                 <!--Image Avatar-->
 
@@ -65,6 +65,14 @@
                                 <span class="none">Ressource</span>
                             </a>
                         </li>
+                        {% if usr.Status == 'Psychologue' %}
+                        <li class="parent">
+                            <a href="/assistance" class=""><i class="fas fa-envelope mr-3"></i>
+                                <span class="none">Messagerie</span>
+                            </a>
+                        </li>
+                        {% else %}
+                        {% endif %}
                         <li class="parent">
                             <a href="/chat" class=""><i class="fas fa-comments mr-3"></i>
                                 <span class="none">Chat</span>

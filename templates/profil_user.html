@@ -85,18 +85,13 @@
                         <!--User profile header-->
                         <div class="mt-1 mb-3 button-container bg-white border shadow-sm">
                             <div class="profile-bg p-5">
-                                <img src="{{ usr.Image_profil.url }}" height="125px" width="125px" class="rounded-circle shadow profile-img" />
+                                <img src="{{ ustr.Image_profil.url }}" height="125px" width="125px" class="rounded-circle shadow profile-img" />
                             </div>
                             <div class="profile-bio-main container-fluid">
                                 <div class="row">
                                     <div class="col-md-5 offset-md-3 col-sm-12 offset-sm-0 col-12 bio-header">
-                                        <h3 class="mt-4">{{ usr.Nom_Complet }}</h3>
-                                        <span class="text-muted mt-0 bio-request">{{ usr.Profession }}</span>
-                                    </div>
-                                    <div class="col-md-4 col-sm-12 col-12 px-5 text-right pt-4 bio-comment">
-                                        <button class="btn btn-outline-info btn-round" data-toggle="modal" data-target="#myModal">
-                                            <i class="fas fa-edit mr-3"></i> Modifier mon profil
-                                        </button>
+                                        <h3 class="mt-4">{{ ustr.Nom_Complet }}</h3>
+                                        <span class="text-muted mt-0 bio-request">{{ ustr.Profession }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -121,23 +116,23 @@
                                     <tbody>
                                         <tr>
                                             <th scope="row">Nom Complet</th>
-                                            <td>{{ usr.Nom_Complet }}</td>
+                                            <td>{{ ustr.Nom_Complet }}</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Age</th>
-                                            <td>{{ usr.Age }}</td>
+                                            <td>{{ ustr.Age }}</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Email</th>
-                                            <td>{{ usr.Email }}</td>
+                                            <td>{{ ustr.Email }}</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Département</th>
-                                            <td>{{ usr.Departement }}</td>
+                                            <td>{{ ustr.Departement }}</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Profession</th>
-                                            <td>{{ usr.Profession }}</td>
+                                            <td>{{ ustr.Profession }}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -206,105 +201,12 @@
 
             </div>
 
-            <div class="modal fade" id="myModal">
-                <div class="modal-dialog modal-dialog-centered modal-lg">
-                    <div class="modal-content">
-              
-                        <!-- Modal Header -->
-                        <div class="modal-header">
-                            <h3>Modifier mes infos</h3>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        </div>
-              
-                        <!-- Modal body -->
-                        <div class="modal-body">
-                            <form class="form-horizontal mt-4 mb-5" method="post" action="{% url 'update_user_app' usr.id %}" enctype="multipart/form-data">
-                                {%  csrf_token %}
-                                <div class="form-group row">
-                                    <label for="Image_Profil" class="control-label col-sm-2">Photo de Profil</label>
-                                    <div class="col-sm-8">
-                                        <input type="file" name="Image_Profil" accept="image/*" onchange="loadFile(event)" required >
-                                    </div>
-                                    <img id="output" src="{% static 'img/default-avatar.jpg' %}" class="rounded-circle" width="100" height="100" />
-                                </div>
-
-                                <div class="form-group row">
-                                    <label for="Nom" class="control-label col-sm-2">Nom Complet</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" name="Nom" class="form-control" value="{{ usr.Nom_Complet }}" />
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label for="Age" class="control-label col-sm-2">Age</label>
-                                    <div class="col-sm-10">
-                                        <input type="number" name="Age" class="form-control" value="{{ usr.Age }}" min="15" max="85" />
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label for="Email" class="control-label col-sm-2">Email</label>
-                                    <div class="col-sm-8">
-                                        <input type="email" name="Email" class="form-control" value="{{ usr.Email }}" />
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label for="Departement" class="control-label col-sm-2">Département</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" name="Departement" class="form-control" value="{{ usr.Departement }}" />
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label for="Profession" class="control-label col-sm-2">Profession</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" name="Profession" class="form-control" value="{{ usr.Profession }}" />
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label for="Username" class="control-label col-sm-2">Nom d'utilisateur</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" name="Username" class="form-control" value="{{ usr.Username }}" />
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label for="Password" class="control-label col-sm-2">Mot de passe</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" name="Password" class="form-control" value="{{ usr.Password }}"/>
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <div class="offset-sm-2 col-sm-9">
-                                        <input type="submit" class="btn btn-success" value="Modifier">
-                                        <a class="btn btn-danger" href="/journal_app">Annuler</a>
-                                    </div>
-                                </div>
-
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
         </div>
         {% endblock content %}
         
 
     <!--Page Wrapper-->
     {% block script %}
-    <script>
-        var loadFile = function(event) {
-            var output = document.getElementById('output');
-            output.src = URL.createObjectURL(event.target.files[0]);
-            output.onload = function() {
-              URL.revokeObjectURL(output.src) // free memory
-            }
-          };
-    </script>
     <!-- Page JavaScript Files-->
     <script src="{% static 'js/jquery.min.js' %}"></script>
     <script src="{% static 'js/jquery-1.12.4.min.js' %}"></script>

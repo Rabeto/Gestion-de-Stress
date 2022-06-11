@@ -30,6 +30,8 @@ class Message(models.Model):
     Object_msg = models.CharField(max_length=150, default='Prise de Contact')
     Content_msg = models.TextField(max_length=255)
     Date_send_msg = models.DateTimeField(auto_now=True)
+    Status_msg = models.CharField(max_length=150)
+    
     
 class Manage_Stress(models.Model):
     Titre_MS = models.CharField(max_length=50)
@@ -44,5 +46,10 @@ class News_Post(models.Model):
     Type = models.CharField(max_length=5)
     Fichier = models.ImageField()
     Auteur_pub = models.ForeignKey(Utilisateur, on_delete=models.CASCADE)
+    
+class Assistance(models.Model):
+    Cas = models.ForeignKey(Message, on_delete=models.CASCADE)
+    Suivi = models.ForeignKey(Utilisateur, on_delete=models.CASCADE)
+    
 
     

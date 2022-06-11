@@ -13,13 +13,26 @@ def index(request):
 def chat(request):
     return render(request,'chat.html')
 
+def assistance(request):
+    msg = Message.objects.all()
+    ptc = Assistance.objects.all()
+    ust = request.session['user']
+    usr = Utilisateur.objects.get(Username = ust)
+    context = {
+        'msg': msg,
+        'usr': usr,
+        'ptc': ptc,
+    }
+    return render(request,'messagerie.html',context)
+
 def send_msg(request):
     ust = request.session['user']
     usr = Utilisateur.objects.get(Username = ust)
     user_send_msg = usr
     object_msg = request.POST['Object_msg']
     content_msg = request.POST['Content_msg']
-    create_send_msg = Message(User_send_msg = user_send_msg, Object_msg = object_msg, Content_msg = content_msg)
+    statut_msg = 'Non pris en charge'
+    create_send_msg = Message(User_send_msg = user_send_msg, Object_msg = object_msg, Content_msg = content_msg, Status_msg = statut_msg)
     create_send_msg.save()
     return redirect('/manage_stress_app')
     
@@ -32,6 +45,31 @@ def profil(request):
         'pub': pub,
     }
     return render(request,'profil.html',context)
+
+def cas(request,id):
+    ust = request.session['user']
+    usr = Utilisateur.objects.get(Username = ust)
+    name = usr.Nom_Complet
+    msg = Message.objects.get(pk=id)
+    msg.Status_msg = 'Pris en charge'
+    msg.save()
+    create_assistance = Assistance(Cas = msg, Suivi = usr)
+    create_assistance.save()
+    return redirect('/assistance')
+    
+
+def profil_user(request,id):
+    ust = request.session['user']
+    usr = Utilisateur.objects.get(Username = ust)
+    ustr = Utilisateur.objects.get(Nom_Complet = id)
+    pub = News_Post.objects.filter(Auteur_pub = ustr)
+    context = {
+        'usr': usr,
+        'pub': pub,
+        'ustr': ustr,
+    }
+    return render(request,'profil_user.html',context)
+    
 
 def create_comment(request,id):
     post = News_Post.objects.get(pk=id)
@@ -86,12 +124,12 @@ def index_app(request):
     MS = Manage_Stress.objects.order_by('Date_pub_MS').reverse()[:3]
     RS = Ressources.objects.order_by('Date_pub_Ressource').reverse()[:3]
     ust = request.session['user']
-    ustr = Utilisateur.objects.get(Username = ust)
+    usr = Utilisateur.objects.get(Username = ust)
     context = {
         'NP': NP,
         'MS': MS,
         'RS': RS,
-        'ustr': ustr,
+        'usr': usr,
     }
     return render(request,'index_app.html',context)
 
