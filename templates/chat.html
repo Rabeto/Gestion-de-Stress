@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="{% static 'css/nice-select.css' %}">
     {% endblock stylesheet %}
 
-    {% block title %}Acceuil{% endblock title %}
+    {% block title %}Chat{% endblock title %}
 
     {% block content %}
 
@@ -31,7 +31,7 @@
             <div class="inner-sidebar mr-3">
                 <!--Image Avatar-->
                 <div class="avatar text-center">
-                    <img src="{{ ustr.Image_profil.url }}" alt="" class="rounded-circle" />
+                    <img src="{{ usr.Image_profil.url }}" alt="" class="rounded-circle" />
                     <p><strong>{{ usr.Nom_Complet }}</strong></p>
                     <span class="text-primary small"><strong>{{ ustr.Status }}</strong></span>
                 </div>
@@ -89,7 +89,54 @@
             </div>
         </div>
 
-        
+        <!--Vertical nav pills-->
+        <div class="col-sm-9 col-xs-12 content pt-3 pl-0">
+            <div class="row mt-3">
+                <div class="col-sm-12">
+                    <div class="mt-1 mb-3 p-3 button-container bg-white border shadow-sm">
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                    <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">
+                                        <div class="media p-3 border-bottom">
+                                            <img class="align-self-center mr-3 rounded-circle" src="{{ usr.Image_profil.url }}" width="40px" height="40px">{{ usr.Nom_Complet }}
+                                        </div>
+                                    </a>
+                                    <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Profile</a>
+                                    <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Messages</a>
+                                    <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Settings</a>
+                                </div>
+                            </div>
+                            <div class="col-8">
+                                <div class="tab-content" id="v-pills-tabContent">
+                                    <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                                        <div class="media">
+                                            <div class="media-body">
+                                                <p class="media-text">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus. </p>
+                                            </div>
+                                            <img class="mr-3" width="100px" height="100px" src="assets/img/gallery-img2.jpg" alt="Generic placeholder image">
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                                        <p class="media-text">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus. </p>
+                                    </div>
+                                    <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+                                        <p>Messages</p>
+                                    </div>
+                                    <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
+                                        <p>Settings</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!--/Vertical nav pills-->
        
         
     </div>

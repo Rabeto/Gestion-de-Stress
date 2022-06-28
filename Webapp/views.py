@@ -10,8 +10,16 @@ from .models import *
 def index(request):
     return render(request,'login.html')
 
+@login_required(login_url='/')
 def chat(request):
-    return render(request,'chat.html')
+    Ast = Assistance.objects.all()
+    ust = request.session['user']
+    usr = Utilisateur.objects.get(Username = ust)
+    context = {
+        'usr': usr,
+        'Ast': Ast,
+    }
+    return render(request,'chat.html',context)
 
 def assistance(request):
     msg = Message.objects.all()
@@ -35,7 +43,8 @@ def send_msg(request):
     create_send_msg = Message(User_send_msg = user_send_msg, Object_msg = object_msg, Content_msg = content_msg, Status_msg = statut_msg)
     create_send_msg.save()
     return redirect('/manage_stress_app')
-    
+
+@login_required(login_url='/')    
 def profil(request):
     ust = request.session['user']
     usr = Utilisateur.objects.get(Username = ust)
@@ -57,7 +66,7 @@ def cas(request,id):
     create_assistance.save()
     return redirect('/assistance')
     
-
+@login_required(login_url='/')
 def profil_user(request,id):
     ust = request.session['user']
     usr = Utilisateur.objects.get(Username = ust)
@@ -133,6 +142,7 @@ def index_app(request):
     }
     return render(request,'index_app.html',context)
 
+@login_required(login_url='/')
 def ressource_app(request):
     Ressource = Ressources.objects.order_by('Date_pub_Ressource').reverse()
     usr = Utilisateur.objects.filter(Status = 'Psychologue')
@@ -145,6 +155,7 @@ def ressource_app(request):
     }
     return render(request,'ressource_app.html',context)
 
+@login_required(login_url='/')
 def manage_stress_app(request):
     MS = Manage_Stress.objects.order_by('Date_pub_MS').reverse()
     ust = request.session['user']
@@ -155,9 +166,11 @@ def manage_stress_app(request):
     }
     return render(request,'manage_stress_app.html',context)
 
+@login_required(login_url='/')
 def journal_app(request):
     pst = News_Post.objects.filter(Type = 'Posts').order_by('Date_pub').reverse()
     nws = News_Post.objects.filter(Type = 'News').order_by('Date_pub').reverse()
+    lk_p = Like_Post.objects.all()
     ust = request.session['user']
     usr = Utilisateur.objects.get(Username = ust)
     
@@ -165,28 +178,23 @@ def journal_app(request):
         'pst': pst,
         'nws': nws,
         'usr': usr,
+        'lk_p': lk_p,
     }
     return render(request,'journal_app.html',context)
 
-# def like_post(request, id):
-#     instance = News_Post.objects.get(pk=id)
-#     ust = request.session['user']
-#     usr = Utilisateur.objects.get(Username = ust)
-#     if not instance.Likes.filter(id= usr.id).exists():
-#         instance.Likes.add(usr.Nom_Complet)
-#         instance.save()
-#         context = {
-#             'poster': instance,
-#         }
-#         return render(request,'journal_app.html',context)
-#     else:
-#         instance.Likes.remove(usr.Nom_Complet)
-#         instance.save()
-#         context = {
-#             'poster': instance,
-#         }
-#         return render(request,'journal_app.html',context)
+def like_post(request, id):
+    ust = request.session['user']
+    usr = Utilisateur.objects.get(Username = ust)
+    post = id
+    reaction = usr.id
+    if Like_Post.objects.filter(Post = post, Reacteur = reaction).exists():
+        Like_Post.objects.filter(Post = post, Reacteur = reaction).delete()
+    else:
+        lkp = Like_Post(Post = post, Reacteur = reaction)
+        lkp.save()
         
+    return redirect('/journal')
+    
 
 def pub_post_user(request):
     titre = request.POST['Titre']
@@ -239,7 +247,7 @@ def index_admin(request):
     }
     return render(request,'index_admin.html',context)
 
-
+@login_required(login_url='/')
 def manage_stress_admin(request):
     MS = Manage_Stress.objects.all()
     ust = request.session['user']
@@ -290,7 +298,7 @@ def update_manage_stress_admin(request,id):
     update_MS.save()
     return redirect('/manage_stress_admin')
     
-
+@login_required(login_url='/')
 def ressources_admin(request):
     Src = Ressources.objects.all()
     ust = request.session['user']
@@ -341,6 +349,7 @@ def update_ressource_admin(request,id):
     update_R.save()
     return redirect('/ressources_admin')
 
+@login_required(login_url='/')
 def user_admin(request):
     Users = Utilisateur.objects.all()
     ust = request.session['user']
@@ -417,7 +426,7 @@ def delete_user_admin(request,id):
     Users.delete()
     return redirect('/user_admin')
 
-
+@login_required(login_url='/')
 def news_post_admin(request):
     News_Posts = News_Post.objects.all()
     ust = request.session['user']

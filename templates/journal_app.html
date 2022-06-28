@@ -65,6 +65,14 @@
                                 <span class="none">Ressource</span>
                             </a>
                         </li>
+                        {% if usr.Status == 'Psychologue' %}
+                        <li class="parent">
+                            <a href="/assistance" class=""><i class="fas fa-envelope mr-3"></i>
+                                <span class="none">Messagerie</span>
+                            </a>
+                        </li>
+                        {% else %}
+                        {% endif %}
                         <li class="parent">
                             <a href="/chat" class=""><i class="fas fa-comments mr-3"></i>
                                 <span class="none">Chat</span>
@@ -117,16 +125,49 @@
                                             <p>{{ post.Contenu }}</p>
 
                                             <div class="feed-footer">
-                                                <span class="pr-3">
-                                                    <a href="#"><i class="fa fa-star"></i> Réagir</a></span>
-                                                <span class="pr-3">
-                                                    <a href="/details_pub/{{ post.id }}"><i class="fa fa-comment"></i> Voir Commentaires</a>
-                                                </span>
-                                                <span class="pr-3">
-                                                    <a href="#"><i class="fas fa-comments"></i> Messge Privé</a></span>
-                                                <span class="pl-3 pull-right"><i class="fa fa-ellipsis-h"></i></span>
+                                                <form action="/like_post/{{ post.id }}" method="post">
+                                                    {% csrf_token %}
+                                                    {% if lk_p %}
+                                                        {% for lk in lk_p %}
+                                                            {% if lk.Post.Titre == post.Titre %}
+                                                                {% if user.Nom_Complet == lk.Reacteur.Nom_Complet %}
+                                                                    <button type="submit" name="blogpost-{{ post.id }}" value="{{ post.id }}" class="btn btn-round btn-info">
+                                                                        <span class="pr-3">
+                                                                            <i class="fa fa-star"></i>{{ lk.Reacteur.count }}
+                                                                        </span>
+                                                                    </button>
+                                                                {% else %}
+                                                                    <button type="submit" name="blogpost-{{ post.id }}" value="{{ post.id }}" class="btn btn-round btn-default">
+                                                                        <span class="pr-3">
+                                                                            <i class="fa fa-star"></i>{{ lk.Reacteur.count }}
+                                                                        </span>
+                                                                    </button>
+                                                                {% endif %}
+                                                            {% else %}
+                                                                <button type="submit" name="blogpost-{{ post.id }}" value="{{ post.id }}" class="btn btn-round btn-default">
+                                                                    <span class="pr-3">
+                                                                        <i class="fa fa-star"></i>Reagir
+                                                                    </span>
+                                                                </button>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    {% else %}
+                                                        <button type="submit" name="blogpost-{{ post.id }}" value="{{ post.id }}" class="btn btn-round btn-default">
+                                                            <span class="pr-3">
+                                                                <i class="fa fa-star"></i>Reagir
+                                                            </span>
+                                                        </button>
+                                                    {% endif %}
 
-                                                <p class="clearfix"></p>
+                                                    <span class="pr-3">
+                                                        <a href="/details_pub/{{ post.id }}"><i class="fa fa-comment"></i> Voir Commentaires</a>
+                                                    </span>
+                                                    <span class="pr-3">
+                                                        <a href="#"><i class="fas fa-comments"></i> Messge Privé</a></span>
+                                                    <span class="pl-3 pull-right"><i class="fa fa-ellipsis-h"></i></span>
+
+                                                    <p class="clearfix"></p>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>

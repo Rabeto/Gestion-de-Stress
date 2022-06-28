@@ -32,7 +32,7 @@
                 <!--Image Avatar-->
                 <div class="avatar text-center">
                     <img src="{{ ustr.Image_profil.url }}" alt="" class="rounded-circle" />
-                    <p><strong>{{ usr.Nom_Complet }}</strong></p>
+                    <p><strong>{{ ustr.Nom_Complet }}</strong></p>
                     <span class="text-primary small"><strong>{{ ustr.Status }}</strong></span>
                 </div>
                 <!--Image Avatar-->
@@ -65,7 +65,7 @@
                                 <span class="none">Ressource</span>
                             </a>
                         </li>
-                        {% if usr.Status == 'Psychologue' %}
+                        {% if ustr.Status == 'Psychologue' %}
                         <li class="parent">
                             <a href="/assistance" class=""><i class="fas fa-envelope mr-3"></i>
                                 <span class="none">Messagerie</span>

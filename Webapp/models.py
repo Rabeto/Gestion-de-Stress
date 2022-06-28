@@ -38,7 +38,7 @@ class Manage_Stress(models.Model):
     Description_MS = models.TextField(max_length=255)
     Date_pub_MS = models.DateTimeField(auto_now=True)
     Fichier_MS = models.FileField()
-    
+        
 class News_Post(models.Model):
     Titre = models.CharField(max_length=50)
     Contenu = models.TextField(max_length=255)
@@ -51,5 +51,6 @@ class Assistance(models.Model):
     Cas = models.ForeignKey(Message, on_delete=models.CASCADE)
     Suivi = models.ForeignKey(Utilisateur, on_delete=models.CASCADE)
     
-
-    
+class Like_Post(models.Model):
+    Post = models.ForeignKey(News_Post, on_delete=models.CASCADE)
+    Reacteur = models.ManyToManyField(Utilisateur)
