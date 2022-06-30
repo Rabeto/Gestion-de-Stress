@@ -185,15 +185,15 @@ def journal_app(request):
 def like_post(request, id):
     ust = request.session['user']
     usr = Utilisateur.objects.get(Username = ust)
-    post = id
-    reaction = usr.id
+    post = News_Post.objects.get(pk=id)
+    reaction = usr
     if Like_Post.objects.filter(Post = post, Reacteur = reaction).exists():
         Like_Post.objects.filter(Post = post, Reacteur = reaction).delete()
     else:
         lkp = Like_Post(Post = post, Reacteur = reaction)
         lkp.save()
         
-    return redirect('/journal')
+    return redirect('/journal_app')
     
 
 def pub_post_user(request):

@@ -53,4 +53,4 @@ class Assistance(models.Model):
     
 class Like_Post(models.Model):
     Post = models.ForeignKey(News_Post, on_delete=models.CASCADE)
-    Reacteur = models.ManyToManyField(Utilisateur)
+    Reacteur = models.ForeignKey(Utilisateur, on_delete=models.CASCADE)

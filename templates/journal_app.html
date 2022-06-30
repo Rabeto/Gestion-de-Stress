@@ -129,32 +129,26 @@
                                                     {% csrf_token %}
                                                     {% if lk_p %}
                                                         {% for lk in lk_p %}
-                                                            {% if lk.Post.Titre == post.Titre %}
-                                                                {% if user.Nom_Complet == lk.Reacteur.Nom_Complet %}
-                                                                    <button type="submit" name="blogpost-{{ post.id }}" value="{{ post.id }}" class="btn btn-round btn-info">
-                                                                        <span class="pr-3">
-                                                                            <i class="fa fa-star"></i>{{ lk.Reacteur.count }}
-                                                                        </span>
+                                                            {% if lk.Post.id == post.id %}
+                                                                {% if lk.Reacteur.Nom_Complet == usr.Nom_Complet %}
+                                                                    <button type="submit" name="blogpost-{{ post.id }}" value="{{ post.id }}" class="btn btn-round btn-danger">
+                                                                        <span class="pr-3"><i class="fa fa-star"></i></span>
                                                                     </button>
                                                                 {% else %}
                                                                     <button type="submit" name="blogpost-{{ post.id }}" value="{{ post.id }}" class="btn btn-round btn-default">
-                                                                        <span class="pr-3">
-                                                                            <i class="fa fa-star"></i>{{ lk.Reacteur.count }}
-                                                                        </span>
+                                                                        <span class="pr-3"><i class="fa fa-star"></i>else1</span>
                                                                     </button>
                                                                 {% endif %}
                                                             {% else %}
-                                                                <button type="submit" name="blogpost-{{ post.id }}" value="{{ post.id }}" class="btn btn-round btn-default">
-                                                                    <span class="pr-3">
-                                                                        <i class="fa fa-star"></i>Reagir
-                                                                    </span>
-                                                                </button>
+                                                            <button type="submit" name="blogpost-{{ post.id }}" value="{{ post.id }}" class="btn btn-round btn-default">
+                                                                <span class="pr-3"><i class="fa fa-star"></i>else2</span>
+                                                            </button>
                                                             {% endif %}
                                                         {% endfor %}
                                                     {% else %}
                                                         <button type="submit" name="blogpost-{{ post.id }}" value="{{ post.id }}" class="btn btn-round btn-default">
                                                             <span class="pr-3">
-                                                                <i class="fa fa-star"></i>Reagir
+                                                                <i class="fa fa-star"></i>else3
                                                             </span>
                                                         </button>
                                                     {% endif %}
