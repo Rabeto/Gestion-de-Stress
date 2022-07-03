@@ -170,7 +170,6 @@ def manage_stress_app(request):
 def journal_app(request):
     pst = News_Post.objects.filter(Type = 'Posts').order_by('Date_pub').reverse()
     nws = News_Post.objects.filter(Type = 'News').order_by('Date_pub').reverse()
-    lk_p = Like_Post.objects.all()
     ust = request.session['user']
     usr = Utilisateur.objects.get(Username = ust)
     
@@ -178,7 +177,6 @@ def journal_app(request):
         'pst': pst,
         'nws': nws,
         'usr': usr,
-        'lk_p': lk_p,
     }
     return render(request,'journal_app.html',context)
 
@@ -186,12 +184,12 @@ def like_post(request, id):
     ust = request.session['user']
     usr = Utilisateur.objects.get(Username = ust)
     post = News_Post.objects.get(pk=id)
+    pst = post.Titre
     reaction = usr
-    if Like_Post.objects.filter(Post = post, Reacteur = reaction).exists():
-        Like_Post.objects.filter(Post = post, Reacteur = reaction).delete()
+    if News_Post.objects.filter(Titre = pst, Like = reaction).exists():
+        post.Like.remove(reaction)
     else:
-        lkp = Like_Post(Post = post, Reacteur = reaction)
-        lkp.save()
+        post.Like.add(reaction)
         
     return redirect('/journal_app')
     

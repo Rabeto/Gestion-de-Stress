@@ -45,12 +45,10 @@ class News_Post(models.Model):
     Date_pub = models.DateTimeField(auto_now=True)
     Type = models.CharField(max_length=5)
     Fichier = models.ImageField()
+    Like = models.ManyToManyField(Utilisateur, default=None, blank=True, related_name='Reaction_Utilisateur')
     Auteur_pub = models.ForeignKey(Utilisateur, on_delete=models.CASCADE)
     
 class Assistance(models.Model):
     Cas = models.ForeignKey(Message, on_delete=models.CASCADE)
     Suivi = models.ForeignKey(Utilisateur, on_delete=models.CASCADE)
     
-class Like_Post(models.Model):
-    Post = models.ForeignKey(News_Post, on_delete=models.CASCADE)
-    Reacteur = models.ForeignKey(Utilisateur, on_delete=models.CASCADE)

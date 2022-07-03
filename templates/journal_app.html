@@ -127,31 +127,16 @@
                                             <div class="feed-footer">
                                                 <form action="/like_post/{{ post.id }}" method="post">
                                                     {% csrf_token %}
-                                                    {% if lk_p %}
-                                                        {% for lk in lk_p %}
-                                                            {% if lk.Post.id == post.id %}
-                                                                {% if lk.Reacteur.Nom_Complet == usr.Nom_Complet %}
-                                                                    <button type="submit" name="blogpost-{{ post.id }}" value="{{ post.id }}" class="btn btn-round btn-danger">
-                                                                        <span class="pr-3"><i class="fa fa-star"></i></span>
-                                                                    </button>
-                                                                {% else %}
-                                                                    <button type="submit" name="blogpost-{{ post.id }}" value="{{ post.id }}" class="btn btn-round btn-default">
-                                                                        <span class="pr-3"><i class="fa fa-star"></i>else1</span>
-                                                                    </button>
-                                                                {% endif %}
-                                                            {% else %}
-                                                            <button type="submit" name="blogpost-{{ post.id }}" value="{{ post.id }}" class="btn btn-round btn-default">
-                                                                <span class="pr-3"><i class="fa fa-star"></i>else2</span>
+                                                    
+                                                        {% if post.Like.Nom_Complet == usr.Nom_Complet %}
+                                                            <button type="submit" name="blogpost-{{ post.id }}" value="{{ post.id }}" class="btn btn-round btn-danger">
+                                                                <span class="pr-3"><i class="fa fa-star"></i>{{ post.Like.count }}</span>
                                                             </button>
-                                                            {% endif %}
-                                                        {% endfor %}
-                                                    {% else %}
-                                                        <button type="submit" name="blogpost-{{ post.id }}" value="{{ post.id }}" class="btn btn-round btn-default">
-                                                            <span class="pr-3">
-                                                                <i class="fa fa-star"></i>else3
-                                                            </span>
-                                                        </button>
-                                                    {% endif %}
+                                                        {% else %}
+                                                            <button type="submit" name="blogpost-{{ post.id }}" value="{{ post.id }}" class="btn btn-round btn-default">
+                                                                <span class="pr-3"><i class="fa fa-star"></i>{{ post.Like.count }}</span>
+                                                            </button>
+                                                        {% endif %}
 
                                                     <span class="pr-3">
                                                         <a href="/details_pub/{{ post.id }}"><i class="fa fa-comment"></i> Voir Commentaires</a>
@@ -218,9 +203,9 @@
                                         <p class="card-text">{{ new.Contenu }}</p>
                                         <p class="card-text"><small class="text-muted">{{ new.Date_pub }}</small></p>
                                         <div class="row text-center">
-                                            <div class="col-sm-12 btn btn-danger">
+                                            <div class="col-sm-12 btn btn-default">
                                                 <i class="fas fa-heart"></i>
-                                                <span class="None"> Réagir</span>
+                                                <span class="None"> {{ new.Like.count }}</span>
                                             </div>
                                         </div>
                                     </div>
