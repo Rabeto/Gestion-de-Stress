@@ -10,16 +10,28 @@ from .models import *
 def index(request):
     return render(request,'login.html')
 
+def chat_mp(request):
+    return render(request,'chat_mp.html')
+
 @login_required(login_url='/')
 def chat(request):
-    Ast = Assistance.objects.all()
     ust = request.session['user']
     usr = Utilisateur.objects.get(Username = ust)
-    context = {
-        'usr': usr,
-        'Ast': Ast,
-    }
-    return render(request,'chat.html',context)
+    if usr.Status == 'Utilisateur Simple':
+        Ast = Utilisateur.objects.filter(Status = 'Psychologue')
+        context = {
+            'usr': usr,
+            'Ast': Ast,
+        }
+        return render(request,'chat.html',context)
+    else:
+        Ast = Utilisateur.objects.filter(Status = 'Utilisateur Simple')
+        context = {
+            'usr': usr,
+            'Ast': Ast,
+        }
+        return render(request,'chat.html',context)
+
 
 def assistance(request):
     msg = Message.objects.all()
@@ -64,6 +76,14 @@ def cas(request,id):
     msg.save()
     create_assistance = Assistance(Cas = msg, Suivi = usr)
     create_assistance.save()
+    return redirect('/assistance')
+
+def non_cas(request,id):
+    msg = Message.objects.get(pk=id)
+    msg.Status_msg = 'Non pris en charge'
+    msg.save()
+    assistance = Assistance.objects.get(Cas = msg)
+    assistance.delete()
     return redirect('/assistance')
     
 @login_required(login_url='/')

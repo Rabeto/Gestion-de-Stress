@@ -38,7 +38,9 @@ urlpatterns = [
     path('assistance/', views.assistance, name='assistance'),
     path('profil_user/<id>/', views.profil_user, name='profil_user'),
     path('cas/<id>/', views.cas, name='cas'),
+    path('non_cas/<id>/', views.non_cas, name='non_cas'),
     path('chat/', views.chat, name='chat'),
+    path('chat_mp/', views.chat_mp, name='chat_mp'),
     path('send_msg/', views.send_msg, name='send_msg'),
     path('update_user_app/<id>/', views.update_user_app, name='update_user_app'),
     
