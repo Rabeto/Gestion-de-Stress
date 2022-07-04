@@ -11,7 +11,12 @@ def index(request):
     return render(request,'login.html')
 
 def chat_mp(request):
-    return render(request,'chat_mp.html')
+    ust = request.session['user']
+    usr = Utilisateur.objects.get(Username = ust)
+    context = {
+        'usr': usr,
+    }
+    return render(request,'chat_mp.html',context)
 
 @login_required(login_url='/')
 def chat(request):
