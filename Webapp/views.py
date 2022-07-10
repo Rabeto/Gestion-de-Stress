@@ -10,11 +10,13 @@ from .models import *
 def index(request):
     return render(request,'login.html')
 
-def chat_mp(request):
+def chat_mp(request, id):
     ust = request.session['user']
     usr = Utilisateur.objects.get(Username = ust)
+    usr_mp = Utilisateur.objects.get(pk=id)
     context = {
         'usr': usr,
+        'usr_mp': usr_mp,
     }
     return render(request,'chat_mp.html',context)
 

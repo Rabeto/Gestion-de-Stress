@@ -105,7 +105,9 @@
                     <div class="media p-3 border-bottom">
                         <img class="align-self-center mr-3 rounded-circle" src="{{ as.Image_profil.url }}" width="40px" height="40px" alt="Generic placeholder image">
                         <div class="media-body dd">
-                            <p><strong>{{ as.Nom_Complet }}</strong></p>
+                            <a href='/chat_mp/{{ as.id }}' >
+                                <p><strong>{{ as.Nom_Complet }}</strong></p>
+                            </a>
                             <small>{{ as.Status }}</small>
                         </div>
                     </div>
