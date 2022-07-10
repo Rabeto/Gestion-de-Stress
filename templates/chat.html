@@ -72,12 +72,13 @@
                             </a>
                         </li>
                         {% else %}
-                        {% endif %}
                         <li class="parent">
                             <a href="/chat" class=""><i class="fas fa-comments mr-3"></i>
                                 <span class="none">Chat</span>
                             </a>
                         </li>
+                        {% endif %}
+
                         <li class="parent">
                             <a href="/logout" class=""><i class="fas fa-power-off mr-3"></i>
                                 <span class="none">Déconnexion</span>
@@ -89,34 +90,39 @@
             </div>
         </div>
 
-        <div class="col-sm-9 col-xs-12 content pt-3 pl-0">
-            <!--Chats-->
-            <div class="mt-1 mb-3 button-container bg-white border shadow-sm lh-sm">
-                <div class="p-2 px-3 mb-0 border-bottom email-chat">
-                    <h6 class="mb-0"><span class="align-bottom" style="line-height: 35px;">Chats</span>
-                        <small class="pull-right"><i class="fa fa-circle text-success"></i> online </small></h6>
-
-                        <div class="clearfix"></div>
-                    </h6>
-                </div>
-
-                <div class="email-chat-body mt-0">
-                    {% for as in Ast %}
-                    <div class="media p-3 border-bottom">
-                        <img class="align-self-center mr-3 rounded-circle" src="{{ as.Image_profil.url }}" width="40px" height="40px" alt="Generic placeholder image">
-                        <div class="media-body dd">
-                            <a href='/chat_mp/{{ as.id }}' >
-                                <p><strong>{{ as.Nom_Complet }}</strong></p>
-                            </a>
-                            <small>{{ as.Status }}</small>
+        
+        <!--Dashboard Profile card-->
+        {% if Ast %}
+        {% for as in Ast %}
+        <div class="col-lg-4 col-md-4 col-sm-4 card-pro mb-3">
+            <div class="card shadow">
+                <div class="card-body">
+                    <div class="media">
+                        <img class="align-self-center mr-3 rounded-circle" src="{{as.User_send_msg.Image_profil.url }}" width="40px" height="40px" alt="Generic placeholder image">
+                        <div class="media-body">
+                            <h4 class="mt-0"><strong>{{ as.User_send_msg.Nom_Complet }}</strong></h4>
                         </div>
                     </div>
-                    {% endfor %}
+                    <p class="mb-3 mt-3 text-center p-space">
+                        <strong>{{ as.Object_msg}}</strong>
+                    </p>
+                    <div class="dropdown-divider"></div>
+                    <p class="mb-3 mt-3 text-center p-space">
+                        {{ as.Content_msg}}
+                    </p>
+                    <a href="/chat_mp/{{ as.Object_msg }}" class="btn btn-outline-info btn-round">
+                        <span class="none"><i class="fa fa-comments mr-3"></i> Discuter</span>
+                    </a>
                 </div>
             </div>
-            <!--/Chats-->
-
         </div>
+        {% endfor %}
+        {% else %}
+        <div class="col-sm-9 col-xs-12 content pt-3 pl-0">
+            <h5 class="mb-3" ><strong>Vous n'avez pas envoyer de message</strong></h5>
+        </div>
+        {% endif %}
+        <!--Dashboard Profile card-->
        
         
     </div>

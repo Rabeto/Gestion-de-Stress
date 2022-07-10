@@ -40,7 +40,9 @@ urlpatterns = [
     path('cas/<id>/', views.cas, name='cas'),
     path('non_cas/<id>/', views.non_cas, name='non_cas'),
     path('chat/', views.chat, name='chat'),
-    path('chat_mp/<id>', views.chat_mp, name='chat_mp'),
+    path('chat_mp/<str:room>', views.chat_mp, name='chat_mp'),
+    path('send', views.send, name='send'),
+    # path('getMessages/<str:room>/', views.getMessages, name='getMessages'),
     path('send_msg/', views.send_msg, name='send_msg'),
     path('update_user_app/<id>/', views.update_user_app, name='update_user_app'),
     

@@ -1,7 +1,6 @@
 from aiohttp import request
 from django import urls
-from django.forms import EmailField
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
 from .models import *
@@ -10,35 +9,36 @@ from .models import *
 def index(request):
     return render(request,'login.html')
 
-def chat_mp(request, id):
+def send(request):
     ust = request.session['user']
     usr = Utilisateur.objects.get(Username = ust)
-    usr_mp = Utilisateur.objects.get(pk=id)
+    username = usr
+    room_id = request.POST['room_id']
+    message = request.POST['message']
+    new_message = Private_Message.objects.create(Message = message, User = username, Room = room_id)
+    new_message.save()
+    return redirect('/chat_mp/'+room_id)
+
+def chat_mp(request, room):
+    ust = request.session['user']
+    usr = Utilisateur.objects.get(Username = ust)
+    messages = Private_Message.objects.filter(Room = room)
     context = {
         'usr': usr,
-        'usr_mp': usr_mp,
+        'room': room,
+        'messages': messages,
     }
     return render(request,'chat_mp.html',context)
 
-@login_required(login_url='/')
 def chat(request):
     ust = request.session['user']
     usr = Utilisateur.objects.get(Username = ust)
-    if usr.Status == 'Utilisateur Simple':
-        Ast = Utilisateur.objects.filter(Status = 'Psychologue')
-        context = {
-            'usr': usr,
-            'Ast': Ast,
-        }
-        return render(request,'chat.html',context)
-    else:
-        Ast = Utilisateur.objects.filter(Status = 'Utilisateur Simple')
-        context = {
-            'usr': usr,
-            'Ast': Ast,
-        }
-        return render(request,'chat.html',context)
-
+    Ast = Message.objects.filter(User_send_msg = usr)
+    context = {
+        'usr': usr,
+        'Ast': Ast,
+    }
+    return render(request,'chat.html',context)
 
 def assistance(request):
     msg = Message.objects.all()
@@ -61,9 +61,12 @@ def send_msg(request):
     statut_msg = 'Non pris en charge'
     create_send_msg = Message(User_send_msg = user_send_msg, Object_msg = object_msg, Content_msg = content_msg, Status_msg = statut_msg)
     create_send_msg.save()
+    theme = object_msg
+    create_room = Room(Theme = theme)
+    create_room.save()
+    
     return redirect('/manage_stress_app')
 
-@login_required(login_url='/')    
 def profil(request):
     ust = request.session['user']
     usr = Utilisateur.objects.get(Username = ust)
@@ -93,7 +96,6 @@ def non_cas(request,id):
     assistance.delete()
     return redirect('/assistance')
     
-@login_required(login_url='/')
 def profil_user(request,id):
     ust = request.session['user']
     usr = Utilisateur.objects.get(Username = ust)
@@ -154,7 +156,6 @@ def logout(request):
         return redirect('/')
     return redirect('/')
 
-@login_required(login_url='/')
 def index_app(request):
     NP = News_Post.objects.order_by('Date_pub').reverse()[:3]
     MS = Manage_Stress.objects.order_by('Date_pub_MS').reverse()[:3]
@@ -169,7 +170,6 @@ def index_app(request):
     }
     return render(request,'index_app.html',context)
 
-@login_required(login_url='/')
 def ressource_app(request):
     Ressource = Ressources.objects.order_by('Date_pub_Ressource').reverse()
     usr = Utilisateur.objects.filter(Status = 'Psychologue')
@@ -182,7 +182,6 @@ def ressource_app(request):
     }
     return render(request,'ressource_app.html',context)
 
-@login_required(login_url='/')
 def manage_stress_app(request):
     MS = Manage_Stress.objects.order_by('Date_pub_MS').reverse()
     ust = request.session['user']
@@ -193,7 +192,6 @@ def manage_stress_app(request):
     }
     return render(request,'manage_stress_app.html',context)
 
-@login_required(login_url='/')
 def journal_app(request):
     pst = News_Post.objects.filter(Type = 'Posts').order_by('Date_pub').reverse()
     nws = News_Post.objects.filter(Type = 'News').order_by('Date_pub').reverse()
@@ -251,7 +249,6 @@ def details_pub(request,id):
     }
     return render(request,'pub.html',context)
 
-@login_required(login_url='/')
 def index_admin(request):
     user_S = Utilisateur.objects.filter(Status = "Utilisateur Simple").count()
     user_P = Utilisateur.objects.filter(Status = "Psychologue").count()
@@ -272,7 +269,6 @@ def index_admin(request):
     }
     return render(request,'index_admin.html',context)
 
-@login_required(login_url='/')
 def manage_stress_admin(request):
     MS = Manage_Stress.objects.all()
     ust = request.session['user']
@@ -323,7 +319,6 @@ def update_manage_stress_admin(request,id):
     update_MS.save()
     return redirect('/manage_stress_admin')
     
-@login_required(login_url='/')
 def ressources_admin(request):
     Src = Ressources.objects.all()
     ust = request.session['user']
@@ -374,7 +369,6 @@ def update_ressource_admin(request,id):
     update_R.save()
     return redirect('/ressources_admin')
 
-@login_required(login_url='/')
 def user_admin(request):
     Users = Utilisateur.objects.all()
     ust = request.session['user']
@@ -451,7 +445,6 @@ def delete_user_admin(request,id):
     Users.delete()
     return redirect('/user_admin')
 
-@login_required(login_url='/')
 def news_post_admin(request):
     News_Posts = News_Post.objects.all()
     ust = request.session['user']

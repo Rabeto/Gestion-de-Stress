@@ -27,12 +27,21 @@ class Ressources(models.Model):
 
 class Message(models.Model):
     User_send_msg = models.ForeignKey(Utilisateur, on_delete=models.CASCADE)
-    Object_msg = models.CharField(max_length=150, default='Prise de Contact')
+    Object_msg = models.CharField(max_length=150, blank=True)
     Content_msg = models.TextField(max_length=255)
     Date_send_msg = models.DateTimeField(auto_now=True)
     Status_msg = models.CharField(max_length=150)
+
+class Room(models.Model):
+    Theme = models.CharField(max_length=150, blank=True)
     
-    
+class Private_Message(models.Model):
+    User = models.ForeignKey(Utilisateur, on_delete=models.CASCADE)
+    Message = models.CharField(max_length=1000)
+    Date = models.DateTimeField(auto_now=True)
+    Room = models.CharField(max_length=150, blank=True)
+
+
 class Manage_Stress(models.Model):
     Titre_MS = models.CharField(max_length=50)
     Description_MS = models.TextField(max_length=255)

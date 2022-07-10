@@ -72,12 +72,13 @@
                             </a>
                         </li>
                         {% else %}
-                        {% endif %}
                         <li class="parent">
                             <a href="/chat" class=""><i class="fas fa-comments mr-3"></i>
                                 <span class="none">Chat</span>
                             </a>
                         </li>
+                        {% endif %}
+                        
                         <li class="parent">
                             <a href="/logout" class=""><i class="fas fa-power-off mr-3"></i>
                                 <span class="none">Déconnexion</span>
@@ -161,7 +162,10 @@
                         {% if m.Status_msg == "Non pris en charge" %}
                         <a class="btn btn-success btn-pill btn-lg my-4" href="/cas/{{ m.id }}">Assister</a>
                         {% else %}
-                        <a class="btn btn-success btn-pill btn-lg my-4" href="/non_cas/{{ m.id }}">Ne Plus Assister</a>
+                        <a class="btn btn-danger btn-pill btn-lg my-4" href="/non_cas/{{ m.id }}">Ne Plus Assister</a>
+                        <a href="/chat_mp/{{ m.Object_msg }}" class="btn btn-success btn-pill btn-lg my-4">
+                            <span class="none"><i class="fa fa-comments mr-3"></i> Discuter</span>
+                        </a>
                         {% endif %}
                     </div>
                     </div>
