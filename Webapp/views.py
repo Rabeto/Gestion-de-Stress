@@ -428,7 +428,7 @@ def edit_user_admin(request, id):
 
 def update_user_admin(request, id):
     create_user_edit = Utilisateur.objects.get(pk=id)
-    create_user_edit.Nom_Complet = request.GET['Nom_Complet']
+    create_user_edit.Nom_Complet = request.GET['Nom']
     create_user_edit.Departement = request.GET['Departement']
     create_user_edit.Email = request.GET['Email']
     create_user_edit.Age = request.GET['Age']
