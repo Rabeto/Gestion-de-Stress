@@ -116,7 +116,7 @@
                                         <div class="row text-center">
                                             <div class="col-sm-4">
                                                 <i class="fas fa-heart"></i>
-                                                <span class="None"> Réagir</span>
+                                                <span class="None"> {{ post.Like.count }}</span>
                                             </div>
                                             <div class="col-sm-4">
                                                 <i class="fas fa-comment"></i>
@@ -125,12 +125,6 @@
                                                 {% else %}
                                                 <span class="None"> {{ cpt }}</span>
                                                 {% endif %}
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <a href="#">
-                                                    <i class="fas fa-comments"></i>
-                                                    <span class="None"> Message privé</span>
-                                                </a>
                                             </div>
                                         </div>
                                         <div class="dropdown-divider"></div>

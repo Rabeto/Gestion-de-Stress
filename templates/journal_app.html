@@ -131,19 +131,17 @@
                                                     
                                                         {% if post.Like.Nom_Complet == usr.Nom_Complet %}
                                                             <button type="submit" name="blogpost-{{ post.id }}" value="{{ post.id }}" class="btn btn-round btn-danger">
-                                                                <span class="pr-3"><i class="fa fa-star"></i>{{ post.Like.count }}</span>
+                                                                <span class="pr-3"><i class="fas fa-heart"></i>   {{ post.Like.count }}</span>
                                                             </button>
                                                         {% else %}
                                                             <button type="submit" name="blogpost-{{ post.id }}" value="{{ post.id }}" class="btn btn-round btn-default">
-                                                                <span class="pr-3"><i class="fa fa-star"></i>{{ post.Like.count }}</span>
+                                                                <span class="pr-3"><i class="fas fa-heart"></i>   {{ post.Like.count }}</span>
                                                             </button>
                                                         {% endif %}
 
                                                     <span class="pr-3">
                                                         <a href="/details_pub/{{ post.id }}"><i class="fa fa-comment"></i> Voir Commentaires</a>
                                                     </span>
-                                                    <span class="pr-3">
-                                                        <a href="#"><i class="fas fa-comments"></i> Messge Privé</a></span>
                                                     <span class="pl-3 pull-right"><i class="fa fa-ellipsis-h"></i></span>
 
                                                     <p class="clearfix"></p>

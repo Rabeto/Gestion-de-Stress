@@ -99,6 +99,9 @@
         </div>
 
         <div class="col-sm-9 col-xs-12 content pt-3 pl-0">
+            <a href="/chat_mp/{{ room }}" class="btn btn-info">
+                <i class="fas fa-refresh mr-3"></i> Rafraîchir
+            </a>
             <div class="row mt-3">
                 <!--Messages-->
                 <div class="col-sm-12">
@@ -123,7 +126,7 @@
                             </div>
 
                             <div class="text-justify">
-                                <form id="post-form">
+                                <form method="post" action="/send">
                                     {% csrf_token %}
                                     <div class="form-group mb-3">
                                         <input type="hidden" name="room_id" id="room_id" value="{{ room }}"/>
@@ -183,23 +186,23 @@
     <script>
         //Nice select
         $('.bulk-actions').niceSelect();
-        $(document).on('submit','#post-form',function(e){
-            e.preventDefault();
+        //$(document).on('submit','#post-form',function(e){
+        //    e.preventDefault();
         
-            $.ajax({
-            type:'POST',
-            url:'/send',
-            data:{
-                username:$('#username').val(),
-                room_id:$('#room_id').val(),
-                message:$('#message').val(),
-                csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
-            },
-            success: function(data){
+          //  $.ajax({
+           // type:'POST',
+            //url:'/send',
+            //data:{
+              //  username:$('#username').val(),
+               // room_id:$('#room_id').val(),
+                //message:$('#message').val(),
+                //csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+            //},
+            //success: function(data){
                 //alert(data)
-            }
-            });
-            document.getElementById('message').value = ''
-        });
+            //}
+            //});
+            //document.getElementById('message').value = ''
+        //});
     </script>
     {% endblock script %}
