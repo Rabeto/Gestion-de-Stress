@@ -72,7 +72,7 @@ urlpatterns = [
     path('add_user_admin/', views.add_user_admin, name='add_user_admin'),
     path('create_user_admin/', views.create_user_admin, name='create_user_admin'),
     path('edit_user_admin/<id>/', views.edit_user_admin, name='edit_user_admin'),
-    path('update_user_admin/<id>/', views.update_user_admin, name='update_user_admin'),
+    path('update_user_admin/<id>', views.update_user_admin, name='update_user_admin'),
     path('delete_user_admin/<id>/', views.delete_user_admin, name='delete_user_admin'),
 
 ] + static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)
