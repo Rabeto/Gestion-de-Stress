@@ -405,14 +405,14 @@ def create_user_admin(request):
 
 def update_user_app(request, id):
     create_user_app_edit = Utilisateur.objects.get(pk=id)
-    create_user_app_edit.Nom_Complet = request.GET['Nom_Complet']
-    create_user_app_edit.Departement = request.GET['Departement']
-    create_user_app_edit.Email = request.GET['Email']
-    create_user_app_edit.Age = request.GET['Age']
-    create_user_app_edit.Profession = request.GET['Profession']
-    create_user_app_edit.Image_profil = request.FILES.get('Image_profil')
-    create_user_app_edit.Username = request.GET['Username']
-    create_user_app_edit.Password = request.GET['Password']
+    create_user_app_edit.Nom_Complet = request.POST['Nom']
+    create_user_app_edit.Departement = request.POST['Departement']
+    create_user_app_edit.Email = request.POST['Email']
+    create_user_app_edit.Age = request.POST['Age']
+    create_user_app_edit.Profession = request.POST['Profession']
+    # create_user_app_edit.Image_profil = request.FILES.get('Image_profil')
+    create_user_app_edit.Username = request.POST['Username']
+    create_user_app_edit.Password = request.POST['Password']
     create_user_app_edit.save()
     return redirect('/profil')
     
