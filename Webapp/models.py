@@ -1,4 +1,5 @@
 from django.db import models
+from .choix import choix_publication, choix_status
 
 # Create your models here.
 class Utilisateur(models.Model):
@@ -10,7 +11,7 @@ class Utilisateur(models.Model):
     Profession = models.CharField(max_length=50)
     Username = models.CharField(max_length=50, unique=True)
     Password = models.CharField(max_length=50)
-    Status = models.CharField(max_length=20)
+    Status = models.CharField(max_length=20, choices=choix_status, default = 'Utilisateur Simple')
     
 class Commentaires(models.Model):
     Titre_pub = models.CharField(max_length=150)
@@ -52,7 +53,7 @@ class News_Post(models.Model):
     Titre = models.CharField(max_length=50)
     Contenu = models.TextField(max_length=255)
     Date_pub = models.DateTimeField(auto_now=True)
-    Type = models.CharField(max_length=5)
+    Type = models.CharField(max_length=5, choices=choix_publication, default='Posts')
     Fichier = models.ImageField()
     Like = models.ManyToManyField(Utilisateur, default=None, blank=True, related_name='Reaction_Utilisateur')
     Auteur_pub = models.ForeignKey(Utilisateur, on_delete=models.CASCADE)
