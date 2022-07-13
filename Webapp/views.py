@@ -394,12 +394,12 @@ def create_user_admin(request):
     age= request.POST['Age']
     email = request.POST['Email']
     departement = request.POST['Departement']
-    profession = request.POST['Profession']
+    Fonction = request.POST['Fonction']
     username = request.POST['Username']
     password = request.POST['Password']
     status = request.POST['Status']
     image_profile = request.FILES.get('Image_Profil')
-    create_user = Utilisateur(Image_profil = image_profile, Nom = nom, Prenom = prenom, Age = age, Email = email, Departement = departement, Profession = profession, Username = username, Password = password, Status = status)
+    create_user = Utilisateur(Image_profil = image_profile, Nom = nom, Prenom = prenom, Age = age, Email = email, Departement = departement, Fonction = Fonction, Username = username, Password = password, Status = status)
     create_user.save()
     return redirect('/user_admin')
 
@@ -409,7 +409,7 @@ def update_user_app(request, id):
     create_user_app_edit.Departement = request.POST['Departement']
     create_user_app_edit.Email = request.POST['Email']
     create_user_app_edit.Age = request.POST['Age']
-    create_user_app_edit.Profession = request.POST['Profession']
+    create_user_app_edit.Fonction = request.POST['Fonction']
     # create_user_app_edit.Image_profil = request.FILES.get('Image_profil')
     create_user_app_edit.Username = request.POST['Username']
     create_user_app_edit.Password = request.POST['Password']
@@ -432,7 +432,7 @@ def update_user_admin(request, id):
     create_user_edit.Departement = request.POST['Departement']
     create_user_edit.Email = request.POST['Email']
     create_user_edit.Age = request.POST['Age']
-    create_user_edit.Profession = request.POST['Profession']
+    create_user_edit.Fonction = request.POST['Fonction']
     create_user_edit.Status = request.POST['Status']
     create_user_edit.Image_profil = request.FILES.get('Image_profil')
     create_user_edit.Username = request.POST['Username']
