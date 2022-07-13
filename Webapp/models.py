@@ -8,7 +8,7 @@ class Utilisateur(models.Model):
     Age = models.IntegerField(null=True)
     Email = models.EmailField()
     Departement = models.CharField(max_length=50)
-    Profession = models.CharField(max_length=50)
+    Fonction = models.CharField(max_length=50)
     Username = models.CharField(max_length=50, unique=True)
     Password = models.CharField(max_length=50)
     Status = models.CharField(max_length=20, choices=choix_status, default = 'Utilisateur Simple')
