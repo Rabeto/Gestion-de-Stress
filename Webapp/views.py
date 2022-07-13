@@ -414,7 +414,7 @@ def update_user_app(request, id):
     create_user_app_edit.Username = request.POST['Username']
     create_user_app_edit.Password = request.POST['Password']
     create_user_app_edit.save()
-    return redirect('/profil')
+    return redirect('/logout')
     
 def edit_user_admin(request, id):
     Users_e = Utilisateur.objects.get(pk=id)
