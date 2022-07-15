@@ -19,6 +19,12 @@
     <link rel="stylesheet" href="{% static 'js/calendar/bootstrap_calendar.css' %}">
     <!--Nice select -->
     <link rel="stylesheet" href="{% static 'css/nice-select.css' %}">
+    <style>
+        #anyClass {
+            height:400px;
+            overflow-y: scroll;
+          } 
+    </style>
     {% endblock stylesheet %}
 
     {% block title %}Profil{% endblock title %}
@@ -155,7 +161,7 @@
                     </div>
 
                 <!--User profile content-->
-                <div class="col-sm-12 col-md-8">
+                <div class="col-sm-12 col-md-8" id="anyClass">
                     <div class="mt-1 mb-3 p-3 button-container bg-white border shadow-sm custom-tabs">
                         
                         <nav>

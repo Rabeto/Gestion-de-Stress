@@ -19,6 +19,12 @@
     <link rel="stylesheet" href="{% static 'js/calendar/bootstrap_calendar.css' %}">
     <!--Nice select -->
     <link rel="stylesheet" href="{% static 'css/nice-select.css' %}">
+    <style>
+        #anyClass {
+            height:750px;
+            overflow-y: scroll;
+          } 
+    </style>
     {% endblock stylesheet %}
 
     {% block title %}Journal{% endblock title %}
@@ -90,7 +96,7 @@
             </div>
         </div>
 
-        <div class="col-sm-9 col-xs-12 content pt-3 pl-0">
+        <div class="col-sm-9 col-xs-12 content pt-3 pl-0" id="anyClass">
             <button class="btn btn-success" data-toggle="modal" data-target="#myModal">
                 <i class="fas fa-plus mr-3"></i> Poster publication
             </button>

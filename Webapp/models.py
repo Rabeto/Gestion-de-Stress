@@ -51,7 +51,7 @@ class Manage_Stress(models.Model):
         
 class News_Post(models.Model):
     Titre = models.CharField(max_length=50)
-    Contenu = models.TextField(max_length=255)
+    Contenu = models.TextField(max_length=100000)
     Date_pub = models.DateTimeField(auto_now=True)
     Type = models.CharField(max_length=5, choices=choix_publication, default='Posts')
     Fichier = models.ImageField()
