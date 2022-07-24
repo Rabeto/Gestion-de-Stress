@@ -114,11 +114,19 @@
                                 <div class="media">
                                     <img class="mr-3 rounded-circle" height="40px" width="40px" src="{{ msg.User.Image_profil.url }}">
                                     <div class="media-body">
+                                        {% if msg.User.Status == "Psychologue" %}
+                                        <h6 class="mt-1">{{ msg.User.Nom_Complet }}&nbsp;<span class="small">(Votre {{msg.User.Status}})</span>
+                                            <small class="text-muted small pull-right"><i class="fa fa-clock"></i>{{ msg.Date }}</small>
+
+                                            <p class="clearfix"></p>
+                                        </h6>
+                                        {% else %}
                                         <h6 class="mt-1">{{ msg.User.Nom_Complet }}
                                             <small class="text-muted small pull-right"><i class="fa fa-clock"></i>{{ msg.Date }}</small>
 
                                             <p class="clearfix"></p>
                                         </h6>
+                                        {% endif %}
                                         <p>{{ msg.Message }}</p>
                                     </div>
                                 </div> <hr>
@@ -204,5 +212,7 @@
             //});
             //document.getElementById('message').value = ''
         //});
+        var element = document.getElementById('anyClass');
+        element.scrollTop = element.scrollHeight;
     </script>
     {% endblock script %}
