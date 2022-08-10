@@ -136,11 +136,11 @@
                                                     {% csrf_token %}
                                                     
                                                         {% if post.Like.Nom_Complet == usr.Nom_Complet %}
-                                                            <button type="submit" name="blogpost-{{ post.id }}" value="{{ post.id }}" class="btn btn-round btn-danger">
+                                                            <button type="submit" name="blogpost-{{ post.id }}" value="{{ post.id }}" class="btn btn-round btn-danger" style="border: none;background: none;">
                                                                 <span class="pr-3"><i class="fas fa-heart"></i>&nbsp;{{ post.Like.count }}</span>
                                                             </button>
                                                         {% else %}
-                                                            <button type="submit" name="blogpost-{{ post.id }}" value="{{ post.id }}" class="btn btn-round btn-default">
+                                                            <button type="submit" name="blogpost-{{ post.id }}" value="{{ post.id }}" class="btn btn-round btn-default" style="border: none;background: none;">
                                                                 <span class="pr-3"><i class="fas fa-heart"></i>&nbsp;{{ post.Like.count }}</span>
                                                             </button>
                                                         {% endif %}
@@ -209,7 +209,7 @@
                                         <p class="card-text">{{ new.Contenu }}</p>
                                         <p class="card-text"><small class="text-muted">{{ new.Date_pub }}</small></p>
                                         <div class="row text-center">
-                                            <div class="col-sm-12 btn btn-default">
+                                            <div class="col-sm-12">
                                                 <i class="fas fa-heart"></i>
                                                 <span class="None"> {{ new.Like.count }}</span>
                                             </div>

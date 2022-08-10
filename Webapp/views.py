@@ -225,13 +225,13 @@ def pub_post_user(request):
     type = 'Posts'
     ust = request.session['user']
     usr = Utilisateur.objects.get(Username = ust)
-    auteur_pub = usr.Nom_Complet
+    auteur_pub = usr
     fichier = request.FILES.get('Fichier')
     if fichier != None:
-        create_np = News_Post(Titre = titre, Contenu = contenu, Type = type, Fichier = fichier)
+        create_np = News_Post(Titre = titre, Contenu = contenu, Type = type, Fichier = fichier, Auteur_pub = auteur_pub)
         create_np.save()
     else:
-        create_np = News_Post(Titre = titre, Contenu = contenu, Type = type)
+        create_np = News_Post(Titre = titre, Contenu = contenu, Type = type, Auteur_pub = auteur_pub)
         create_np.save()
     return redirect('/journal_app')
 

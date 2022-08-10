@@ -112,14 +112,16 @@
                                 <div class="mt-1 mb-5 button-container">
                                     <div class="card-group">
                                         {% for np in NP %}
-                                        <div class="card">
-                                            {% if np.Fichier %}
-                                                <div class="card_header"><img class="card-img-top" src="{{ np.Fichier.url }}" alt="Card image cap"></div>
-                                            {% else %}
-                                            {% endif %}
-                                            <div class="card-body">
-                                                <h5 class="card-title text-left">{{ np.Titre }}</h5>
-                                                <p class="card-text"><small class="text-muted">{{ np.Date_pub }}</small></p>
+                                        <div class="col-sm-6">
+                                            <div class="card">
+                                                {% if np.Fichier %}
+                                                <img class="card-img-top" src="{{ np.Fichier.url }}" alt="Card image cap">
+                                                {% else %}
+                                                {% endif %}
+                                                <div class="card-body">
+                                                    <h5 class="card-title text-left">{{ np.Titre }}</h5>
+                                                    <p class="card-text"><small class="text-muted">{{ np.Date_pub }}</small></p>
+                                                </div>
                                             </div>
                                         </div>
                                         {% endfor %}
@@ -135,7 +137,7 @@
                                         {% for ms in MS %}
                                         <div class="card">
                                             {% if ms.Fichier_MS %}
-                                            <img class="card-img-top" src="{{ ms.Fichier_MS.url }}" alt="Card image cap">
+                                            <img class="card-img-top" src="{{ ms.Fichier_MS.url }}" style="height:300px" alt="Card image cap">
                                             {% else %}
                                             {% endif %}
                                             <div class="card-body">
