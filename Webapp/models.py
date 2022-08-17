@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import MinLengthValidator
 from .choix import choix_publication, choix_status
 
 # Create your models here.
@@ -10,7 +11,7 @@ class Utilisateur(models.Model):
     Departement = models.CharField(max_length=50)
     Fonction = models.CharField(max_length=50)
     Username = models.CharField(max_length=50, unique=True)
-    Password = models.CharField(max_length=50)
+    Password = models.CharField(max_length=50, validators=[MinLengthValidator(8)])
     Status = models.CharField(max_length=20, choices=choix_status, default = 'Utilisateur Simple')
     
     def __str__(self):
