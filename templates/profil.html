@@ -230,7 +230,7 @@
               
                         <!-- Modal body -->
                         <div class="modal-body">
-                            <form class="form-horizontal mt-4 mb-5" method="post" action="{% url 'update_user_app' usr.id %}" enctype="multipart/form-data">
+                            <form class="form-horizontal mt-4 mb-5" method="post" action="{% url 'update_user_app' usr.id %}" enctype="multipart/form-data" id="myform">
                                 {%  csrf_token %}
                                 {% comment %} <div class="form-group row">
                                     <label for="Image_Profil" class="control-label col-sm-2">Photo de Profil</label>
@@ -291,7 +291,7 @@
 
                                 <div class="form-group row">
                                     <div class="offset-sm-2 col-sm-9">
-                                        <input type="submit" class="btn btn-success" value="Modifier">
+                                        <button type="button" class="btn btn-success" onclick="confirm()">Modifier</button>
                                         <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
                                     </div>
                                 </div>
@@ -316,6 +316,24 @@
               URL.revokeObjectURL(output.src) // free memory
             }
           };
+        
+          function confirm() {
+            swal({
+                    title: 'Avertissement!',
+                    text: 'Voulez-vous modifier vos infos ?',
+                    icon: 'warning',
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                  if (willDelete) {
+                    alert("Vous allez être rediriger vers la page d'accueil");
+                    document.querySelector('#myform').submit();
+                  } else {
+                    swal("Modification annuler");
+                  }
+                })
+        }
     </script>
     <!-- Page JavaScript Files-->
     <script src="{% static 'js/jquery.min.js' %}"></script>
@@ -325,7 +343,7 @@
     <!--Bootstrap-->
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <!--Sweet alert JS-->
-    <script src="{% static 'js/sweetalert.js' %}"></script>
+    <script src="{% static 'js/sweetalert.min.js' %}"></script>
     <!--Progressbar JS-->
     <script src="{% static 'js/progressbar.min.js' %}"></script>
     <!--Flot.JS-->
