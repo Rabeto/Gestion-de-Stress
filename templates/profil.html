@@ -230,7 +230,7 @@
               
                         <!-- Modal body -->
                         <div class="modal-body">
-                            <form class="form-horizontal mt-4 mb-5" method="post" action="{% url 'update_user_app' usr.id %}" enctype="multipart/form-data" id="myform">
+                            <form class="form-horizontal mt-4 mb-5" method="post" action="{% url 'update_user_app' usr.id %}" enctype="multipart/form-data" id="myform" name="myform">
                                 {%  csrf_token %}
                                 {% comment %} <div class="form-group row">
                                     <label for="Image_Profil" class="control-label col-sm-2">Photo de Profil</label>
@@ -285,7 +285,17 @@
                                 <div class="form-group row">
                                     <label for="Password" class="control-label col-sm-2">Mot de passe</label>
                                     <div class="col-sm-10">
-                                        <input type="text" name="Password" class="form-control" value="{{ usr.Password }}"/>
+                                        <input type="password" name="Password" id="Password" class="form-control" minlength="8" /><br>
+                                        <input type="checkbox" onclick="myFunction()">&nbsp;Afficher le contenu
+                                    </div>
+                                    
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="Password" class="control-label col-sm-2">Confimer Mot de passe</label>
+                                    <div class="col-sm-10">
+                                        <input type="password" name="Con_Password" id="Con_Password" class="form-control" minlength="8" /><br>
+                                        <input type="checkbox" onclick="myFunction_Con()">&nbsp;Afficher le contenu
                                     </div>
                                 </div>
 
@@ -310,14 +320,112 @@
     {% block script %}
     <script>
         var loadFile = function(event) {
-            var output = document.getElementById('output');
+            var output = document.getElementByName('Password');
             output.src = URL.createObjectURL(event.target.files[0]);
             output.onload = function() {
-              URL.revokeObjectURL(output.src) // free memory
+                URL.revokeObjectURL(output.src) // free memory
             }
-          };
+        };
+
+        function myFunction() {
+            var x = document.getElementById("Password");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+        }
+
+        function myFunction_Con() {
+            var x = document.getElementById("Con_Password");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+        }
         
-          function confirm() {
+        function confirm() {
+            let Nom = document.forms['myform']['Nom'].value;
+            let Age = document.forms['myform']['Age'].value;
+            let Email = document.forms['myform']['Email'].value;
+            let Departement = document.forms['myform']['Departement'].value;
+            let Fonction = document.forms['myform']['Fonction'].value;
+            let Username = document.forms['myform']['Username'].value;
+            let Password = document.forms['myform']['Password'].value;
+            let Con_Password = document.forms['myform']['Con_Password'].value;
+
+            if (Nom == "") {
+                alert("Veillez saisir le champ : Nom Complet");
+                return false;
+            }
+
+            if (Age == "") {
+                alert("Veillez saisir le champ : Age");
+                return false;
+            }
+
+            if (Email == "") {
+                alert("Veillez saisir le champ : Email");
+                return false;
+            }
+
+            if (Departement == "") {
+                alert("Veillez saisir le champ : Département");
+                return false;
+            }
+
+            if (Fonction == "") {
+                alert("Veillez saisir le champ : Fonction");
+                return false;
+            }
+
+            if (Username == "") {
+                alert("Veillez saisir le champ : Nom d'utilisateur");
+                return false;
+            }
+
+            if (Password == "") {
+                alert("Veillez saisir le champ : Mot de passe");
+                return false;
+            }
+
+            if (Password.length < 8) {
+                alert("Veillez saisir plus de 8 caractères dans le champ : Mot de passe");
+                return false;
+            }
+
+            if (Con_Password == "") {
+                alert("Veillez saisir le champ : Confirmer mot de passe");
+                return false;
+            }
+
+            if (Con_Password.length < 8) {
+                alert("Veillez saisir plus de 8 caractères dans le champ : Confirmer mot de passe");
+                return false;
+            }
+
+            if (Password != Con_Password) {
+                alert("Les valeurs saisies dans le champ 'Mot de passe' et 'Confirmer mot de passe' ne correspond pas");
+                return false;
+            }
+
+            else {
+
+                notify();
+                /* if(confirm("Voulez-vous modifier vos infos ?") == true ) {
+                    alert("Modification effectuer avec succès");
+                    return false;
+                    alert("Vous allez être rediriger vers la page de connexion");
+                    return false;
+                    //document.querySelector('#myform').submit();
+                } else {
+                    alert("Modification annuler");
+                } */
+            }
+        }
+
+        function notify() {
             swal({
                     title: 'Avertissement!',
                     text: 'Voulez-vous modifier vos infos ?',
@@ -326,13 +434,26 @@
                     dangerMode: true,
                 })
                 .then((willDelete) => {
-                  if (willDelete) {
-                    alert("Vous allez être rediriger vers la page d'accueil");
-                    document.querySelector('#myform').submit();
-                  } else {
+                if (willDelete) {
+                    swal({
+                        title :'Modification effectuer',
+                        icon: 'success',
+                    })
+                    .then((okay) => {
+                        if (okay) {
+                            swal({
+                                text :'Vous allez être rediriger vers la page de connexion',
+                            })
+                            .then((ok) => {
+                                document.querySelector('#myform').submit();
+                            })
+                        }
+                    });
+                    
+                } else {
                     swal("Modification annuler");
-                  }
-                })
+                }
+            });
         }
     </script>
     <!-- Page JavaScript Files-->
