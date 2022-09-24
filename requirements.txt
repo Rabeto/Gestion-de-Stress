@@ -1,5 +1,2 @@
-django
-psycopg2-binary
-Pillow
-django-tables2
-django-crispy-forms
+django==4.0.4
+
