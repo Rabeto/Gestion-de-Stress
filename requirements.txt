@@ -1,4 +1,1 @@
 Django==4.0.4
-pysqlite3
-pysqlite3-binary
-psycopg2
