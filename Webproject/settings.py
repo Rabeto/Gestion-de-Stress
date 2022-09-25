@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-8cl^zaqx5az98r08y(h8i!w@m8rw_ke^&&az-z1opem-waev8m
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['app-env.eba-qgkyrpqy.us-west-2.elasticbeanstalk.com','127.0.0.1']
+ALLOWED_HOSTS = ['myEnv.eba-bzkn4pyh.us-west-2.elasticbeanstalk.com','127.0.0.1']
 
 
 # Application definition
@@ -76,12 +76,24 @@ WSGI_APPLICATION = 'Webproject.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+if 'RDS_DB_NAME' in os.environ:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': os.environ['RDS_DB_NAME'],
+            'USER': os.environ['RDS_USERNAME'],
+            'PASSWORD': os.environ['RDS_PASSWORD'],
+            'HOST': os.environ['RDS_HOSTNAME'],
+            'PORT': os.environ['RDS_PORT'],
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 
 # Password validation
