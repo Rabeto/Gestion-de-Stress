@@ -2,3 +2,6 @@ Django
 Pillow
 psycopg[binary,pool]
 SQLAlchemy
+sqlalchemy-pysqlite3
+pysqlite-binary
+pysqlite3-wheels
